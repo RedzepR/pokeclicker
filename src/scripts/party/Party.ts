@@ -229,7 +229,7 @@ class Party implements Feature {
         // between 0.2 -> 1 based on highest region
         //return Math.min(1, Math.max(0.2, 0.1 + (highestRegion / 10)));
 
-        return RegionalDex[region.toString()].includes(Math.floor(pokemonID)) && region == PokemonHelper.calcNativeRegion(PokemonHelper.getPokemonById(pokemonID).name) ? 1 : 0.4;
+        return RegionalDex[region.toString()].includes(Math.floor(pokemonID)) && region >= PokemonHelper.calcNativeRegion(PokemonHelper.getPokemonById(pokemonID).name) ? 1 : 0.4;
     }
 
     public calculateEffortPoints(pokemon: PartyPokemon, shiny: boolean, shadow: GameConstants.ShadowStatus, number = GameConstants.BASE_EP_YIELD, ignore = false): number {
