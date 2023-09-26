@@ -178,11 +178,11 @@ class Party implements Feature {
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
 
         // Check if the pokemon is in their native region
-        if (!ignoreRegionMultiplier && nativeRegion != region && nativeRegion != GameConstants.Region.none) {
+        if (!ignoreRegionMultiplier && nativeRegion != GameConstants.Region.none) {
             // Check if the challenge mode is active
             if (App.game.challenges.list.regionalAttackDebuff.active()) {
                 // Pokemon only retain a % of their total damage in other regions based on highest region.
-                multiplier = this.getRegionAttackMultiplier();
+                multiplier = this.getRegionAttackMultiplier(region, pokemon.id);
             }
         }
 
@@ -225,9 +225,13 @@ class Party implements Feature {
         return attack;
     }
 
-    public getRegionAttackMultiplier(highestRegion = player.highestRegion()): number {
+    public getRegionAttackMultiplier(region: GameConstants.Region = player.region, pokemonID: number): number {
         // between 0.2 -> 1 based on highest region
-        return Math.min(1, Math.max(0.2, 0.1 + (highestRegion / 10)));
+        //return Math.min(1, Math.max(0.2, 0.1 + (highestRegion / 10)));
+
+        console.log(region);
+
+        return RegionalDex[region.toString()].includes(Math.floor(pokemonID)) ? 1 : 0.4;
     }
 
     public calculateEffortPoints(pokemon: PartyPokemon, shiny: boolean, shadow: GameConstants.ShadowStatus, number = GameConstants.BASE_EP_YIELD, ignore = false): number {
