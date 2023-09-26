@@ -76,7 +76,8 @@ class PokedexHelper {
 
             // If not showing this region
             const region: (GameConstants.Region | null) = PokedexFilters.region.value() ?? null;
-            if (region != null && region != nativeRegion) {
+            console.log(region);
+            if (region != null && !regionalDexHelper.checkIfPokemonIsInRegionalDex(region, pokemon.id)) {
                 return false;
             }
 
