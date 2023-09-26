@@ -402,11 +402,30 @@ class PartyPokemon implements Saveable {
 
         // Check based on native region
         const showRegions = BreedingFilters.region.value();
+        let showRegionsInBit = showRegions.toString(2);
+        var regionAmount = 0;
+        for (let element in GameConstants.Region) {
+          if (isNaN(Number(element))) {
+            regionAmount++;
+          }
+        }
+        //-1 because of Region.None
+        while (showRegionsInBit.length < regionAmount - 1) {
+            showRegionsInBit = '0' + showRegionsInBit;
+        }
+        let isPokemonInRegionalDex = Math.pow(2, player.highestRegion()) - 1 == showRegions;
+        if (!isPokemonInRegionalDex) {
+            for (let i = 0; i < showRegionsInBit.length; i++) {
+                if (showRegionsInBit[showRegionsInBit.length - 1 - i] == 1 && RegionalDex[i].includes(Math.floor(this.id))) {
+                    isPokemonInRegionalDex = true;
+                    break;
+                }
+            }
+        }
         const region = PokemonHelper.calcNativeRegion(this.name);
-        const regionBitInFilter = 1 << region & showRegions;
         const noneRegionCheck = (showRegions === 0 || showRegions === (2 << player.highestRegion()) - 1)
             && region === GameConstants.Region.none;
-        if (!regionBitInFilter && !noneRegionCheck) {
+        if (!isPokemonInRegionalDex && !noneRegionCheck) {
             return false;
         }
 

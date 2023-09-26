@@ -88,7 +88,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                             </div>
 
                                             <div class="form-group col-lg-6 col-6">
-                                                <label>Regions</label><br/>
+                                                <label>Regional Dex</label><br/>
                                                 <div class="dropdown show">
                                                     <button type="button" class="text-left custom-select col-12 btn btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text :
                                                         BreedingFilters.region.value() == (2 << player.highestRegion()) - 1 ?
@@ -99,7 +99,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                                     .reduce(function(s,n){ return s + (n == '1' ? 1 : 0)}, 0) > 1 ? ' & more' : '') :
                                                                 'None')
                                                         ">
-                                                        Regions
+                                                        Regional Dex
                                                     </button>
                                                     <div class="border-secondary dropdown-menu col-12">
                                                         <div class="dropdown-item" data-bind="click : function(){ BreedingFilters.region.value((2 << player.highestRegion()) - 1); Settings.setSettingByName('breedingRegionFilter', BreedingFilters.region.value()) }">
