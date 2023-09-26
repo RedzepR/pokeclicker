@@ -225,11 +225,11 @@ class Party implements Feature {
         return attack;
     }
 
-    public getRegionAttackMultiplier(region: GameConstants.Region = player.region, pokemonID: number): number {
+    public getRegionAttackMultiplier(region: GameConstants.Region, pokemonID: number): number {
         // between 0.2 -> 1 based on highest region
         //return Math.min(1, Math.max(0.2, 0.1 + (highestRegion / 10)));
 
-        return RegionalDex[region].includes(Math.floor(pokemonID)) && region >= PokemonHelper.calcNativeRegion(PokemonHelper.getPokemonById(pokemonID).name) ? 1 : 0.4;
+        return regionalDexHelper.checkIfPokemonIsInRegionalDex(region, pokemonID) ? 1 : 0.4;
     }
 
     public calculateEffortPoints(pokemon: PartyPokemon, shiny: boolean, shadow: GameConstants.ShadowStatus, number = GameConstants.BASE_EP_YIELD, ignore = false): number {

@@ -261,7 +261,7 @@ class PartyController {
 
     public static calculateRegionalMultiplier(pokemon: PartyPokemon, region: number): number {
         if (region > -1 && PokemonHelper.calcNativeRegion(pokemon.name) !== region) {
-            return App.game.party.getRegionAttackMultiplier(player.region, pokemon.id);
+            return App.game.party.getRegionAttackMultiplier(region, pokemon.id);
         }
         return 1.0;
     }

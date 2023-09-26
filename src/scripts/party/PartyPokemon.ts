@@ -416,7 +416,7 @@ class PartyPokemon implements Saveable {
         let isPokemonInRegionalDex = Math.pow(2, player.highestRegion()) - 1 == showRegions;
         if (!isPokemonInRegionalDex) {
             for (let i = 0; i < showRegionsInBit.length; i++) {
-                if (showRegionsInBit[showRegionsInBit.length - 1 - i] == 1 && RegionalDex[i].includes(Math.floor(this.id))) {
+                if (showRegionsInBit[showRegionsInBit.length - 1 - i] == 1 && regionalDexHelper.checkIfPokemonIsInRegionalDex(i, this.id)) {
                     isPokemonInRegionalDex = true;
                     break;
                 }
