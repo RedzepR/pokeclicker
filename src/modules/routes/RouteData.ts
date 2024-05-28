@@ -2712,7 +2712,7 @@ Routes.add(new RegionRoute(
           new SpecialRoutePokemon(['Drilbur'], new WeatherRequirement([WeatherType.Harsh_Sunlight, WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Bonsly', 'Dwebble', 'Rhyhorn', 'Shuckle'], new WeatherRequirement([WeatherType.Sandstorm])),
           new SpecialRoutePokemon(['Hatenna', 'Munna', 'Nickit', 'Thievul', 'Dottler', 'Togetic'], new WeatherRequirement([WeatherType.Fog])),
-          new SpecialRoutePokemon(['Toxel'], new MultiRequirement([new ObtainedPokemonRequirement('Toxel'), new WeatherRequirement([WeatherType.Thunderstorm])])),        
+          new SpecialRoutePokemon(['Toxel'], new MultiRequirement([new ObtainedPokemonRequirement('Toxel'), new WeatherRequirement([WeatherType.Thunderstorm])])),
       ],
     }),
     [new RouteKillRequirement(10, Region.galar, 17)],
@@ -3671,14 +3671,14 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Bidoof', 'Starly', 'Shinx', 'Drifloon'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 8)],
 ));
 Routes.add(new RegionRoute(
     'Horseshoe Plains', Region.hisui, 2,
     new RoutePokemon({
         land: ['Bidoof', 'Starly', 'Eevee', 'Drifloon', 'Buizel', 'Wurmple', 'Silcoon', 'Cascoon', 'Mime Jr.', 'Ponyta', 'Rapidash'],
     }),
-    [new DevelopmentRequirement()],
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 11), new RouteKillRequirement(10, Region.hisui, 1)])],
 ));
 Routes.add(new RegionRoute(
     'Sandgem Flats', Region.hisui, 3,
@@ -3686,7 +3686,7 @@ Routes.add(new RegionRoute(
         land: ['Mime Jr.', 'Mr. Mime', 'Drifblim', 'Abra', 'Kadabra', 'Luxio', 'Luxray', 'Shellos (West)', 'Gastrodon (West)', 'Alakazam', 'Staravia'],
         headbutt: ['Wormadam (Plant)', 'Graveler'],
     }),
-    [new DevelopmentRequirement()],
+    [new ClearDungeonRequirement(1, getDungeonIndex('Floaro Gardens'))],
 ));
 Routes.add(new RegionRoute(
     'Deertrack Path', Region.hisui, 4,

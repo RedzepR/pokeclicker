@@ -2149,52 +2149,113 @@ GymList['Elite Trainer Peony'] = new Gym(
 GymList['Grandtree Arena'] = new Gym(
     'Lord of the Woods: Kleavor',
     'Grandtree Arena',
-    [new GymPokemon('Noble Kleavor', 76658268, 70)],
+    [new GymPokemon('Noble Kleavor', 76658268, 18)],
     BadgeEnums.Noble_Kleavor,
     128000,
-    'You defeated Lord Kleavor once again!',
+    'The golden light was dispelled from Kleavor, calming it.',
     [new DevelopmentRequirement()],
     undefined, undefined, { displayName: 'Lord Kleavor', imageName: '../pokemon/900.01' }
 );
 GymList['Brava Arena'] = new Gym(
     'Lady of the Ridge: Lilligant',
     'Brava Arena',
-    [new GymPokemon('Noble Lilligant', 76658268, 70)],
+    [new GymPokemon('Noble Lilligant', 76658268, 30)],
     BadgeEnums.Noble_Lilligant,
     128000,
-    'You defeated Lady Lilligant once again!',
+    'The golden light was dispelled from Lilligant, calming it.',
     [new DevelopmentRequirement()],
     undefined, undefined, { displayName: 'Lady Lilligant', imageName: '../pokemon/549.02' }
 );
 GymList['Molten Arena'] = new Gym(
     'Lord of the Isles: Arcanine',
     'Molten Arena',
-    [new GymPokemon('Noble Arcanine', 76658268, 70)],
+    [new GymPokemon('Noble Arcanine', 76658268, 36)],
     BadgeEnums.Noble_Arcanine,
     128000,
-    'You defeated Lord Arcanine once again!',
+    'The golden light was dispelled from Arcanine, calming it.',
     [new DevelopmentRequirement()],
     undefined, undefined, { displayName: 'Lord Arcanine', imageName: '../pokemon/59.02' }
 );
 GymList['Moonview Arena'] = new Gym(
     'Lord of the Hollow: Electrode',
     'Moonview Arena',
-    [new GymPokemon('Noble Electrode', 76658268, 70)],
+    [new GymPokemon('Noble Electrode', 76658268, 46)],
     BadgeEnums.Noble_Electrode,
     128000,
-    'You defeated Lord Electrode once again!',
+    'The golden light was dispelled from Electrode, calming it.',
     [new DevelopmentRequirement()],
     undefined, undefined, { displayName: 'Lord Electrode', imageName: '../pokemon/101.02' }
 );
 GymList['Icepeak Arena'] = new Gym(
     'Lord of the Tundra: Avalugg',
     'Icepeak Arena',
-    [new GymPokemon('Noble Avalugg', 76658268, 70)],
+    [new GymPokemon('Noble Avalugg', 76658268, 56)],
     BadgeEnums.Noble_Avalugg,
     128000,
-    'You defeated Lord Avalugg once again!',
+    'The golden light was dispelled from Avalugg, calming it.',
     [new DevelopmentRequirement()],
     undefined, undefined, { displayName: 'Lord Avalugg', imageName: '../pokemon/713.02' }
+);
+GymList['Prelude Beach'] = new Gym(
+    'Kamado',
+    'Prelude Beach',
+    [
+        new GymPokemon('Golem', 348526193, 65),
+        new GymPokemon('Clefable', 348526193, 65),
+        new GymPokemon('Hisuian Braviary', 348526193, 65),
+        new GymPokemon('Heracross', 348526193, 65),
+        new GymPokemon('Snorlax', 348526193, 66),
+    ],
+    BadgeEnums.Elite_Kamado,
+    128000,
+    'Even frightful creatures like Pokémon can become powerful allies...',
+    [new DevelopmentRequirement()],
+    undefined, undefined, { displayName: 'The Galaxy Team\'s Kamado', imageName: 'The Galaxy Team\'s Kamado' }
+);
+GymList['Ancient Lake Valor'] = new Gym(
+    'Adaman',
+    'Ancient Lake Valor',
+    [
+        new GymPokemon('Umbreon', 348526193, 32),
+        new GymPokemon('Vaporeon', 348526193, 32),
+        new GymPokemon('Leafeon', 348526193, 64),
+    ],
+    BadgeEnums.Elite_Adaman,
+    128000,
+    'You\'re really something...and I\'m a man of my word. So, here\'s that treasure.',
+    [new DevelopmentRequirement()],
+    undefined, undefined, { displayName: 'Clan Leader Adaman' }
+);
+GymList['Pearl Settlement'] = new Gym(
+    'Irida',
+    'Pearl Settlement',
+    [
+        new GymPokemon('Espeon', 348526193, 32),
+        new GymPokemon('Flareon', 348526193, 32),
+        new GymPokemon('Glaceon', 348526193, 64),
+    ],
+    BadgeEnums.Elite_Irida,
+    128000,
+    'I wonder... Are there people even stronger than you out in the world, with Pokémon stronger than yours? I\'ll just have to find out for myself I suppose! Here! The treasure I promised you.',
+    [new DevelopmentRequirement()],
+    undefined, undefined, { displayName: 'Clan Leader Irida' }
+);
+GymList['Jubilife Village'] = new Gym(
+    'Ingo',
+    'Jubilife Village',
+    [
+        new GymPokemon('Alakazam', 348526193, 67),
+        new GymPokemon('Tangrowth', 348526193, 67),
+        new GymPokemon('Probopass', 348526193, 67),
+        new GymPokemon('Machamp', 348526193, 67),
+        new GymPokemon('Magnezone', 348526193, 67),
+        new GymPokemon('Gliscor', 348526193, 68),
+    ],
+    BadgeEnums.Elite_Ingo,
+    128000,
+    'Sometimes I find myself saying things without knowing where the words come from... yet those words seem to fill me with power. But returning to the matter at hand: I hope you\'ll challenge me again sometime.',
+    [new DevelopmentRequirement()],
+    undefined, undefined, { displayName: 'Warden Ingo' }
 );
 GymList['Temple of Sinnoh'] = new Gym(
     'Volo',

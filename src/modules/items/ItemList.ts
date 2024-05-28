@@ -233,6 +233,24 @@ ItemList.Max_Mushroom_IoA = new QuestItem('Max_Mushroom_IoA', 'Max Mushroom', 'A
 ItemList.Shaderoot_Carrot_Calyrex = new QuestItem('Shaderoot_Carrot_Calyrex', 'Shaderoot Carrot', 'Carrot that the King of Bountiful Harvest\'s beloved steed likes to eat. It grew in a gloomy field.', 'The Crown of Galar');
 ItemList.Iceroot_Carrot_Calyrex = new QuestItem('Iceroot_Carrot_Calyrex', 'Iceroot Carrot', 'Carrot that the King of Bountiful Harvest\'s beloved steed likes to eat. It grew in a field covered in snow.', 'The Crown of Galar');
 ItemList.Wishing_Piece = new QuestItem('Wishing_Piece', 'Wishing Piece', 'Attracts Gigantamax Pokémon to the Max Lair', 'The Lair of Giants');
+ItemList.Sacred_Blank_Plate = new QuestItem('Sacred_Blank_Plate', 'Sacred Blank Plate', 'A stone tablet imbued with the essence of normalcy. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Flame_Plate = new QuestItem('Sacred_Flame_Plate', 'Sacred Flame Plate', 'A stone tablet imbued with the essence of fire. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Splash_Plate = new QuestItem('Sacred_Splash_Plate', 'Sacred Splash Plate', 'A stone tablet imbued with the essence of water. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Zap_Plate = new QuestItem('Sacred_Zap_Plate', 'Sacred Zap Plate', 'A stone tablet imbued with the essence of electricity. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Meadow_Plate = new QuestItem('Sacred_Meadow_Plate', 'Sacred Meadow Plate', 'A stone tablet imbued with the essence of plants. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Icicle_Plate = new QuestItem('Sacred_Icicle_Plate', 'Sacred Icicle Plate', 'A stone tablet imbued with the essence of ice. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Fist_Plate = new QuestItem('Sacred_Fist_Plate', 'Sacred Fist Plate', 'A stone tablet imbued with the essence of fighting spirit. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Toxic_Plate = new QuestItem('Sacred_Toxic_Plate', 'Sacred Toxic Plate', 'A stone tablet imbued with the essence of poison. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Earth_Plate = new QuestItem('Sacred_Earth_Plate', 'Sacred Earth Plate', 'A stone tablet imbued with the essence of the earth. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Sky_Plate = new QuestItem('Sacred_Sky_Plate', 'Sacred Sky Plate', 'A stone tablet imbued with the essence of flight. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Mind_Plate = new QuestItem('Sacred_Mind_Plate', 'Sacred Mind Plate', 'A stone tablet imbued with the essence of psychic energy. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Insect_Plate = new QuestItem('Sacred_Insect_Plate', 'Sacred Insect Plate', 'A stone tablet imbued with the essence of bugs. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Stone_Plate = new QuestItem('Sacred_Stone_Plate', 'Sacred Stone Plate', 'A stone tablet imbued with the essence of rock. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Spooky_Plate = new QuestItem('Sacred_Spooky_Plate', 'Sacred Spooky Plate', 'A stone tablet imbued with the essence of ghosts. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Draco_Plate = new QuestItem('Sacred_Draco_Plate', 'Sacred Draco Plate', 'A stone tablet imbued with the essence of dragons. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Dread_Plate = new QuestItem('Sacred_Dread_Plate', 'Sacred Dread Plate', 'A stone tablet imbued with the essence of darkness. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Iron_Plate = new QuestItem('Sacred_Iron_Plate', 'Sacred Iron Plate', 'A stone tablet imbued with the essence of steel. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
+ItemList.Sacred_Pixie_Plate = new QuestItem('Sacred_Pixie_Plate', 'Sacred Pixie Plate', 'A stone tablet imbued with the essence of fairies. It is said to be one of the original Plates that Arceus made use of, yet it seems to be lacking in power.', 'The Frenzied Nobles of Hisui');
 
 // Vitamins
 ItemList.Protein   = new Vitamin(VitaminType.Protein, 1e4, Currency.money, {
@@ -470,6 +488,7 @@ ItemList.Sigilyph  = new PokemonItem('Sigilyph');
 ItemList['Tornadus (Therian)']  = new PokemonItem('Tornadus (Therian)');
 ItemList['Thundurus (Therian)']  = new PokemonItem('Thundurus (Therian)');
 ItemList['Landorus (Therian)']  = new PokemonItem('Landorus (Therian)');
+ItemList['Enamorus (Therian)']  = new PokemonItem('Enamorus (Therian)');
 // Contest
 ItemList['Dugtrio (Punk)'] = new PokemonItem('Dugtrio (Punk)', 1500, Currency.contestToken);
 ItemList['Gengar (Punk)'] = new PokemonItem('Gengar (Punk)', 3000, Currency.contestToken);

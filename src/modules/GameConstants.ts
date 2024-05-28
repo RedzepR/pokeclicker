@@ -49,7 +49,7 @@ export enum Region {
     final = 10,
 }
 
-export const MAX_AVAILABLE_REGION = Region.galar;
+export const MAX_AVAILABLE_REGION = Region.hisui;
 
 export const MaxIDPerRegion = [
     151, // 151 - Kanto
@@ -1277,6 +1277,10 @@ export const HisuiGyms = [
     'Molten Arena',
     'Moonview Arena',
     'Icepeak Arena',
+    'Prelude Beach',
+    'Ancient Lake Valor',
+    'Pearl Settlement',
+    'Jubilife Village',
     'Temple of Sinnoh',
 ];
 
@@ -2121,39 +2125,32 @@ export const TemporaryBattles = [
     'Kyurem 1',
     'Kyurem 2',
     'Kyurem 3',
+    'Rowlet, Cyndaquil and Oshawott',
     'Volo 1',
     'Akari 1',
     'Warden Mai',
     'Alpha Kricketune',
     'Warden Lian',
     'Irida 1',
-    'Lord of the Woods: Kleavor',
     'Akari 2',
     'Volo 2',
     'Coin 1',
     'Ursaluna',
-    'Lady of the Ridge: Lilligant',
     'Irida 2',
     'Clover',
     'Coin 2',
     'Charm 1',
-    'Lord of the Isles: Arcanine',
-    'Adaman 1',
+    'Adaman',
     'Melli 1',
     'Warden Ingo',
     'Melli 2',
-    'Lord of the Hollow: Electrode',
     'Warden Gaeric',
     'Warden Sabi',
     'Hisuian Braviary',
-    'Lord of the Tundra: Avalugg',
     'Beni',
     'Charm 2',
     'Dialga (Origin)',
     'Palkia (Origin)',
-    'The Galaxy Team\'s Kamado',
-    'Adaman 2',
-    'Irida 3',
     'Volo 3',
     'Tornadus 1',
     'Tornadus 2',
