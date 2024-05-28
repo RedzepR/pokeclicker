@@ -6628,11 +6628,29 @@ TemporaryBattleList['Eternamax Eternatus'] = new TemporaryBattle(
 
 
 // Hisui Temporary Battles
+TemporaryBattleList['Rowlet, Cyndaquil and Oshawott'] = new TemporaryBattle(
+    'Rowlet, Cyndaquil and Oshawott',
+    [
+        new GymPokemon('Rowlet', 183178565, 5),
+        new GymPokemon('Cyndaquil', 183178565, 5),
+        new GymPokemon('Oshawott', 183178565, 5),
+    ],
+    'Thank you for calming those three Pokémon! It seems you\'ve quite the knack for this Pokémon business, $playername$! Jolly useful skill to have around here.',
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    undefined,
+    {
+        firstTimeRewardFunction: () => {
+            App.game.quests.getQuestLine('The Frenzied Nobles of Hisui').beginQuest(0, undefined, true);
+        },
+        hideTrainer: true,
+        imageName: 'Laventon',
+    }
+);
 TemporaryBattleList['Volo 1'] = new TemporaryBattle(
     'Volo 1',
     [new GymPokemon('Togepi', 348526193, 5)],
-    'Moves, items... Use them well, and the world will open up to you!',
-    [new DevelopmentRequirement()],
+    'It\'s always good fun to have your Pokémon do battle, don\'t you think? And as they gain experience through battle, they\'ll learn more moves and grow even stronger!',
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 6)],
     undefined,
     {
         displayName: 'Ginkgo Guild Member Volo',
@@ -6693,17 +6711,6 @@ TemporaryBattleList['Irida 1'] = new TemporaryBattle(
         imageName: 'Irida',
     }
 );
-TemporaryBattleList['Lord of the Woods: Kleavor'] = new TemporaryBattle(
-    'Lord of the Woods: Kleavor',
-    [new GymPokemon('Noble Kleavor', 2031393560, 18)],
-    'The golden light was dispelled from Kleavor, calming it.',
-    [new DevelopmentRequirement()],
-    undefined,
-    {
-        hideTrainer: true,
-        imageName: '../pokemon/900.01',
-    }
-);
 TemporaryBattleList['Akari 2'] = new TemporaryBattle(
     'Akari 2',
     [new GymPokemon('Pikachu', 348526193, 9)],
@@ -6749,17 +6756,6 @@ TemporaryBattleList.Ursaluna = new TemporaryBattle(
     {
         hideTrainer: true,
         imageName: '../pokemon/901',
-    }
-);
-TemporaryBattleList['Lady of the Ridge: Lilligant'] = new TemporaryBattle(
-    'Lady of the Ridge: Lilligant',
-    [new GymPokemon('Noble Lilligant', 2031393560, 30)],
-    'The golden light was dispelled from Lilligant, calming it.',
-    [new DevelopmentRequirement()],
-    undefined,
-    {
-        hideTrainer: true,
-        imageName: '../pokemon/549.02',
     }
 );
 TemporaryBattleList['Irida 2'] = new TemporaryBattle(
@@ -6811,19 +6807,8 @@ TemporaryBattleList['Charm 1'] = new TemporaryBattle(
         imageName: 'Charm',
     }
 );
-TemporaryBattleList['Lord of the Isles: Arcanine'] = new TemporaryBattle(
-    'Lord of the Isles: Arcanine',
-    [new GymPokemon('Noble Arcanine', 2031393560, 36)],
-    'The golden light was dispelled from Arcanine, calming it.',
-    [new DevelopmentRequirement()],
-    undefined,
-    {
-        hideTrainer: true,
-        imageName: '../pokemon/59.02',
-    }
-);
-TemporaryBattleList['Adaman 1'] = new TemporaryBattle(
-    'Adaman 1',
+TemporaryBattleList['Adaman'] = new TemporaryBattle(
+    'Adaman',
     [
         new GymPokemon('Eevee', 348526193, 18),
         new GymPokemon('Leafeon', 348526193, 36),
@@ -6876,17 +6861,6 @@ TemporaryBattleList['Melli 2'] = new TemporaryBattle(
         imageName: 'Melli',
     }
 );
-TemporaryBattleList['Lord of the Hollow: Electrode'] = new TemporaryBattle(
-    'Lord of the Hollow: Electrode',
-    [new GymPokemon('Noble Electrode', 2031393560, 46)],
-    'The golden light was dispelled from Electrode, calming it.',
-    [new DevelopmentRequirement()],
-    undefined,
-    {
-        hideTrainer: true,
-        imageName: '../pokemon/101.02',
-    }
-);
 TemporaryBattleList['Warden Gaeric'] = new TemporaryBattle(
     'Warden Gaeric',
     [
@@ -6923,17 +6897,6 @@ TemporaryBattleList['Hisuian Braviary'] = new TemporaryBattle(
     {
         hideTrainer: true,
         imageName: '../pokemon/628.01',
-    }
-);
-TemporaryBattleList['Lord of the Tundra: Avalugg'] = new TemporaryBattle(
-    'Lord of the Tundra: Avalugg',
-    [new GymPokemon('Noble Avalugg', 2031393560, 56)],
-    'The golden light was dispelled from Avalugg, calming it.',
-    [new DevelopmentRequirement()],
-    undefined,
-    {
-        hideTrainer: true,
-        imageName: '../pokemon/713.02',
     }
 );
 TemporaryBattleList.Beni = new TemporaryBattle(
@@ -6988,48 +6951,6 @@ TemporaryBattleList['Palkia (Origin)'] = new TemporaryBattle(
         imageName: '../pokemon/484.01',
     }
 );
-TemporaryBattleList['The Galaxy Team\'s Kamado'] = new TemporaryBattle(
-    'The Galaxy Team\'s Kamado',
-    [
-        new GymPokemon('Golem', 348526193, 65),
-        new GymPokemon('Clefable', 348526193, 65),
-        new GymPokemon('Hisuian Braviary', 348526193, 65),
-        new GymPokemon('Heracross', 348526193, 65),
-        new GymPokemon('Snorlax', 348526193, 66),
-    ],
-    'Even frightful creatures like Pokémon can become powerful allies...',
-    [new DevelopmentRequirement()]
-);
-TemporaryBattleList['Adaman 2'] = new TemporaryBattle(
-    'Adaman 2',
-    [
-        new GymPokemon('Umbreon', 348526193, 32),
-        new GymPokemon('Vaporeon', 348526193, 32),
-        new GymPokemon('Leafeon', 348526193, 64),
-    ],
-    'You\'re really something...and I\'m a man of my word. So, here\'s that treasure.',
-    [new DevelopmentRequirement()],
-    undefined,
-    {
-        displayName: 'Clan Leader Adaman',
-        imageName: 'Adaman',
-    }
-);
-TemporaryBattleList['Irida 3'] = new TemporaryBattle(
-    'Irida 3',
-    [
-        new GymPokemon('Espeon', 348526193, 32),
-        new GymPokemon('Flareon', 348526193, 32),
-        new GymPokemon('Glaceon', 348526193, 64),
-    ],
-    'I wonder... Are there people even stronger than you out in the world, with Pokémon stronger than yours? I\'ll just have to find out for myself I suppose! Here! The treasure I promised you.',
-    [new DevelopmentRequirement()],
-    undefined,
-    {
-        displayName: 'Clan Leader Irida',
-        imageName: 'Irida',
-    }
-);
 TemporaryBattleList['Volo 3'] = new TemporaryBattle(
     'Volo 3',
     [
@@ -7071,11 +6992,10 @@ TemporaryBattleList['Tornadus 2'] = new TemporaryBattle(
 TemporaryBattleList['Tornadus 3'] = new TemporaryBattle(
     'Tornadus 3',
     [new GymPokemon('Tornadus', 2031393560, 70)],
-    undefined,
+    'Before you could attempt to capture it, Tornadus fled to roam the region!',
     [new TemporaryBattleRequirement('Tornadus 2')],
-    [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1), new TemporaryBattleRequirement('Tornadus 3')],
+    undefined,
     {
-        isTrainerBattle: false,
         hideTrainer: true,
         imageName: '../pokemon/641',
         returnTown: 'Ancient Retreat',
@@ -7108,11 +7028,10 @@ TemporaryBattleList['Thundurus 2'] = new TemporaryBattle(
 TemporaryBattleList['Thundurus 3'] = new TemporaryBattle(
     'Thundurus 3',
     [new GymPokemon('Thundurus', 2031393560, 70)],
-    undefined,
+    'Before you could attempt to capture it, Thundurus fled to roam the region!',
     [new TemporaryBattleRequirement('Thundurus 2')],
-    [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1), new TemporaryBattleRequirement('Thundurus 3')],
+    undefined,
     {
-        isTrainerBattle: false,
         hideTrainer: true,
         imageName: '../pokemon/642',
         returnTown: 'Ancient Retreat',
@@ -7145,11 +7064,10 @@ TemporaryBattleList['Landorus 2'] = new TemporaryBattle(
 TemporaryBattleList['Landorus 3'] = new TemporaryBattle(
     'Landorus 3',
     [new GymPokemon('Landorus', 2031393560, 70)],
-    undefined,
+    'Before you could attempt to capture it, Landorus fled to roam the region!',
     [new TemporaryBattleRequirement('Landorus 2')],
-    [new QuestLineStepCompletedRequirement('Incarnate Forces of Hisui', 1), new TemporaryBattleRequirement('Landorus 3')],
+    undefined,
     {
-        isTrainerBattle: false,
         hideTrainer: true,
         imageName: '../pokemon/645',
         returnTown: 'Ancient Retreat',

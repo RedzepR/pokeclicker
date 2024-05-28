@@ -3788,14 +3788,14 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Bidoof', 'Starly', 'Shinx', 'Drifloon'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 8)],
 ));
 Routes.add(new RegionRoute(
     'Horseshoe Plains', Region.hisui, 2,
     new RoutePokemon({
         land: ['Bidoof', 'Starly', 'Eevee', 'Drifloon', 'Buizel', 'Wurmple', 'Silcoon', 'Cascoon', 'Mime Jr.', 'Ponyta', 'Rapidash'],
     }),
-    [new DevelopmentRequirement()],
+    [new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 11), new RouteKillRequirement(10, Region.hisui, 1)])],
 ));
 Routes.add(new RegionRoute(
     'Sandgem Flats', Region.hisui, 3,
@@ -3803,7 +3803,7 @@ Routes.add(new RegionRoute(
         land: ['Mime Jr.', 'Mr. Mime', 'Drifblim', 'Abra', 'Kadabra', 'Luxio', 'Luxray', 'Shellos (West)', 'Gastrodon (West)', 'Alakazam', 'Staravia'],
         headbutt: ['Wormadam (Plant)', 'Graveler'],
     }),
-    [new DevelopmentRequirement()],
+    [new ClearDungeonRequirement(1, getDungeonIndex('Floaro Gardens'))],
 ));
 Routes.add(new RegionRoute(
     'Deertrack Path', Region.hisui, 4,

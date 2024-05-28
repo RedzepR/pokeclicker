@@ -4111,6 +4111,256 @@ class QuestLineHelper {
 
     /* Hisui QuestLines */
 
+    public static createHisuiNobleQuestLine() {
+        const hisuiNobleQuestLine = new QuestLine('The Frenzied Nobles of Hisui', 'Calm the frenzied Noble Pokémon of Hisui, the ancient past of the Sinnoh region.');
+
+        const talktoLaventon1 = new TalkToNPCQuest(Laventon1, 'Speak to Professor Laventon at Prelude Beach.');
+        hisuiNobleQuestLine.addQuest(talktoLaventon1);
+
+        const talktoArcPhone = new TalkToNPCQuest(ArcPhone, 'Pick up the Arc Phone at Prelude Beach.');
+        hisuiNobleQuestLine.addQuest(talktoArcPhone);
+
+        const talktoLaventon2 = new TalkToNPCQuest(Laventon2, 'Tell Laventon about the Arc Phone at Prelude Beach.');
+        hisuiNobleQuestLine.addQuest(talktoLaventon2);
+
+        const talktoLaventon3 = new TalkToNPCQuest(Laventon3, 'Follow Laventon to Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoLaventon3);
+
+        const talktoCyllene1 = new TalkToNPCQuest(Cyllene1, 'Talk to Captain Cyllene in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoCyllene1);
+
+        const talktoCyllene2 = new TalkToNPCQuest(Cyllene2, 'Talk to Cyllene in Galaxy Hall.');
+        hisuiNobleQuestLine.addQuest(talktoCyllene2);
+
+        const talktoVolo1 = new TalkToNPCQuest(Volo1, 'There is someone at the village gate. Talk to Volo.');
+        hisuiNobleQuestLine.addQuest(talktoVolo1);
+
+        const clearVolo1 = new DefeatTemporaryBattleQuest('Volo 1', 'Defeat Volo in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(clearVolo1);
+
+        const talktoAkari1 = new TalkToNPCQuest(Akari1, 'Talk to Akari at Fieldlands Camp.');
+        hisuiNobleQuestLine.addQuest(talktoAkari1);
+
+        const captureThree = new CapturePokemonsQuest(3, 0).withDescription('Capture 3 Pokémon.')
+        hisuiNobleQuestLine.addQuest(captureThree);
+
+        const talktoCyllene3 = new TalkToNPCQuest(Cyllene3, 'Report back to Cyllene in Galaxy Hall.');
+        hisuiNobleQuestLine.addQuest(talktoCyllene3);
+
+        const talktoKamado1 = new TalkToNPCQuest(Kamado1, 'Report to Commander Kamado in Galaxy Hall.');
+        hisuiNobleQuestLine.addQuest(talktoKamado1);
+
+        const clearAkari1 = new DefeatTemporaryBattleQuest('Akari 1', 'Defeat Akari in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(clearAkari1);
+
+        const clearMai = new DefeatTemporaryBattleQuest('Warden Mai', 'Defeat Warden Mai at Fieldlands Camp.');
+        hisuiNobleQuestLine.addQuest(clearMai);
+
+        const clearAlphaKricketune = new DefeatTemporaryBattleQuest('Alpha Kricketune', 'Defeat Alpha Kricketune at Heights Camp.');
+        hisuiNobleQuestLine.addQuest(clearAlphaKricketune);
+
+        const clearLian = new DefeatTemporaryBattleQuest('Warden Lian', 'Defeat Warden Lian at Grandtree Arena.');
+        hisuiNobleQuestLine.addQuest(clearLian);
+
+        const SacredMindPlateReward = () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Sacred Mind Plate'}, 1);
+            Notifier.notify({
+                title: hisuiNobleQuestLine.name,
+                message: 'You recieved the Sacred Mind Plate from Wyrdeer!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talktoAdamanMai2 = new TalkToNPCQuest(AdamanMai2, 'Talk to Adaman & Mai at Heights Camp.').withCustomReward(SacredMindPlateReward);
+        hisuiNobleQuestLine.addQuest(talktoAdamanMai2);
+
+        const clearIrida1 = new DefeatTemporaryBattleQuest('Irida 1', 'Defeat Clan Leader Irida at Grandtree Arena.');
+        hisuiNobleQuestLine.addQuest(clearIrida1);
+
+        const SacredInsectPlateReward = () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Sacred Insect Plate'}, 1);
+            Notifier.notify({
+                title: hisuiNobleQuestLine.name,
+                message: 'You recieved the Sacred Insect Plate from Kleavor!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearNobleKleavor = new DefeatGymQuest(1, 0, 'Grandtree Arena').withDescription('Defeat the Lord of the Woods, Kleavor, at Grandtree Arena.').withCustomReward(SacredInsectPlateReward);
+        hisuiNobleQuestLine.addQuest(clearNobleKleavor);
+
+        const clearAkari2 = new DefeatTemporaryBattleQuest('Akari 2', 'Defeat Akari in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(clearAkari2);
+
+        const clearVolo2 = new DefeatTemporaryBattleQuest('Volo 2', 'Defeat Volo in Ancient Solaceon Ruins.');
+        hisuiNobleQuestLine.addQuest(clearVolo2);
+
+        const clearCoin1 = new DefeatTemporaryBattleQuest('Coin 1', 'Defeat Coin at Mirelands Camp.');
+        hisuiNobleQuestLine.addQuest(clearCoin1);
+
+        const clearUrsaluna = new DefeatTemporaryBattleQuest('Ursaluna', 'Defeat Ursaluna at Sludge Mound.');
+        hisuiNobleQuestLine.addQuest(clearUrsaluna);
+
+        const SacredEarthPlateReward = () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Sacred Ursaluna Plate'}, 1);
+            Notifier.notify({
+                title: hisuiNobleQuestLine.name,
+                message: 'You recieved the Sacred Earth Plate from Ursaluna!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talktoCalaba4 = new TalkToNPCQuest(Calaba4, 'Speak to Warden Calaba at Sludge Mound.').withCustomReward(SacredEarthPlateReward);
+        hisuiNobleQuestLine.addQuest(talktoCalaba4);
+
+        const arezuSearch = new DefeatPokemonsQuest(100, 0, 15, GameConstants.Region.hisui, 'Search the Crimson Mirelands for Arezu.');
+        hisuiNobleQuestLine.addQuest(arezuSearch);
+
+        const SacredMeadowPlateReward = () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Sacred Meadow Plate'}, 1);
+            Notifier.notify({
+                title: hisuiNobleQuestLine.name,
+                message: 'You recieved the Sacred Meadow Plate from Lilligant!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearNobleLilligant = new DefeatGymQuest(1, 0, 'Brava Arena').withDescription('Defeat the Lady of the Ridge, Lilligant, at Brava Arena.').withCustomReward(SacredMeadowPlateReward);
+        hisuiNobleQuestLine.addQuest(clearNobleLilligant);
+
+        const clearIrida2 = new DefeatTemporaryBattleQuest('Irida 2', 'Defeat Clan Leader Irida at Beachside Camp.');
+        hisuiNobleQuestLine.addQuest(clearIrida2);
+
+        const clearVeilstoneCape = new DefeatDungeonQuest(1, 0, 'Veilstone Cape').withDescription('Search for Palina on Veilstone Cape.');
+        hisuiNobleQuestLine.addQuest(clearVeilstoneCape);
+
+        //const catchDusknoir = new CaptureSpecificPokemonQuest('Dusknoir', 'Capture a Dusknoir to help Iscan make Basculegion Food.', 1, true); //change to defeat because monotype
+        //hisuiNobleQuestLine.addQuest(catchDusknoir);
+
+        const SacredSplashPlateReward = () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Sacred Splash Plate'}, 1);
+            Notifier.notify({
+                title: hisuiNobleQuestLine.name,
+                message: 'You recieved the Sacred Splash Plate from Basculegion!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const talktoIscanPalina1 = new TalkToNPCQuest(IscanPalina1, 'Talk to Iscan & Palina at Coastlands Camp.').withCustomReward(SacredSplashPlateReward);
+        hisuiNobleQuestLine.addQuest(talktoIscanPalina1);
+
+        const clearFirespitIsland = new DefeatDungeonQuest(1, 0, 'Firespit Island').withDescription('Make your way through Firespit Island.');
+        hisuiNobleQuestLine.addQuest(clearFirespitIsland);
+
+        const clearClover = new DefeatTemporaryBattleQuest('Clover', 'Defeat Clover at Molten Arena.');
+        hisuiNobleQuestLine.addQuest(clearClover);
+
+        const clearCoin2 = new DefeatTemporaryBattleQuest('Coin 2', 'Defeat Coin at Molten Arena.');
+        hisuiNobleQuestLine.addQuest(clearCoin2);
+
+        const clearCharm1 = new DefeatTemporaryBattleQuest('Charm 1', 'Defeat Charm at Molten Arena.');
+        hisuiNobleQuestLine.addQuest(clearCharm1);
+
+        const SacredFlamePlateReward = () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Sacred Flame Plate'}, 1);
+            Notifier.notify({
+                title: hisuiNobleQuestLine.name,
+                message: 'You recieved the Sacred Flame Plate from Arcanine!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearNobleArcanine = new DefeatGymQuest(1, 0, 'Molten Arena').withDescription('Defeat the Lord of the Isles, Arcanine, at Molten Arena.').withCustomReward(SacredFlamePlateReward);
+        hisuiNobleQuestLine.addQuest(clearNobleArcanine);
+
+        const clearAdaman1 = new DefeatTemporaryBattleQuest('Adaman 1', 'Defeat Adaman in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(clearAdaman1);
+
+        const clearMelli1 = new DefeatTemporaryBattleQuest('Melli 1', 'Defeat Melli in Ancient Quarry.');
+        hisuiNobleQuestLine.addQuest(clearMelli1);
+
+        const clearWardenIngo = new DefeatTemporaryBattleQuest('Warden Ingo', 'Defeat Warden Ingo at Clamberclaw Cliffs.');
+        hisuiNobleQuestLine.addQuest(clearWardenIngo);
+
+        const clearMelli2 =new DefeatTemporaryBattleQuest('Melli 2', 'Defeat Melli in Moonview Arena.');
+        hisuiNobleQuestLine.addQuest(clearMelli2);
+
+        const SacredZapPlateReward = () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Sacred Zap Plate'}, 1);
+            Notifier.notify({
+                title: hisuiNobleQuestLine.name,
+                message: 'You recieved the Sacred Zap Plate from Electrode!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearNobleElectrode = new DefeatGymQuest(1, 0, 'Moonview Arena').withDescription('Defeat the Lord of the Hollow, Electrode, at Moonview Arena.').withCustomReward(SacredZapPlateReward);
+        hisuiNobleQuestLine.addQuest(clearNobleElectrode);
+
+        const clearWardenGaeric = new DefeatTemporaryBattleQuest('Warden Gaeric', 'Defeat Warden Gaeric in Avalugg\'s Legacy.');
+        hisuiNobleQuestLine.addQuest(clearWardenGaeric);
+
+        const clearWardenSabi = new DefeatTemporaryBattleQuest('Warden Sabi', 'Defeat Warden Sabi in Ancient Snowpoint Temple.');
+        hisuiNobleQuestLine.addQuest(clearWardenSabi);
+
+        const clearHisuianBraviary = new DefeatTemporaryBattleQuest('Hisuian Braviary', 'Defeat Hisuian Braviary in Ancient Snowpoint Temple.');
+        hisuiNobleQuestLine.addQuest(clearHisuianBraviary);
+
+        const SacredIciclePlateReward = () => {
+            BagHandler.gainItem({type: ItemType.item, id: 'Sacred Icicle Plate'}, 1);
+            Notifier.notify({
+                title: hisuiNobleQuestLine.name,
+                message: 'You recieved the Sacred Icicle Plate from Avalugg!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
+        };
+
+        const clearNobleAvalugg = new DefeatGymQuest(1, 0, 'Icepeak Arena').withDescription('Defeat the Lord of the Tundra, Avalugg, at Icepeak Arena.').withCustomReward(SacredIciclePlateReward);
+        hisuiNobleQuestLine.addQuest(clearNobleAvalugg);
+
+        App.game.quests.questLines().push(hisuiNobleQuestLine);
+    }
+
+    public static createHisuiSinnohQuestLine() {
+        const hisuiSinnohQuestLine = new QuestLine('The Origin of Sinnoh', 'Put a stop to the frenzy of Sinnoh, the deity the Diamond and Pearl Clans revere.', new QuestLineCompletedRequirement('The Frenzied Nobles of Hisui'));
+
+        const clearBeni = new DefeatTemporaryBattleQuest('Beni', 'Defeat Beni in Stone Portal.');
+        hisuiSinnohQuestLine.addQuest(clearBeni);
+
+        const clearCharm2 = new DefeatTemporaryBattleQuest('Charm 2', 'Defeat Charm in Primeval Grotto.');
+        hisuiSinnohQuestLine.addQuest(clearCharm2);
+
+        const clearOriginDialga = new DefeatTemporaryBattleQuest('Dialga (Origin)', 'Defeat Origin Dialga!');
+        const clearOriginPalkia = new DefeatTemporaryBattleQuest('Palkia (Origin)', 'Defeat Origin Palkia!');
+
+        hisuiSinnohQuestLine.addQuest(new MultipleQuestsQuest([
+            clearOriginDialga,
+            clearOriginPalkia,
+        ],'It\'s finally time! Defeat Origin Dialga and Origin Palkia in the Temple of Sinnoh!'));
+
+        App.game.quests.questLines().push(hisuiSinnohQuestLine);
+    }
+
+    public static createHisuiVoloQuestLine() {
+        const hisuiVoloQuestLine = new QuestLine('Volo\'s Dream', 'Help Volo find the remaining Sacred Plates.', new QuestLineCompletedRequirement('The Origin of Sinnoh'));
+
+        const clearVolo3 = new DefeatGymQuest(1, 0, 'Temple of Sinnoh').withDescription('Volo has revealed himself to possess the final Plate and has betrayed you! Defeat him atop the Temple of Sinnoh!');
+        hisuiVoloQuestLine.addQuest(clearVolo3);
+
+        const clearVolo4 = new DefeatTemporaryBattleQuest('Volo 3', 'Volo has summoned Giratina! Defeat him one more time in the Temple of Sinnoh!');
+        hisuiVoloQuestLine.addQuest(clearVolo4);
+
+        App.game.quests.questLines().push(hisuiVoloQuestLine);
+    }
+
     public static createHisuiForcesQuestLine() {
         const hisuiForcesQuestLine = new QuestLine('Incarnate Forces of Hisui', 'Cogita would like you to catch the Forces of Nature.', new DevelopmentRequirement(), GameConstants.BulletinBoards.Hisui);
 
@@ -4302,6 +4552,9 @@ class QuestLineHelper {
         this.createDynaTreeBirdsQuestLine();
         this.createAncientGolemsQuestLine();
         this.createGigantamaxQuestLine();
+        this.createHisuiNobleQuestLine();
+        this.createHisuiSinnohQuestLine();
+        this.createHisuiVoloQuestLine();
         this.createHisuiForcesQuestLine();
         this.createHisuiArceusQuestLine();
         this.createPaldeaLegendsQuestLine();
