@@ -15,6 +15,9 @@ class Battle {
     static lastClickAttack = Date.now();
     static route;
 
+    static enemyPokemonArray: KnockoutObservable<EnemyPokemon[]> = ko.observable([]);
+    static doubleBattle = true;
+
     /**
      * Probably not needed right now, but might be if we add more logic to a gameTick.
      */
@@ -27,6 +30,14 @@ class Battle {
      * Attacks with Pokémon and checks if the enemy is defeated.
      */
     public static pokemonAttack() {
+        const that = this;
+        this.enemyPokemonArray().filter(p => p.pokemon().isAlive()).forEach(function (p) {
+            const enemyPokemon = p.pokemon();
+            enemyPokemon.damage(App.game.party.calculatePokemonAttack(enemyPokemon.type1, enemyPokemon.type2) * (that.doubleBattle ? 0.75 : 1));
+            if (!enemyPokemon.isAlive()) {
+                that.defeatPokemon(p);
+            }
+        })
         if (!this.enemyPokemon()?.isAlive()) {
             return;
         }
@@ -34,12 +45,14 @@ class Battle {
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
         }
+
+
     }
 
     /**
      * Attacks with clicks and checks if the enemy is defeated.
      */
-    public static clickAttack() {
+    public static clickAttack(index = -1) {
         // click attacks disabled and we already beat the starter
         if (App.game.challenges.list.disableClickAttack.active() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None) {
             return;
@@ -51,20 +64,21 @@ class Battle {
             return;
         }
         this.lastClickAttack = now;
-        if (!this.enemyPokemon()?.isAlive()) {
+        if (index == -1) {
             return;
         }
         GameHelper.incrementObservable(App.game.statistics.clickAttacks);
-        this.enemyPokemon().damage(App.game.party.calculateClickAttack(true));
-        if (!this.enemyPokemon().isAlive()) {
-            this.defeatPokemon();
+        const enemyPokemon = this.enemyPokemonArray().filter(p => p.pokemon().isAlive())[index];
+        enemyPokemon.pokemon().damage(App.game.party.calculateClickAttack(true));
+        if (!enemyPokemon.pokemon().isAlive()) {
+            this.defeatPokemon(enemyPokemon);
         }
     }
 
     /**
      * Award the player with money and exp, and throw a Pokéball if applicable
      */
-    public static defeatPokemon() {
+    public static defeatPokemon(enemyPoke: EnemyPokemon = undefined) {
         const enemyPokemon = this.enemyPokemon();
         Battle.route = player.route;
         const region = player.region;
@@ -221,6 +235,10 @@ class Battle {
         } else {
             return '';
         }
-    }).extend({rateLimit: 1000});
+    }).extend({ rateLimit: 1000 });
+
+    public static getAllPokemon(): BattlePokemon[]{
+        return this.enemyPokemonArray().map(p => p.pokemon());
+    }
 
 }

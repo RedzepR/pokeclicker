@@ -19,6 +19,7 @@ interface optionalGymArgs {
     environment?: GameConstants.Environment,
     hideUntilUnlocked?: boolean,
     visibleRequirement?: Requirement,
+    doubleBattle?: boolean
 }
 
 /**

@@ -11,7 +11,7 @@ class GymRunner {
     public static autoRestart: KnockoutObservable<boolean> = ko.observable(false);
     public static initialRun = true;
 
-    public static startGym(
+    public static startGym( 
         gym: Gym,
         autoRestart = false,
         initialRun = true
@@ -26,8 +26,10 @@ class GymRunner {
         GymRunner.timeLeftPercentage(100);
 
         GymBattle.gym = gym;
+        GymBattle.doubleBattle = gym.optionalArgs.doubleBattle;
         GymBattle.totalPokemons(gym.getPokemonList().length);
         GymBattle.index(0);
+        GymBattle.enemyPokemonArray([]);
         GymBattle.generateNewEnemy();
         App.game.gameState = GameConstants.GameState.gym;
         GymRunner.running(true);
