@@ -26,7 +26,7 @@ class GymBattle extends Battle {
         App.game.breeding.progressEggsBattle(this.gym.badgeReward * 3 + 1, GameConstants.Region.none);
         this.index(this.index() + 1);
 
-        if (this.getAllPokemon().filter(p => !p.isAlive()).length >= this.gym.getPokemonList().length) {
+        if (this.getAllPokemonByStatus(false).length >= this.gym.getPokemonList().length) {
             GymRunner.gymWon(this.gym);
         } else {
             this.generateNewEnemy();
@@ -43,14 +43,14 @@ class GymBattle extends Battle {
             return;
         }
         this.enemyPokemonArray().push(new EnemyPokemon(PokemonFactory.generateGymPokemon(this.gym, this.index())));
-        if (this.doubleBattle && this.pokemonsUndefeatedComputable() >= 2 && this.getAllPokemon().filter(x => x.isAlive()).length == 1) {
+        if (this.doubleBattle && this.pokemonsUndefeatedComputable() >= 2 && this.getAllPokemonByStatus(true).length == 1) {
             this.index(this.index() + 1);
             this.generateNewEnemy();
         }
     }
 
     public static pokemonsDefeatedComputable: KnockoutComputed<number> = ko.pureComputed(() => {
-        return GymBattle.getAllPokemon().filter(x => !x.isAlive()).length;
+        return GymBattle.getAllPokemonByStatus(false).length;
     });
 
     public static pokemonsUndefeatedComputable: KnockoutComputed<number> = ko.pureComputed(() => {

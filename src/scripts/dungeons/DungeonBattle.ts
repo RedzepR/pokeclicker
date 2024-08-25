@@ -58,7 +58,7 @@ class DungeonBattle extends Battle {
         const route = player.town?.dungeon?.difficultyRoute || 1;
         const region = player.region;
         if (pokeBall !== GameConstants.Pokeball.None) {
-            this.prepareCatch(enemyPokemon, pokeBall);
+            this.prepareCatch(new EnemyPokemon(enemyPokemon), pokeBall);
             setTimeout(
                 () => {
                     this.attemptCatch(enemyPokemon, route, region);
@@ -92,7 +92,7 @@ class DungeonBattle extends Battle {
             const route = player.town?.dungeon?.difficultyRoute || 1;
             const region = player.region;
             if (pokeBall !== GameConstants.Pokeball.None) {
-                this.prepareCatch(enemyPokemon, pokeBall);
+                this.prepareCatch(new EnemyPokemon(enemyPokemon), pokeBall);
                 setTimeout(
                     () => {
                         this.attemptCatch(enemyPokemon, route, region);

@@ -68,7 +68,7 @@ class Battle {
             return;
         }
         GameHelper.incrementObservable(App.game.statistics.clickAttacks);
-        const enemyPokemon = this.enemyPokemonArray().filter(p => p.pokemon().isAlive())[index];
+        const enemyPokemon = this.getAllPokemonByStatus(true)[index];
         enemyPokemon.pokemon().damage(App.game.party.calculateClickAttack(true));
         if (!enemyPokemon.pokemon().isAlive()) {
             this.defeatPokemon(enemyPokemon);
@@ -79,7 +79,7 @@ class Battle {
      * Award the player with money and exp, and throw a Pokéball if applicable
      */
     public static defeatPokemon(enemyPoke: EnemyPokemon = undefined) {
-        const enemyPokemon = this.enemyPokemon();
+        const enemyPokemon = enemyPoke.pokemon();
         Battle.route = player.route;
         const region = player.region;
         const catchRoute = player.route; // Has to be set, the Battle.route is "zeroed" on region change
@@ -93,10 +93,10 @@ class Battle {
         const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny, isShadow, enemyPokemon.encounterType);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
-            this.prepareCatch(enemyPokemon, pokeBall);
+            this.prepareCatch(enemyPoke, pokeBall);
             setTimeout(
                 () => {
-                    this.attemptCatch(enemyPokemon, catchRoute, region);
+                    this.attemptCatch(enemyPoke, catchRoute, region);
                     if (Battle.route != 0) {
                         this.generateNewEnemy();
                     }
@@ -118,8 +118,9 @@ class Battle {
      */
     public static generateNewEnemy() {
         this.counter = 0;
-        this.enemyPokemon(PokemonFactory.generateWildPokemon(player.route, player.region, player.subregionObject()));
-        const enemyPokemon = this.enemyPokemon();
+        this.enemyPokemonArray([]);
+        this.enemyPokemonArray().push(new EnemyPokemon(PokemonFactory.generateWildPokemon(player.route, player.region, player.subregionObject())));
+        const enemyPokemon = this.enemyPokemonArray()[0].pokemon();
         PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatisticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender, enemyPokemon.shadow);
         // Shiny
         if (enemyPokemon.shiny) {
@@ -153,14 +154,15 @@ class Battle {
         return totalChance;
     }
 
-    protected static prepareCatch(enemyPokemon: BattlePokemon, pokeBall: GameConstants.Pokeball) {
-        this.pokeball(pokeBall);
-        this.catching(true);
-        this.catchRateActual(this.calculateActualCatchRate(enemyPokemon, pokeBall));
+    protected static prepareCatch(enemyPokemon: EnemyPokemon, pokeBall: GameConstants.Pokeball) {        
+        enemyPokemon.pokeball(pokeBall);
+        enemyPokemon.catching(true);
+        enemyPokemon.catchRateActual(this.calculateActualCatchRate(enemyPokemon.pokemon(), pokeBall));
         App.game.pokeballs.usePokeball(pokeBall);
     }
 
-    protected static attemptCatch(enemyPokemon: BattlePokemon, route: number, region: GameConstants.Region) {
+    protected static attemptCatch(enemyPoke: EnemyPokemon, route: number, region: GameConstants.Region) {
+        const enemyPokemon = enemyPoke.pokemon();
         if (enemyPokemon == null) {
             this.catching(false);
             return;
@@ -180,8 +182,8 @@ class Battle {
                 createLogContent.escapedWild({ pokemon: enemyPokemon.name})
             );
         }
-        this.catching(false);
-        this.catchRateActual(null);
+        enemyPoke.catching(false);
+        enemyPoke.catchRateActual(null);
     }
 
     public static catchPokemon(enemyPokemon: BattlePokemon, route: number, region: GameConstants.Region) {
@@ -237,8 +239,8 @@ class Battle {
         }
     }).extend({ rateLimit: 1000 });
 
-    public static getAllPokemon(): BattlePokemon[]{
-        return this.enemyPokemonArray().map(p => p.pokemon());
+    public static getAllPokemonByStatus(alive: boolean): EnemyPokemon[]{
+        return this.enemyPokemonArray().filter(x => x.pokemon().isAlive() == alive);
     }
 
 }

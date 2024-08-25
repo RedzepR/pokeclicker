@@ -26,7 +26,7 @@ class TemporaryBattleBattle extends Battle {
             const isShadow: boolean = enemyPokemon.shadow == GameConstants.ShadowStatus.Shadow;
             const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny, isShadow, enemyPokemon.encounterType);
             if (pokeBall !== GameConstants.Pokeball.None) {
-                this.prepareCatch(enemyPokemon, pokeBall);
+                this.prepareCatch(new EnemyPokemon(enemyPokemon), pokeBall);
                 setTimeout(
                     () => {
                         this.attemptCatch(enemyPokemon, 1, player.region);

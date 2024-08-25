@@ -182,7 +182,7 @@
 
                     <!-- Route Battles -->
                     <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
-                        <div class="col no-gutters clickable" data-bind="click: function() {Battle.clickAttack()}" style="height: 280px; display: block;">
+                        <div class="col no-gutters clickable" data-bind="click: function() {Battle.clickAttack(0)}, with: Battle.enemyPokemonArray()[0] " style="height: 280px; display: block;">
                             <h2 class="pageItemTitle" style="display: block;">
                                 <knockout>
                                     <knockout class="right">
@@ -190,33 +190,33 @@
                                             <img src="assets/images/encountersInfo/encountersInfo.png">
                                         </div>
                                     </knockout>
-                                    <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': Battle.enemyPokemon() } }">Pokémon name</knockout>
-                                    <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(Battle.enemyPokemon().id)}}"></knockout>
+                                    <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': $data.pokemon() } }">Pokémon name</knockout>
+                                    <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus($data.pokemon().id)}}"></knockout>
                                     <knockout style="position: relative; top: -1px;"
                                         data-bind="template: { name: 'pokerusStatusTemplate', data: {
-                                            'pokerus': PartyController.getPokerusStatus(Battle.enemyPokemon().id),
-                                            'evs': App.game.party.getPokemon(Battle.enemyPokemon().id)?.evs() }}">
+                                            'pokerus': PartyController.getPokerusStatus($data.pokemon().id),
+                                            'evs': App.game.party.getPokemon($data.pokemon().id)?.evs() }}">
                                     </knockout>
                                 </knockout>
                             </h2>
                             <div>
-                                <div data-bind="visible: !Battle.catching()">
-                                    <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': Battle.enemyPokemon() } }">Pokémon sprite</knockout>
+                                <div data-bind="visible: !$data.catching()">
+                                    <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': $data.pokemon() } }">Pokémon sprite</knockout>
                                 </div>
-                                <div data-bind="visible: Battle.catching()" class="catchChance">
+                                <div data-bind="visible: $data.catching()" class="catchChance">
                                     <img class="pokeball-animated"
-                                         data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.svg'}"
+                                         data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.pokeball()] + '.svg'}"
                                          src=""/>
                                     <br>
                                     Catch Chance:
-                                    <knockout data-bind="text: Math.floor(Battle.catchRateActual()) + '%'">Catch Rate</knockout>
+                                    <knockout data-bind="text: Math.floor($data.catchRateActual()) + '%'">Catch Rate</knockout>
                                 </div>
                             </div>
                             <div class="progress hitpoints" style="height: 20px;">
                                 <div class="progress-bar bg-danger" role="progressbar"
-                                     data-bind="attr:{ style: 'width:' + Battle.enemyPokemon().healthPercentage() + '%' }"
+                                     data-bind="attr:{ style: 'width:' + $data.pokemon().healthPercentage() + '%' }"
                                      aria-valuemin="0" aria-valuemax="100">
-                                     <span data-bind="text: Battle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + Battle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
+                                     <span data-bind="text: $data.pokemon().health().toLocaleString('en-US') + ' / ' + $data.pokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
                                 </div>
                             </div>
 
@@ -259,7 +259,7 @@
                                   </tr>
                                   <tr>
                                     <td width="50%">
-                                        <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
+                                        <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': $data.pokemon() } }"></knockout>
                                     </td>
                                     <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
                                         <span style="display: inline;">Click Attack:
