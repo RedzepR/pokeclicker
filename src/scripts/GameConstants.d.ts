@@ -60,6 +60,7 @@ namespace GameConstants {
     declare const EGG_CYCLE_MULTIPLIER: number;
     declare const BREEDING_ATTACK_BONUS: number;
     declare const BREEDING_SHINY_ATTACK_MULTIPLIER: number;
+    declare const DOUBLE_BATTLE_ATTACK_PENALTY: number;
     declare const FARM_PLOT_WIDTH: number;
     declare const FARM_PLOT_HEIGHT: number;
     declare const BerryDistribution: number[];

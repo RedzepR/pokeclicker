@@ -163,6 +163,9 @@ export const MAX_EGG_CYCLES = 120;
 export const BREEDING_ATTACK_BONUS = 25;
 export const BREEDING_SHINY_ATTACK_MULTIPLIER = 5;
 
+// Double Battles
+export const DOUBLE_BATTLE_ATTACK_PENALTY = 0.75;
+
 // Farming
 export const FARM_PLOT_WIDTH = 5;
 export const FARM_PLOT_HEIGHT = 5;

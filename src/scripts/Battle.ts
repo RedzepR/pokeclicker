@@ -31,21 +31,16 @@ class Battle {
      */
     public static pokemonAttack() {
         const that = this;
-        this.enemyPokemonArray().filter(p => p.pokemon().isAlive()).forEach(function (p) {
+        this.enemyPokemonArray().filter(p => p.pokemon().isAlive() && !p.catching()).forEach(function (p) {
             const enemyPokemon = p.pokemon();
-            enemyPokemon.damage(App.game.party.calculatePokemonAttack(enemyPokemon.type1, enemyPokemon.type2) * (that.doubleBattle ? 0.75 : 1));
+            console.log(`I damage: ${enemyPokemon.name}`);
+            const damage = App.game.party.calculatePokemonAttack(enemyPokemon.type1, enemyPokemon.type2);
+            const penalty = that.doubleBattle ? GameConstants.DOUBLE_BATTLE_ATTACK_PENALTY : 1;
+            enemyPokemon.damage(damage * penalty);
             if (!enemyPokemon.isAlive()) {
                 that.defeatPokemon(p);
             }
         })
-        if (!this.enemyPokemon()?.isAlive()) {
-            return;
-        }
-        this.enemyPokemon().damage(App.game.party.calculatePokemonAttack(this.enemyPokemon().type1, this.enemyPokemon().type2));
-        if (!this.enemyPokemon().isAlive()) {
-            this.defeatPokemon();
-        }
-
 
     }
 
@@ -69,6 +64,9 @@ class Battle {
         }
         GameHelper.incrementObservable(App.game.statistics.clickAttacks);
         const enemyPokemon = this.getAllPokemonByStatus(true)[index];
+        if (!enemyPokemon) {
+            return;
+        }
         enemyPokemon.pokemon().damage(App.game.party.calculateClickAttack(true));
         if (!enemyPokemon.pokemon().isAlive()) {
             this.defeatPokemon(enemyPokemon);

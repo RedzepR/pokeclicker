@@ -131,7 +131,7 @@ class DungeonMap {
 
     public hasAccessToTile(point: Point): boolean {
         // If player fighting/catching they cannot move right now
-        if (DungeonRunner.fighting() || DungeonBattle.catching()) {
+        if (DungeonRunner.fighting() || DungeonBattle.CurrentlyCatching()) {
             return false;
         }
 
