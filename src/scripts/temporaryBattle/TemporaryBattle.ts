@@ -9,7 +9,8 @@ type TemporaryBattleOptionalArgument = {
     hideTrainer?: boolean,
     environment?: GameConstants.Environment,
     resetDaily?: boolean,
-    finalPokemonImage?: string // trainer image when on final pokemon
+    finalPokemonImage?: string, // trainer image when on final pokemon
+    doubleBattle?: boolean
 };
 
 class TemporaryBattle extends TownContent {

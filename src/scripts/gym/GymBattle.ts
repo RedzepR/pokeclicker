@@ -13,7 +13,7 @@ class GymBattle extends Battle {
 
     public static clickAttack(index = -1) {
         if (GymRunner.running()) {
-            super.clickAttack(index); 
+            super.clickAttack(index);
         }
     }
     /**
@@ -33,7 +33,7 @@ class GymBattle extends Battle {
         }
         player.lowerItemMultipliers(MultiplierDecreaser.Battle);
     }
-     
+
     /**
      * Reset the counter.
      */

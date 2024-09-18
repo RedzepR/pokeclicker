@@ -2,7 +2,7 @@
  * Holds all the logic for an enemy Pokemon
  */
 class EnemyPokemon {
-    
+
     pokemon: KnockoutObservable<BattlePokemon> = ko.observable(null);
     catching: KnockoutObservable<boolean> = ko.observable(false);
     catchRateActual: KnockoutObservable<number> = ko.observable(null);

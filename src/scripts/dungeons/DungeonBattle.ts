@@ -25,6 +25,7 @@ class DungeonBattle extends Battle {
      * Award the player with money and exp, and throw a Pokéball if applicable
      */
     public static defeatPokemon(enemyPoke: EnemyPokemon = undefined) {
+        console.log('hi');
         const enemyPokemon = enemyPoke.pokemon();
 
         // Handle Trainer Pokemon defeat
@@ -110,7 +111,7 @@ class DungeonBattle extends Battle {
 
 
     private static nextTrainerPokemon() {
-        
+
         GameHelper.incrementObservable(this.trainerPokemonIndex);
         if (!this.trainer()) {
             return;
@@ -166,7 +167,6 @@ class DungeonBattle extends Battle {
             //const pokemon = (typeof enemy === 'string') ? enemy : (<DetailedPokemon>enemy).pokemon;
             const pokemon = (typeof enemy === 'string') ? enemy : (enemy as DetailedPokemon).pokemon;
             const enemyPokemon = PokemonFactory.generateDungeonPokemon(pokemon, DungeonRunner.chestsOpened(), DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeonLevel());
-            //this.enemyPokemon(enemyPokemon);
             this.enemyPokemonArray().push(new EnemyPokemon(enemyPokemon));
 
             PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatisticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender, enemyPokemon.shadow);

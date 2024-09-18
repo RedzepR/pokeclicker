@@ -30,17 +30,21 @@ class Battle {
      * Attacks with Pokémon and checks if the enemy is defeated.
      */
     public static pokemonAttack() {
-        const that = this;
-        this.enemyPokemonArray().filter(p => p.pokemon().isAlive() && !p.catching()).forEach(function (p) {
-            const enemyPokemon = p.pokemon();
-            console.log(`I damage: ${enemyPokemon.name}`);
-            const damage = App.game.party.calculatePokemonAttack(enemyPokemon.type1, enemyPokemon.type2);
-            const penalty = that.doubleBattle ? GameConstants.DOUBLE_BATTLE_ATTACK_PENALTY : 1;
-            enemyPokemon.damage(damage * penalty);
-            if (!enemyPokemon.isAlive()) {
-                that.defeatPokemon(p);
-            }
-        })
+        this.enemyPokemonArray()
+            .filter((p) => p.pokemon().isAlive() && !p.catching())
+            .forEach((p) => {
+                const enemyPokemon = p.pokemon();
+                console.log(`I damage: ${enemyPokemon.name}`);
+
+                const damage = App.game.party.calculatePokemonAttack(enemyPokemon.type1, enemyPokemon.type2);
+                const penalty = this.doubleBattle ? GameConstants.DOUBLE_BATTLE_ATTACK_PENALTY : 1; 
+
+                enemyPokemon.damage(damage * penalty);
+
+                if (!enemyPokemon.isAlive()) {
+                    this.defeatPokemon(p); 
+                }
+            });
 
     }
 
@@ -62,11 +66,11 @@ class Battle {
         if (index == -1) {
             return;
         }
-        GameHelper.incrementObservable(App.game.statistics.clickAttacks);
         const enemyPokemon = this.getAllPokemonByStatus(true)[index];
         if (!enemyPokemon) {
             return;
         }
+        GameHelper.incrementObservable(App.game.statistics.clickAttacks);
         enemyPokemon.pokemon().damage(App.game.party.calculateClickAttack(true));
         if (!enemyPokemon.pokemon().isAlive()) {
             this.defeatPokemon(enemyPokemon);
@@ -152,7 +156,7 @@ class Battle {
         return totalChance;
     }
 
-    protected static prepareCatch(enemyPokemon: EnemyPokemon, pokeBall: GameConstants.Pokeball) {        
+    protected static prepareCatch(enemyPokemon: EnemyPokemon, pokeBall: GameConstants.Pokeball) {
         enemyPokemon.pokeball(pokeBall);
         enemyPokemon.catching(true);
         enemyPokemon.catchRateActual(this.calculateActualCatchRate(enemyPokemon.pokemon(), pokeBall));
@@ -237,7 +241,7 @@ class Battle {
         }
     }).extend({ rateLimit: 1000 });
 
-    public static getAllPokemonByStatus(alive: boolean): EnemyPokemon[]{
+    public static getAllPokemonByStatus(alive: boolean): EnemyPokemon[] {
         return this.enemyPokemonArray().filter(x => x.pokemon().isAlive() == alive);
     }
 

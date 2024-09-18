@@ -540,7 +540,7 @@ GymList['Mossdeep City'] = new Gym(
     undefined,
     undefined,
     {
-        doubleBattle: true
+        doubleBattle: true,
     }
 );
 GymList['Sootopolis City'] = new Gym(
@@ -700,7 +700,7 @@ GymList['Kumquat Island'] = new Gym(
     undefined,
     undefined,
     {
-        doubleBattle: true
+        doubleBattle: true,
     }
 );
 
@@ -1987,7 +1987,7 @@ GymList.Hammerlocke = new Gym(
     undefined,
     undefined,
     {
-        doubleBattle: true
+        doubleBattle: true,
     }
 );
 GymList['Elite Trainer Marnie'] = new Gym(

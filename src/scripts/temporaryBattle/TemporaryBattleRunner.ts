@@ -25,6 +25,8 @@ class TemporaryBattleRunner {
         TemporaryBattleBattle.battle = battle;
         TemporaryBattleBattle.totalPokemons(battle.getPokemonList().length);
         TemporaryBattleBattle.index(0);
+        TemporaryBattleBattle.doubleBattle = battle.optionalArgs.doubleBattle;
+        GymBattle.enemyPokemonArray([]);
         TemporaryBattleBattle.generateNewEnemy();
         App.game.gameState = GameConstants.GameState.temporaryBattle;
         this.running(true);
@@ -99,7 +101,7 @@ class TemporaryBattleRunner {
                 }
             }
             battle.optionalArgs.rewardFunction?.();
-            GameHelper.incrementObservable(App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(battle.name)]);
+            //GameHelper.incrementObservable(App.game.statistics.temporaryBattleDefeated[GameConstants.getTemporaryBattlesIndex(battle.name)]);
             player.town = battle.getTown();
             App.game.gameState = GameConstants.GameState.town;
         }
