@@ -115,16 +115,22 @@ class TemporaryBattleRunner {
 
     public static getEnvironmentArea() {
         const battle = TemporaryBattleRunner.battleObservable();
-        return battle?.optionalArgs.environment
-            ?? battle?.parent?.name
-            ?? battle?.optionalArgs.returnTown;
+        return battle?.optionalArgs.environment;
+    }
+
+    public static getBattleBackgroundImage() {
+        const battle = TemporaryBattleRunner.battleObservable();
+        return battle?.optionalArgs.battleBackground
+        ?? battle?.parent?.name
+        ?? battle?.optionalArgs.returnTown;
     }
 }
 
+/* Uncomment once Z-Moves are ready
 document.addEventListener('DOMContentLoaded', () => {
     $('#temporaryBattleWonModal').on('hidden.bs.modal', () => {
         if (TemporaryBattleBattle.battle.name === 'Hau 2') {
             KeyItemController.showGainModal(KeyItemType['Z-Power_Ring']);
         }
     });
-});
+});*/

@@ -1,4 +1,4 @@
-<g data-bind='if: player.region == GameConstants.Region.hoenn, childrenComplete: () => GameController.applyRouteBindings()'>
+<g data-bind='visible: player.region == GameConstants.Region.hoenn'>
     <image width="1600" height="960" data-bind="attr: {
         'xlink:href':'assets/images/hoenn.png?v=$VERSION',
         href:'assets/images/hoenn.png?v=$VERSION'
@@ -980,24 +980,11 @@
         })
     %>
 
-    <%- include('templates/mapOverlay',
-         { name: "Professor Birch's Blimp"
-         , x: 19, y: 43
-         , width: 6, height: 3
-         , databind: "click:function(){MapHelper.moveToTown('Littleroot Town')}, attr:{ class: MapHelper.calculateTownCssClass('Littleroot Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.Special"
-         , image: "assets/images/map/blimp_empty.png"
-         })
-    %>
-
-    <%- include('templates/mapOverlay',
-         { name: "Professor Birch's Blimp"
-         , x: 19, y: 43
-         , width: 6, height: 3
-         , databind: "click:function(){MapHelper.moveToTown('Littleroot Town')}, attr:{ class: MapHelper.calculateTownCssClass('Littleroot Town') }"
-         , visible:  "MapHelper.ableToTravel() && player.regionStarters[GameConstants.Region.kanto]() == GameConstants.Starter.Special"
-         , image: "assets/images/map/blimp_pikachu.png"
-         })
+    <%- include('templates/mapBlimp',
+        { name: "Professor Birch"
+        , x: 19, y: 46
+        , town: "Littleroot Town"
+        })
     %>
 
         <%- include('templates/mapOverlay',

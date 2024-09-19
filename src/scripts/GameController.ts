@@ -2,23 +2,18 @@
  * Class which controls the UI of the game.
  */
 class GameController {
-    static applyRouteBindings() {
-        $('#map path, #map rect').hover(function () {
-            let tooltipText = $(this).attr('data-town');
-            const route = $(this).attr('data-route');
-            if (route) {
-                tooltipText = Routes.getName(Number(route), player.region);
-            }
-            if (tooltipText) {
-                const tooltip = $('#mapTooltip');
-                tooltip.text(tooltipText);
-                tooltip.css('visibility', 'visible');
-            }
-        }, () => {
+    static showMapTooltip(tooltipText: string) {
+        if (tooltipText) {
             const tooltip = $('#mapTooltip');
-            tooltip.text('');
-            tooltip.css('visibility', 'hidden');
-        });
+            tooltip.text(tooltipText);
+            tooltip.css('visibility', 'visible');
+        }
+    }
+
+    static hideMapTooltip() {
+        const tooltip = $('#mapTooltip');
+        tooltip.text('');
+        tooltip.css('visibility', 'hidden');
     }
 
     static convertKey(key: string) {
@@ -308,14 +303,16 @@ class GameController {
                 // Route Battles
                 if (App.game.gameState === GameConstants.GameState.fighting && !GameController.keyHeld.Control?.()) {
                     const cycle = Routes.getRoutesByRegion(player.region).filter(r => r.isUnlocked()).map(r => r.number);
-                    const idx = cycle.findIndex(r => r == player.route);
-                    // Allow '=' to fallthrough to '+' since they share a key on many keyboards
-                    switch (key) {
-                        case '=':
-                        case '+': MapHelper.moveToRoute(cycle[(idx + 1) % cycle.length], player.region);
-                            return e.preventDefault();
-                        case '-': MapHelper.moveToRoute(cycle[(idx + cycle.length - 1) % cycle.length], player.region);
-                            return e.preventDefault();
+                    if (cycle.length > 1) {
+                        const idx = cycle.findIndex(r => r == player.route);
+                        // Allow '=' to fallthrough to '+' since they share a key on many keyboards
+                        switch (key) {
+                            case '=':
+                            case '+': MapHelper.moveToRoute(cycle[(idx + 1) % cycle.length], player.region);
+                                return e.preventDefault();
+                            case '-': MapHelper.moveToRoute(cycle[(idx + cycle.length - 1) % cycle.length], player.region);
+                                return e.preventDefault();
+                        }
                     }
                 }
 
@@ -424,6 +421,7 @@ class GameController {
                 case Settings.getSetting('hotkey.forceSave').value:
                     if (GameController.keyHeld.Shift()) {
                         Save.store(player);
+                        Notifier.notify({ message: 'Game Saved!'});
                         return e.preventDefault();
                     }
                     break;

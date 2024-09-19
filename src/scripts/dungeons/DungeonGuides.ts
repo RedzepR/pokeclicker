@@ -36,11 +36,8 @@ class DungeonGuide {
                 switch (DungeonRunner.map.currentTile().type()) {
                     case GameConstants.DungeonTileType.chest:
                     case GameConstants.DungeonTileType.boss:
-                        DungeonRunner.handleInteraction();
-                        break;
                     case GameConstants.DungeonTileType.ladder:
                         DungeonRunner.handleInteraction();
-                        DungeonRunner.map.playerMoved(true);
                         break;
                 }
             } catch (e) {
@@ -199,7 +196,7 @@ DungeonGuides.add(new DungeonGuide('Jimmy', 'Doesn\'t really know their way arou
     }));
 
 
-DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is treasure chest on a tile near them!',
+DungeonGuides.add(new DungeonGuide('Timmy', 'Can smell when there is a treasure chest on a tile near them!',
     [[4, GameConstants.Currency.money],[1, GameConstants.Currency.dungeonToken]], [],
     2000,
     () => {
@@ -252,7 +249,7 @@ DungeonGuides.add(new DungeonGuide('Shelly', 'Prefers to explore the unknown!',
     }, new MaxRegionRequirement(GameConstants.Region.hoenn)));
 
 DungeonGuides.add(new DungeonGuide('Angeline', 'Can find treasure anywhere, loves to explore new areas!',
-    [[15, GameConstants.Currency.money],[10, GameConstants.Currency.dungeonToken]], [new Amount(2, GameConstants.Currency.diamond)],
+    [[15, GameConstants.Currency.money],[10, GameConstants.Currency.dungeonToken]], [new Amount(1, GameConstants.Currency.diamond)],
     1000,
     () => {
         // Get current position
@@ -291,7 +288,7 @@ DungeonGuides.add(new DungeonGuide('Angeline', 'Can find treasure anywhere, love
     }, new MaxRegionRequirement(GameConstants.Region.kalos)));
 
 DungeonGuides.add(new DungeonGuide('Georgia', 'Knows the path to the boss, avoids random encounters when possible.',
-    [[20, GameConstants.Currency.money],[20, GameConstants.Currency.dungeonToken]], [new Amount(4, GameConstants.Currency.diamond)],
+    [[20, GameConstants.Currency.money],[20, GameConstants.Currency.dungeonToken]], [new Amount(2, GameConstants.Currency.diamond)],
     900,
     () => {
         // Get current position
@@ -320,7 +317,7 @@ DungeonGuides.add(new DungeonGuide('Georgia', 'Knows the path to the boss, avoid
     }, new MaxRegionRequirement(GameConstants.Region.alola)));
 
 DungeonGuides.add(new DungeonGuide('Drake', 'Knows the shortest path to the boss!',
-    [[20, GameConstants.Currency.money],[20, GameConstants.Currency.dungeonToken]], [new Amount(6, GameConstants.Currency.diamond)],
+    [[20, GameConstants.Currency.money],[20, GameConstants.Currency.dungeonToken]], [new Amount(3, GameConstants.Currency.diamond)],
     800,
     () => {
         // Get current position
