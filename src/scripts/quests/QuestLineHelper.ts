@@ -4088,7 +4088,7 @@ class QuestLineHelper {
         const hisuiNobleQuestLine = new QuestLine('The Frenzied Nobles of Hisui', 'Calm the frenzied Noble Pokémon of Hisui, the ancient past of the Sinnoh region.');
 
         const talktoLaventon1 = new TalkToNPCQuest(Laventon1, 'Speak to Professor Laventon at Prelude Beach.');
-        hisuiNobleQuestLine.addQuest(talktoLaventon1);
+        hisuiNobleQuestLine.addQuest(talktoLaventon1);//0
 
         const talktoArcPhone = new TalkToNPCQuest(ArcPhone, 'Pick up the Arc Phone at Prelude Beach.');
         hisuiNobleQuestLine.addQuest(talktoArcPhone);
@@ -4103,7 +4103,7 @@ class QuestLineHelper {
         hisuiNobleQuestLine.addQuest(talktoCyllene1);
 
         const talktoCyllene2 = new TalkToNPCQuest(Cyllene2, 'Talk to Cyllene in Galaxy Hall.');
-        hisuiNobleQuestLine.addQuest(talktoCyllene2);
+        hisuiNobleQuestLine.addQuest(talktoCyllene2);//5
 
         const talktoVolo1 = new TalkToNPCQuest(Volo1, 'There is someone at the village gate. Talk to Volo.');
         hisuiNobleQuestLine.addQuest(talktoVolo1);
@@ -4118,16 +4118,28 @@ class QuestLineHelper {
         hisuiNobleQuestLine.addQuest(captureThree);
 
         const talktoCyllene3 = new TalkToNPCQuest(Cyllene3, 'Report back to Cyllene in Galaxy Hall.');
-        hisuiNobleQuestLine.addQuest(talktoCyllene3);
+        hisuiNobleQuestLine.addQuest(talktoCyllene3);//10
 
         const talktoKamado1 = new TalkToNPCQuest(Kamado1, 'Report to Commander Kamado in Galaxy Hall.');
         hisuiNobleQuestLine.addQuest(talktoKamado1);
 
+        const talktoAkari2 = new TalkToNPCQuest(Akari2, 'Talk to Akari in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoAkari2);
+
         const clearAkari1 = new DefeatTemporaryBattleQuest('Akari 1', 'Defeat Akari in Jubilife Village.');
         hisuiNobleQuestLine.addQuest(clearAkari1);
 
+        const talktoAkari3 = new TalkToNPCQuest(Akari3, 'Talk to Akari in Jubilife Village.');
+        hisuiNobleQuestLine.addQuest(talktoAkari3);
+
+        const talktoMai1 = new TalkToNPCQuest(Mai1, 'Talk to Mai at Fieldlands Camp.');
+        hisuiNobleQuestLine.addQuest(talktoMai1);//15
+
         const clearMai = new DefeatTemporaryBattleQuest('Warden Mai', 'Defeat Warden Mai at Fieldlands Camp.');
         hisuiNobleQuestLine.addQuest(clearMai);
+
+        const talktoMai2 = new TalkToNPCQuest(Mai2, 'Talk to Mai at Fieldlands Camp.');
+        hisuiNobleQuestLine.addQuest(talktoMai2);
 
         const clearAlphaKricketune = new DefeatTemporaryBattleQuest('Alpha Kricketune', 'Defeat Alpha Kricketune at Heights Camp.');
         hisuiNobleQuestLine.addQuest(clearAlphaKricketune);
