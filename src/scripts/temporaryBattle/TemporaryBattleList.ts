@@ -6660,8 +6660,8 @@ TemporaryBattleList['Volo 1'] = new TemporaryBattle(
 TemporaryBattleList['Akari 1'] = new TemporaryBattle(
     'Akari 1',
     [new GymPokemon('Pikachu', 348526193, 9)],
-    'You and your Pokémon seem completely in step with one another.',
-    [new DevelopmentRequirement()],
+    'You and your Pokémon seem to be completely in step with one another. I could be wrong, but...for a moment, I felt like Pikachu and I finally understood one another.',
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 12)],
     undefined,
     {
         displayName: 'The Survey Corps\' Akari',
@@ -6672,7 +6672,7 @@ TemporaryBattleList['Warden Mai'] = new TemporaryBattle(
     'Warden Mai',
     [new GymPokemon('Munchlax', 348526193, 10)],
     'You really aren\'t one of the usual Galaxy buffoons if you could defeat my partner... Well fought, Munchlax.',
-    [new DevelopmentRequirement()],
+    [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 15)],
     undefined,
     {
         imageName: 'Mai',

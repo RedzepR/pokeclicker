@@ -9786,6 +9786,43 @@ const Kamado1 = new NPC('Commander Kamado', [
     image: 'assets/images/npcs/Kamado.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 10), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 12, GameConstants.AchievementOption.less)]),
 });
+const Akari2 = new NPC('Akari', [
+    'I recently got a request from Mai of the Diamond Clan, but... I was thinking maybe you could handle it for me. I was told it would require a bit of skill with battling Pokémon, so...',
+    'Listen—do you have a bit of time after this?',
+    'You see, I\'ve got a partner of my own. We may not get along perfectly, but we\'ve got to work together to help complete the Pokédex!',
+    'When we were attacked by those Shinx, I got too scared to think straight, and...I couldn\'t handle battling as a team. Ever since then, my partner\'s refused to listen to anything I tell him...',
+    'So please! Have a battle with me. I want to learn how to fight effectively!',
+], {
+    image: 'assets/images/npcs/Akari.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 11), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 13, GameConstants.AchievementOption.less)]),
+});
+const Akari3 = new NPC('Akari', [
+    'Now I suppose it\'s time I went to meet Mai. You remember? I mentioned earlier that I could use your help with Mai\'s request.',
+    'I\'m to meet her at Fieldlands Camp. You should come as well!',
+], {
+    image: 'assets/images/npcs/Akari.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 13), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 15, GameConstants.AchievementOption.less)]),
+});
+const Mai1 = new NPC('Mai', [
+    'My, my... A new face in the village? Not that it matters to me if you\'re new. If you\'re here, I assume you\'re prepared to be of help.',
+    'I am one of the wardens of the Diamond Clan. You may call me Mai. I suppose you might not even know what a warden is, if you\'re new to Hisui... But such talk can wait. Right now, I\'d rather we get straight to the point. I have a problem that I need help solving. So the more important question is this...',
+    'Do you feel confident that you can lead your Pokémon in battle?',
+    'That\'s good to hear. This here is my partner, Munchlax. We were raised together like siblings. He battles at my side by choice, without needing any silly little balls like you use. Watch and learn.',
+], {
+    image: 'assets/images/npcs/Mai.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 14), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 16, GameConstants.AchievementOption.less)]),
+});
+const Mai2 = new NPC('Mai', [
+    'You and your Pokémon fought well together! You practically acted as one with them. Rather like the legendary hero of old... The one we tell stories of to our children.',
+    'I think you\'re indeed the one for the job. You see, I need someone to deal with an alpha Pokémon causing trouble upon Deertrack Camp. It is a large, fearsome foe—like any alpha—but you\'ll come, won\'t you?',
+    'Though... Before we continue, I must ask. Do you already know about almighty Sinnoh?',
+    'Almighty Sinnoh steers all time. It\'s said to have created the very universe using its power over time\'s flow, and this land of Hisui was born in the process. It\'s by the grace of almighty Sinnoh that Pokémon can live and thrive here.',
+    'We of the Diamond Clan are descendants of a people who crossed the sea and settled here in the Hisui region to venerate almighty Sinnoh. However, it stole away from the world long ago, hiding itself from our sight... Almighty Sinnoh has only rarely been seen by any human, if the old tales are to be trusted.',
+    'But there are still Pokémon here today in Hisui with a connection to almighty Sinnoh. And it is the duty of wardens like myself to attend to their needs. The Pokémon that graces Deertrack Heights is one of those honored few. It is directly descended from a Pokémon that was blessed with almighty Sinnoh\'s protection.',
+], {
+    image: 'assets/images/npcs/Mai.png',
+    requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 16), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 18, GameConstants.AchievementOption.less)]),
+});
 
 const AdamanMai2 = new NPC('Adaman & Mai', [
     '',
@@ -9890,7 +9927,7 @@ TownList['Jubilife Village'] = new Town(
     [JubilifeVillageShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Jubilife Village']), TemporaryBattleList['Volo 1'], TemporaryBattleList['Akari 1'], TemporaryBattleList['Akari 2'], TemporaryBattleList['Adaman']],
     {
         requirements: [new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 2)],
-        npcs: [Laventon3, Cyllene1, Volo1],
+        npcs: [Laventon3, Cyllene1, Volo1, Akari2, Akari3],
     }
 );
 TownList['Galaxy Hall'] = new Town(
