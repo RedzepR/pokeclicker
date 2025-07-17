@@ -115,8 +115,8 @@ class Pokeballs implements Feature {
             }, 1250, 'Increased catch rate for Pokémon captured more times, plus higher EV gains', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
             new Pokeball(GameConstants.Pokeball.Beastball, () => {
-                return 10;
-            }, 1000, 'Can only be used on Ultra Beasts', new TemporaryBattleRequirement('Anabel')),
+                return 20;
+            }, 750, 'Can only be used on Ultra Beasts', new TemporaryBattleRequirement('Anabel')),
 
             new Pokeball(GameConstants.Pokeball.Moonball, (opts) => {
                 const moonCycleMod = MoonCycle.currentMoonCyclePhase();
