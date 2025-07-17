@@ -40,13 +40,13 @@ class Pokeballs implements Feature {
                 if (App.game.gameState == GameConstants.GameState.fighting && player.route) {
                     const kills = App.game.statistics.routeKills[GameConstants.Region[player.region]]?.[player.route]?.() || 0;
                     // between 0 (0 kills) → 15 (9920 kills)
-                    return Math.min(15, Math.max(0, Math.pow(16, Math.pow(kills, 0.6) / 250) - 1));
+                    return Math.min(25, Math.max(0, Math.pow(16, Math.pow(kills, 0.6) / 250) - 1));
                 }
                 if (App.game.gameState == GameConstants.GameState.dungeon) {
-                    const maxBonus = 15;
+                    const maxBonus = 25;
                     const timeLeftPercent = DungeonRunner.timeLeftPercentage();
-                    const timeLeftPercentWhenMax = 15;
-                    return (timeLeftPercentWhenMax < timeLeftPercent) ? (200 / timeLeftPercent - 2) : maxBonus;
+                    const timeLeftPercentWhenMax = 5;
+                    return (timeLeftPercentWhenMax < timeLeftPercent) ? (150 / timeLeftPercent - 2) : maxBonus;
                 }
                 return 0;
             }, 1000, 'Increased catch rate on routes with more Pokémon defeated', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
