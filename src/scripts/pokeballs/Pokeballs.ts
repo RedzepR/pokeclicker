@@ -68,10 +68,10 @@ class Pokeballs implements Feature {
 
                 // If area is a water environment,
                 if (MapHelper.getCurrentEnvironments().includes('Water')) {
-                    return 15;
+                    return 20;
                 }
                 return 0;
-            }, 1250, 'Increased catch rate in water environments', new RouteKillRequirement(10, GameConstants.Region.hoenn, 101)),
+            }, 750, 'Increased catch rate in water environments', new RouteKillRequirement(10, GameConstants.Region.hoenn, 101)),
 
             new Pokeball(GameConstants.Pokeball.Lureball, (opts) => {
                 if (opts.encounterType === EncounterType.wanderer) {
