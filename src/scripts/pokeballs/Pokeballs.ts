@@ -25,7 +25,7 @@ class Pokeballs implements Feature {
                 }
                 if (App.game.gameState == GameConstants.GameState.fighting && player.route) {
                     const kills = App.game.statistics.routeKills[GameConstants.Region[player.region]]?.[player.route]?.() || 0;
-                    // between 15 (0 kills) → 0 (4012 kills)
+                    // between 25 (0 kills) → 0 (9614 kills)
                     return Math.min(25, Math.max(0, Math.pow(26, 1 - Math.pow(Math.max(0, kills - 10), 0.55) / 155) - 1));
                 }
                 if (App.game.gameState == GameConstants.GameState.dungeon) {
@@ -39,11 +39,11 @@ class Pokeballs implements Feature {
                 }
                 if (App.game.gameState == GameConstants.GameState.fighting && player.route) {
                     const kills = App.game.statistics.routeKills[GameConstants.Region[player.region]]?.[player.route]?.() || 0;
-                    // between 0 (0 kills) → 15 (9920 kills)
-                    return Math.min(25, Math.max(0, Math.pow(16, Math.pow(kills, 0.6) / 250) - 1));
+                    // between 0 (0 kills) → 20 (11596 kills)
+                    return Math.min(20, Math.max(0, Math.pow(16, Math.pow(kills, 0.6) / 250) - 1));
                 }
                 if (App.game.gameState == GameConstants.GameState.dungeon) {
-                    const maxBonus = 25;
+                    const maxBonus = 20;
                     const timeLeftPercent = DungeonRunner.timeLeftPercentage();
                     const timeLeftPercentWhenMax = 5;
                     return (timeLeftPercentWhenMax < timeLeftPercent) ? (150 / timeLeftPercent - 2) : maxBonus;
