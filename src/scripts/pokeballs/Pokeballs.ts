@@ -18,7 +18,12 @@ class Pokeballs implements Feature {
             new Pokeball(GameConstants.Pokeball.Greatball, () => 5, 1000, '+5% chance to catch'),
             new Pokeball(GameConstants.Pokeball.Ultraball, () => 10, 750, '+10% chance to catch'),
             new Pokeball(GameConstants.Pokeball.Masterball, () => 100, 500, '100% chance to catch'),
-            new Pokeball(GameConstants.Pokeball.Fastball, () => 0, 500, 'Reduced catch time', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
+            new Pokeball(GameConstants.Pokeball.Fastball, (opts) => {
+                if (opts.encounterType === EncounterType.roamer) {
+                    return 15;
+                }
+                return 0;
+            }, 500, 'Reduced catch time and increased catch rate on roaming Pokémon', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
             new Pokeball(GameConstants.Pokeball.Quickball, (opts) => {
                 if (opts.encounterType === EncounterType.wanderer) {
                     return 0;
