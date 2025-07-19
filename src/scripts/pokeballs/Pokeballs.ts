@@ -29,7 +29,7 @@ class Pokeballs implements Feature {
                     return Math.min(25, Math.max(0, Math.pow(26, 1 - Math.pow(Math.max(0, kills - 10), 0.55) / 155) - 1));
                 }
                 if (App.game.gameState == GameConstants.GameState.dungeon) {
-                    return Math.min(25,Math.pow(DungeonRunner.timeLeftPercentage(),2) / 250);
+                    return Math.min(25, Math.pow(DungeonRunner.timeLeftPercentage(), 2) / 250);
                 }
                 return 0;
             }, 1000, 'Increased catch rate on routes with less Pokémon defeated', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
@@ -78,8 +78,8 @@ class Pokeballs implements Feature {
                     return 0;
                 }
                 if (App.game.gameState == GameConstants.GameState.fighting && player.route) {
-                    const hasLandPokemon = Routes.getRoute(player.region,player.route).pokemon.land.length > 0;
-                    const isWaterPokemon = Routes.getRoute(player.region,player.route).pokemon.water.includes(Battle.enemyPokemon().name);
+                    const hasLandPokemon = Routes.getRoute(player.region, player.route).pokemon.land.length > 0;
+                    const isWaterPokemon = Routes.getRoute(player.region, player.route).pokemon.water.includes(Battle.enemyPokemon().name);
 
                     // If route has Land Pokémon and the current pokémon is a Water Pokémon
                     if (hasLandPokemon && isWaterPokemon) {
@@ -102,16 +102,16 @@ class Pokeballs implements Feature {
                 } else {
                     currentRoute = player.route;
                 }
-                currentRoute = MapHelper.normalizeRoute(currentRoute,player.region);
+                currentRoute = MapHelper.normalizeRoute(currentRoute, player.region);
 
                 // Increased rate for earlier routes and dungeons, scales with regional progression
-                return Math.min(15,Math.max(1,player.highestRegion()) * Math.max(1,(maxRoute / currentRoute)));
+                return Math.min(15, Math.max(1, player.highestRegion()) * Math.max(1, (maxRoute / currentRoute)));
             }, 1250, 'Increased catch rate on earlier routes', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
             new Pokeball(GameConstants.Pokeball.Repeatball, (opts) => {
                 const amountCaught = App.game.statistics.pokemonCaptured[pokemonMap[opts.pokemon].id]();
 
-                return Math.min(15,Math.pow(amountCaught,2) / 5000);
+                return Math.min(15, Math.pow(amountCaught, 2) / 5000);
             }, 1250, 'Increased catch rate for Pokémon captured more times, plus higher EV gains', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
             new Pokeball(GameConstants.Pokeball.Beastball, () => {
@@ -127,6 +127,21 @@ class Pokeballs implements Feature {
                 }
                 return moonCycleBonus;
             }, 1250, 'Increased catch rate by the light of the moon', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
+
+            new Pokeball(GameConstants.Pokeball.Netball, (opts) => {
+                const pokemonToCatch = PokemonHelper.getPokemonByName(opts.pokemon);
+                const isWanderer = opts.encounterType === EncounterType.wanderer;
+                const isWaterOrBug = pokemonToCatch.type1 == PokemonType.Bug || 
+                                     pokemonToCatch.type1 == PokemonType.Water || 
+                                     pokemonToCatch.type2 == PokemonType.Bug || 
+                                     pokemonToCatch.type2 == PokemonType.Water;
+
+                if (isWanderer || isWaterOrBug) {
+                    return Math.min(25, (isWanderer ? 15 : 0) + (isWaterOrBug ? 15 : 0))
+                }
+
+                return 0;
+            }, 1000, 'Increased catch rate for Wanderer, Water and Bug Pokémon', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
         ];
         this.selectedTitle = ko.observable('');
         this.selectedSelection = ko.observable();
