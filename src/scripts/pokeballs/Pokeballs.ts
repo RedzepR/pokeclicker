@@ -78,16 +78,12 @@ class Pokeballs implements Feature {
                     return 0;
                 }
                 if (App.game.gameState == GameConstants.GameState.fighting && player.route) {
-                    const hasLandPokemon = Routes.getRoute(player.region, player.route).pokemon.land.length > 0;
-                    const isWaterPokemon = Routes.getRoute(player.region, player.route).pokemon.water.includes(Battle.enemyPokemon().name);
-
-                    // If route has Land Pokémon and the current pokémon is a Water Pokémon
-                    if (hasLandPokemon && isWaterPokemon) {
-                        return 15;
+                    if (PokemonFactory.isPokemonFished(player.route, player.region, Battle.enemyPokemon().name)) {
+                        return 20;
                     }
                 }
                 return 0;
-            }, 1250, 'Increased catch rate on fished Pokémon', new RouteKillRequirement(10, GameConstants.Region.hoenn, 101)),
+            }, 750, 'Increased catch rate on fished Pokémon', new RouteKillRequirement(10, GameConstants.Region.hoenn, 101)),
 
             new Pokeball(GameConstants.Pokeball.Nestball, (opts) => {
                 if (opts.encounterType === EncounterType.wanderer) {
@@ -183,6 +179,7 @@ class Pokeballs implements Feature {
         const pokemon = PokemonHelper.getPokemonById(id);
         const isUltraBeast = GameConstants.UltraBeastType[pokemon.name] != undefined;
         const encounterType = isUltraBeast ? EncounterType.ultraBeast : origEncounterType;
+        const isFished = origEncounterType == EncounterType.route ? PokemonFactory.isPokemonFished(player.route, player.region, pokemon.name) : false;
 
         const pref = App.game.pokeballFilters.findMatch({
             caught: alreadyCaught,
@@ -194,6 +191,7 @@ class Pokeballs implements Feature {
             pokemonType: [pokemon.type1, pokemon.type2],
             encounterType,
             category: App.game.party.getPokemon(id)?.category,
+            fished: isFished
         })?.ball() ?? GameConstants.Pokeball.None;
 
         if (pref == GameConstants.Pokeball.Beastball) {
