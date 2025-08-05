@@ -941,8 +941,8 @@ GymList['Canalave City'] = new Gym(
     'Canalave City',
     [
         new GymPokemon('Magneton', 1767000, 37),
-        new GymPokemon('Steelix', 1772000, 38),
-        new GymPokemon('Bastiodon', 1768000, 41),
+        new GymPokemon('Steelix', 1768000, 38),
+        new GymPokemon('Bastiodon', 1772000, 41),
     ],
     BadgeEnums.Mine,
     4800,
