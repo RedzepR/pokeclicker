@@ -138,7 +138,7 @@ class Pokeballs implements Feature {
                                      pokemonToCatch.type2 == PokemonType.Water;
 
                 if (isWanderer || isWaterOrBug) {
-                    return Math.min(25, (isWanderer ? 15 : 0) + (isWaterOrBug ? 15 : 0))
+                    return Math.min(20, (isWanderer ? 15 : 0) + (isWaterOrBug ? 15 : 0))
                 }
 
                 return 0;
