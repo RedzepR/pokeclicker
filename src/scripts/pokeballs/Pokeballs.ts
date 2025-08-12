@@ -91,23 +91,14 @@ class Pokeballs implements Feature {
             }, 750, 'Increased catch rate on fished Pokémon', new RouteKillRequirement(10, GameConstants.Region.hoenn, 101)),
 
             new Pokeball(GameConstants.Pokeball.Nestball, (opts) => {
-                if (opts.encounterType === EncounterType.wanderer) {
-                    return 0;
-                }
-                const highestRegionRoutes = Routes.getRoutesByRegion(player.highestRegion());
-                const maxRoute = MapHelper.normalizeRoute(highestRegionRoutes[highestRegionRoutes.length - 1].number, player.highestRegion());
-                let currentRoute;
-                if (App.game.gameState == GameConstants.GameState.dungeon) {
-                    // Use equivalent route difficulty for dungeons
-                    currentRoute = DungeonRunner.dungeon.difficultyRoute;
-                } else {
-                    currentRoute = player.route;
-                }
-                currentRoute = MapHelper.normalizeRoute(currentRoute, player.region);
+                const AmountOfEvolutions = PokemonHelper.getEvolutionDepth(opts.pokemon);
 
-                // Increased rate for earlier routes and dungeons, scales with regional progression
-                return Math.min(15, Math.max(1, player.highestRegion()) * Math.max(1, (maxRoute / currentRoute)));
-            }, 1250, 'Increased catch rate on earlier routes', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
+                if (AmountOfEvolutions > 0) {
+                    return Math.min(20, 10 + AmountOfEvolutions * 5);
+                }
+                return 0;
+
+            }, 1000, 'Increased catch rate on Pokémon that can still evolve', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
             new Pokeball(GameConstants.Pokeball.Repeatball, (opts) => {
                 const amountCaught = App.game.statistics.pokemonCaptured[pokemonMap[opts.pokemon].id]();
