@@ -6880,7 +6880,13 @@ const PaniolaTownShop = new Shop([
     ItemList.Water_egg,
 ]);
 const RoadsideMotelShop = new Shop([
-    ItemList.Beastball,
+    new PokeballItem(GameConstants.Pokeball.Beastball, 1750000, GameConstants.Currency.money , undefined, 'Beast Ball'),
+    new PokeballItem(GameConstants.Pokeball.Beastball, 25000, GameConstants.Currency.dungeonToken , undefined, 'Beast Ball'),
+    new PokeballItem(GameConstants.Pokeball.Beastball, 500, GameConstants.Currency.questPoint , undefined, 'Beast Ball'),
+    new PokeballItem(GameConstants.Pokeball.Beastball, 500, GameConstants.Currency.farmPoint , undefined, 'Beast Ball'),
+    new PokeballItem(GameConstants.Pokeball.Beastball, 750, GameConstants.Currency.diamond , undefined, 'Beast Ball'),
+    new PokeballItem(GameConstants.Pokeball.Beastball, 150, GameConstants.Currency.battlePoint , undefined, 'Beast Ball'),
+    //new PokeballItem(GameConstants.Pokeball.Beastball, 50, GameConstants.Currency.contestToken , undefined, 'Beast Ball'),
 ], 'Looker’s Exchange', [new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1),
 ]);
 const KonikoniCityShop = new Shop([
