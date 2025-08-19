@@ -129,7 +129,7 @@ class BerryDeal {
                 ],
                 ItemList.Luxuryball,
                 1
-            ),           
+            ),
         ]);
     }
 
