@@ -12621,9 +12621,12 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
         epic: [
             {loot: 'Dread Plate'},
             {loot: 'Draco Plate'},
-            {loot: 'Beastball', requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1) },
+            
         ],
-        legendary: [{loot: 'Dragon_Fang'}],
+        legendary: [
+            { loot: 'Dragon_Fang' },
+            {loot: 'Beastball', requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1), amount: 3 },
+        ],
     },
     17114462,
     [
