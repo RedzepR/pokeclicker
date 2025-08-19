@@ -110,7 +110,7 @@ class PokemonFactory {
         const hasLandPokemon = regionRoute.pokemon.land.length > 0;
         const isWaterPokemon = regionRoute.pokemon.water.includes(pokemon);
 
-        return hasLandPokemon && isWaterPokemon
+        return hasLandPokemon && isWaterPokemon;
     }
 
     /**
