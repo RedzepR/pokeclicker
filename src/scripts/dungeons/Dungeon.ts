@@ -11110,9 +11110,7 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
             {loot: 'Black Shard'},
             {loot: 'White Shard'},
         ],
-        epic: [
-            {loot: 'Meadow Plate'},
-        ],
+        epic: [{loot: 'Meadow Plate'}],
         legendary: [
             {loot: 'MediumRestore'},
             {loot: 'Revive'},
@@ -11169,9 +11167,7 @@ dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
             {loot: 'Yellow Shard'},
             {loot: 'Cyan Shard'},
         ],
-        epic: [
-            { loot: 'Meadow Plate' },
-        ],
+        epic: [{ loot: 'Meadow Plate' }],
         legendary: [{loot: 'Beastball', requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1) }],
     },
     11769270,
@@ -11457,11 +11453,10 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
         epic: [
             {loot: 'Flame Plate'},
             {loot: 'Quickball', amount: 2},
-            
         ],
         legendary: [
             {loot: 'Charcoal'},
-            {loot: 'Beastball', requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1)}
+            {loot: 'Beastball', requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1)},
         ],
     },
     12896392,
@@ -11518,8 +11513,8 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
             {loot: 'Nestball', amount: 2},
         ],
         legendary: [
-            {loot: 'Miracle_Seed'}        
-            {loot: 'Beastball', requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1) }
+            {loot: 'Miracle_Seed'},
+            {loot: 'Beastball', requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1) },
         ],
     },
     13090332,
@@ -11569,11 +11564,10 @@ dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
         epic: [
             {loot: 'Earth Plate'},
             {loot: 'Duskball', amount: 2},
-            
         ],
         legendary: [
             {loot: 'Soft_Sand'},
-            {loot: 'Beastball', requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1) }
+            {loot: 'Beastball', requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1) },
         ],
     },
     13215839,
@@ -11612,10 +11606,10 @@ dungeonList['Memorial Hill'] = new Dungeon('Memorial Hill',
         ],
         epic: [
             {loot: 'Spooky Plate'},
-            {loot: 'Duskball', amount: 2},            
+            {loot: 'Duskball', amount: 2},
         ],
         legendary: [
-            {loot: 'Spell_Tag'}
+            {loot: 'Spell_Tag'},
             {loot: 'Beastball', requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1) },
         ],
     },
@@ -11667,10 +11661,10 @@ dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
         ],
         epic: [
             {loot: 'Spooky Plate'},
-            {loot: 'Luxuryball', amount: 2},            
+            {loot: 'Luxuryball', amount: 2},
         ],
         legendary: [
-            {loot: 'Rare Bone'}
+            {loot: 'Rare Bone'},
             {loot: 'Beastball', requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1)},
         ],
     },
@@ -12590,10 +12584,10 @@ dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
         ],
         epic: [
             {loot: 'Dread Plate'},
-            {loot: 'Draco Plate'},            
+            {loot: 'Draco Plate'},
         ],
         legendary: [{loot: 'Dragon_Fang'}],
-        mythic: [{loot: 'Beastball', requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1), amount: 3 }]
+        mythic: [{loot: 'Beastball', requirement: new QuestLineStepCompletedRequirement('Ultra Beast Hunt', 1), amount: 3 }],
     },
     17114462,
     [
