@@ -1465,6 +1465,18 @@ const AzaleaTownShop = new Shop([
     ItemList.Leaf_stone,
     ItemList.Kings_rock,
 ]);
+const AzaleaKurtShop = new Shop([
+    ItemList.Fastball,
+    ItemList.Lureball,
+    ItemList.Moonball,
+    ItemList.Timerball,
+    ItemList.Luxuryball,
+    ItemList.Diveball,
+    ItemList.Nestball,
+    ItemList.Netball,
+    ItemList.Quickball,
+    ItemList.Duskball,
+], "Kurt\'s Apricorn Shop", [new MaxRegionRequirement(GameConstants.Region.unova)], true);
 const GoldenrodDepartmentStoreShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
@@ -1581,6 +1593,13 @@ const AzaleaHiker = new NPC('Hiker Daniel', [
 ], {
     image: 'assets/images/npcs/Hiker.png',
     requirement: new GymBadgeRequirement(BadgeEnums.Fog),
+});
+
+const AzaleaApricornKurt = new NPC('Kurt', [
+    'I\'m working hard to restore my workshop. Come back later, and I\'ll be able to offer you a wider variety.',
+], {
+    image: 'assets/images/npcs/Kurt.png',
+    requirement: new MaxRegionRequirement(GameConstants.Region.alola, GameConstants.AchievementOption.less),
 });
 
 const AzaleaCelebiKurt1 = new NPC('Kurt', [
@@ -1963,10 +1982,10 @@ TownList['Azalea Town'] = new Town(
     'Azalea Town',
     GameConstants.Region.johto,
     GameConstants.JohtoSubRegions.Johto,
-    [AzaleaTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Azalea Town']), new MoveToDungeon(dungeonList['Slowpoke Well'])],
+    [AzaleaTownShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Azalea Town']), AzaleaKurtShop, new MoveToDungeon(dungeonList['Slowpoke Well'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 33)],
-        npcs: [AzaleaElder, AzaleaHiker, AzaleaCelebiKurt1, AzaleaCelebiKurt2, AzaleaCelebiKurt3, AzaleaCelebiKurt4, AzaleaCelebiOak1, AzaleaCelebiOak2, AzaleaCelebiOak3, AzaleaCelebiOak4, AzaleaCelebiOak5],
+        npcs: [AzaleaElder, AzaleaHiker, AzaleaApricornKurt, AzaleaCelebiKurt1, AzaleaCelebiKurt2, AzaleaCelebiKurt3, AzaleaCelebiKurt4, AzaleaCelebiOak1, AzaleaCelebiOak2, AzaleaCelebiOak3, AzaleaCelebiOak4, AzaleaCelebiOak5],
     }
 );
 TownList['Goldenrod City'] = new Town(
