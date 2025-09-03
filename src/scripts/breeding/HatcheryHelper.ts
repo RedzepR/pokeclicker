@@ -32,6 +32,9 @@ class HatcheryHelper {
     public hatchBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
     public stepEfficiency: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
     public attackEfficiency: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 1 });
+    public totalEfficiency: KnockoutComputed<number> = ko.computed(() => {
+        return (this.stepEfficiency() / 100) * (this.attackEfficiency() / 100) * 100;
+    });
     public prevBonus: KnockoutObservable<number> = ko.observable(0).extend({ numeric: 0 });
     public nextBonus: KnockoutObservable<number> = ko.observable(1).extend({ numeric: 0 });
     public categories: KnockoutObservableArray<number> = ko.observableArray([]);
@@ -142,6 +145,23 @@ class HatcheryHelper {
             );
             return;
         }
+    }
+
+    totalEfficiencyColor(): string {
+        const totalEff = this.totalEfficiency();
+
+        switch (true) {
+
+            case totalEff < 33:
+                return 'text-danger';
+            case totalEff < 100:
+                return 'text-warning';
+            case totalEff < 150:
+                return 'text-success';
+            default:
+                return 'text-primary';
+        }
+
     }
 
     toJSON(): Record<string, any> {

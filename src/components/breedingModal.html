@@ -558,6 +558,12 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                                 </td>
                                             </tr>
                                             <tr>
+                                                <td class="text-left text-nowrap">Total Efficiency:</td>
+                                                <td class="text-right">
+                                                    <knockout data-bind="text: `${$data.totalEfficiency().toLocaleString('en-US')}%`, css: $data.totalEfficiencyColor(), attr: {title: `The total effectiveness is the result of both efficiency stats multiplied proportionally to manual breeding.`}">0%</knockout>
+                                                </td>
+                                            </tr>
+                                            <tr>
                                                 <td class="text-left align-middle">Sort:</td>
                                                 <td class="text-center align-middle">
                                                     <div class="input-group input-group-sm">
