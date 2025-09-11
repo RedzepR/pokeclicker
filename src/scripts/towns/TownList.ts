@@ -27,6 +27,17 @@ const pokeMartShop = new Shop([
     ItemList.LargeRestore,
 ], 'Explorers Poké Mart');
 
+const flowerShop = new Shop([
+    ItemList.Boost_Mulch,
+    ItemList.Rich_Mulch,
+    ItemList.Surprise_Mulch,
+    ItemList.Amaze_Mulch,
+    ItemList.Freeze_Mulch,
+    new MulchItem(MulchType.Gooey_Mulch, 100, 'Gooey Mulch', 'Helps attract rarer species. Gooed Pokémon are more likely to be caught.', new MaxRegionRequirement(GameConstants.Region.sinnoh)),
+    ItemList.Berry_Shovel,
+    ItemList.Mulch_Shovel,
+], 'Explorers Flower Shop');
+
 const DepartmentStoreShop = new Shop([
     ItemList.Pokeball,
     ItemList.Greatball,
