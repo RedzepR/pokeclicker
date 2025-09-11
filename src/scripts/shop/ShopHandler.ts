@@ -85,7 +85,7 @@ class ShopHandler {
         return App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Champion Lance')]() > 0;
     });
 
-    public static flowerShortcutVisible: KnockoutComputed<boolean> = ko.pureComputed(() => {
+    public static farmShortcutVisible: KnockoutComputed<boolean> = ko.pureComputed(() => {
         return App.game.farming.unlockedPlotCount() >= 25 && TownList["Goldenrod City"].requirements.every(r => r.isCompleted());
     });
 }

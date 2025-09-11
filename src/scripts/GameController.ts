@@ -424,11 +424,11 @@ class GameController {
                         return e.preventDefault();
                     }
                     break;
-                case Settings.getSetting('hotkey.flowerShop').value:
+                case Settings.getSetting('hotkey.farmShop').value:
                     // Open the Berry Master Shop
-                    if (ShopHandler.flowerShortcutVisible() && !$shopModal.data('disable-toggle')) {
+                    if (ShopHandler.farmShortcutVisible() && !$shopModal.data('disable-toggle')) {
                         $('.modal').modal('hide');
-                        ShopHandler.showShop(flowerShop);
+                        ShopHandler.showShop(farmShop);
                         $shopModal.modal('toggle');
                         return e.preventDefault();
                     }
