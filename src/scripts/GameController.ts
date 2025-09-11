@@ -426,7 +426,7 @@ class GameController {
                     break;
                 case Settings.getSetting('hotkey.forceSave').value:
                     if (GameController.keyHeld.Shift()) {
-                        Save.store(player, true);                        
+                        Save.store(player, true);
                         return e.preventDefault();
                     }
                     break;
