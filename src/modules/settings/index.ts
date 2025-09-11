@@ -481,7 +481,7 @@ Settings.add(new HotkeySetting('hotkey.achievementsTracker', 'Achievements', 'T'
 Settings.add(new HotkeySetting('hotkey.oakItems', 'Oak Items', 'O'));
 Settings.add(new HotkeySetting('hotkey.underground', 'Underground', 'U'));
 Settings.add(new HotkeySetting('hotkey.shop', 'Poké Mart', 'E'));
-Settings.add(new HotkeySetting('hotkey.farmShop', 'Farm Shop', 'W'));
+Settings.add(new HotkeySetting('hotkey.farmShop', 'Farm Shop', 'M'));
 Settings.add(new HotkeySetting('hotkey.dailyQuests', 'Daily Quests', 'Q'));
 Settings.add(new HotkeySetting('hotkey.pokeballSelection', 'Poké Ball Selection', 'P', { suffix: ' + Number' }));
 Settings.add(new HotkeySetting('hotkey.castformApp', 'Castform App', 'C', {}, new ClearDungeonRequirement(250, getDungeonIndex('Weather Institute'))));
