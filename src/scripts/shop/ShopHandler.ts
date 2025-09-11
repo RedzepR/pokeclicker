@@ -86,6 +86,6 @@ class ShopHandler {
     });
 
     public static farmShortcutVisible: KnockoutComputed<boolean> = ko.pureComputed(() => {
-        return App.game.farming.unlockedPlotCount() >= 25 && TownList["Goldenrod City"].requirements.every(r => r.isCompleted());
+        return App.game.farming.unlockedPlotCount() >= 25 && TownList['Goldenrod City'].requirements.every(r => r.isCompleted());
     });
 }
