@@ -56,7 +56,8 @@ class HatcheryHelper {
             Cost: <img src="assets/images/currency/${GameConstants.Currency[this.cost.currency]}.svg" width="20px">&nbsp;${(this.cost.amount).toLocaleString('en-US')}/hatch<br/>
             Step Efficiency: ${this.stepEfficiency()}%<br/>
             Attack Efficiency: ${this.attackEfficiency()}%<br/>
-            Hatched: ${this.hatched().toLocaleString('en-US')}<br/>`
+            Hatched: ${this.hatched().toLocaleString('en-US')}<br/>
+            Total Efficiency: ${this.totalEfficiency().toLocaleString('en-US')}%<br/>`
         );
 
         // Update our bonus values
