@@ -423,16 +423,7 @@ class GameController {
                         $shopModal.modal('toggle');
                         return e.preventDefault();
                     }
-                    break;
-                case Settings.getSetting('hotkey.farmShop').value:
-                    // Open the Berry Master Shop
-                    if (ShopHandler.farmShortcutVisible() && !$shopModal.data('disable-toggle')) {
-                        $('.modal').modal('hide');
-                        ShopHandler.showShop(farmShop);
-                        $shopModal.modal('toggle');
-                        return e.preventDefault();
-                    }
-                    break;
+                    break;             
                 case Settings.getSetting('hotkey.forceSave').value:
                     if (GameController.keyHeld.Shift()) {
                         Save.store(player);
