@@ -191,8 +191,8 @@ class Dungeon {
     }
 
     get tokenCost(): number {
-        let baseDungeonSize = GameConstants.BASE_DUNGEON_SIZE + (this.difficulty);
-        let dungeonSize = baseDungeonSize - Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]().toString().length - 1);
+        const baseDungeonSize = GameConstants.BASE_DUNGEON_SIZE + (this.difficulty);
+        const dungeonSize = baseDungeonSize - Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]().toString().length - 1);
         return Math.ceil(this.baseTokenCost * Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize) / baseDungeonSize);
     }
 
