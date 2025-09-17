@@ -423,7 +423,7 @@ class GameController {
                         $shopModal.modal('toggle');
                         return e.preventDefault();
                     }
-                    break;             
+                    break;
                 case Settings.getSetting('hotkey.forceSave').value:
                     if (GameController.keyHeld.Shift()) {
                         Save.store(player);
