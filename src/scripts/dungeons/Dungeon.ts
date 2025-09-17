@@ -100,14 +100,13 @@ const DungeonGainGymBadge = (gym: Gym) => {
 }
 class Dungeon {
     private mimicList: PokemonNameType[] = [];
-
     constructor(
         public name: string,
         public enemyList: Enemy[],
         public lootTable: LootTable,
         public baseHealth: number,
         public bossList: Boss[],
-        public tokenCost: number,
+        public baseTokenCost: number,
         public difficultyRoute: number, // Closest route in terms of difficulty, used for egg steps, dungeon tokens etc.
         public rewardFunction = () => {},
         private optionalParameters: optionalDungeonParameters = {}
@@ -189,6 +188,12 @@ class Dungeon {
         return this.availableBosses().map((boss) => {
             return boss.options?.weight ?? 1;
         });
+    }
+
+    get tokenCost(): number {
+        let baseDungeonSize = GameConstants.BASE_DUNGEON_SIZE + (this.difficulty);
+        let dungeonSize = baseDungeonSize - Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]().toString().length - 1);
+        return Math.ceil(this.baseTokenCost * Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize) / baseDungeonSize);
     }
 
     /**
