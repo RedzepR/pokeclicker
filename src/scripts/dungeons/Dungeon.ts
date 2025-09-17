@@ -191,9 +191,15 @@ class Dungeon {
     }
 
     get tokenCost(): number {
-        const baseDungeonSize = GameConstants.BASE_DUNGEON_SIZE + (this.difficulty);
-        const dungeonSize = baseDungeonSize - Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]().toString().length - 1);
-        return Math.ceil(this.baseTokenCost * Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize) / baseDungeonSize);
+        return Math.ceil(this.baseTokenCost * Math.max(GameConstants.MIN_DUNGEON_SIZE, this.getDungeonSize(false)) / this.getDungeonSize(true));
+    }
+
+    public getDungeonSize(ignoreReduction = true) {
+        let dungeonSize = GameConstants.BASE_DUNGEON_SIZE + (this.difficulty);
+        if (!ignoreReduction) {
+            dungeonSize -= Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]().toString().length - 1);
+        }
+        return dungeonSize;
     }
 
     /**
