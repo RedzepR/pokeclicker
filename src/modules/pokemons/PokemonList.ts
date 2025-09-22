@@ -651,6 +651,10 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 63,
         'eggCycles': 20,
+        'evolutions': [
+            LevelEvolution('Squad Leader Squirtle', 'Squad Leader Wartortle', 16),
+            DummyEvolution('Squad Leader Squirtle', 'Squirtle Squad'),
+        ],
         'base': {
             'hitpoints': 44,
             'attack': 48,
@@ -658,6 +662,26 @@ export const pokemonList = createPokemonArray(
             'defense': 65,
             'specialDefense': 64,
             'speed': 43,
+        },
+        'gender': {
+            'femaleRatio': 0,
+        },
+    },
+    {
+        'id': 7.03,
+        'name': 'Squirtle Squad',
+        'catchRate': 45,
+        'type': [PokemonType.Water, PokemonType.Dark],
+        'levelType': LevelType.mediumslow,
+        'exp': 63,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 59,
+            'attack': 63,
+            'specialAttack': 65,
+            'defense': 80,
+            'specialDefense': 79,
+            'speed': 58,
         },
         'gender': {
             'femaleRatio': 0,
@@ -706,6 +730,27 @@ export const pokemonList = createPokemonArray(
         },
         'gender': {
             'femaleRatio': 0.125,
+        },
+    },
+    {
+        'id': 8.02,
+        'name': 'Squad Leader Wartortle',
+        'catchRate': 45,
+        'type': [PokemonType.Water, PokemonType.Dark],
+        'levelType': LevelType.mediumslow,
+        'exp': 142,
+        'eggCycles': 20,
+        'evolutions': [LevelEvolution('Squad Leader Wartortle', 'Blastoise (Firefighter)', 36)],
+        'base': {
+            'hitpoints': 59,
+            'attack': 63,
+            'specialAttack': 65,
+            'defense': 80,
+            'specialDefense': 80,
+            'speed': 58,
+        },
+        'gender': {
+            'femaleRatio': 0,
         },
     },
     {
@@ -787,6 +832,26 @@ export const pokemonList = createPokemonArray(
         },
         'gender': {
             'femaleRatio': 0.125,
+        },
+    },
+    {
+        'id': 9.04,
+        'name': 'Blastoise (Firefighter)',
+        'catchRate': 45,
+        'type': [PokemonType.Water, PokemonType.Dark],
+        'levelType': LevelType.mediumslow,
+        'exp': 239,
+        'eggCycles': 20,
+        'base': {
+            'hitpoints': 79,
+            'attack': 83,
+            'specialAttack': 85,
+            'defense': 100,
+            'specialDefense': 105,
+            'speed': 78,
+        },
+        'gender': {
+            'femaleRatio': 0,
         },
     },
     {
