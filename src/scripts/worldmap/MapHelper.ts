@@ -89,7 +89,7 @@ class MapHelper {
                     envs.push('TrashCloak');
                     break;
             }
-        // if not in Hisui, add general envs for Burmy
+            // if not in Hisui, add general envs for Burmy
         } else if (envs.includes('Cave')) {
             envs.push('SandyCloak');
         } else if (typeof area === 'string' && ['City', 'League', 'Tower'].some(word => area.includes(word))) {
@@ -312,7 +312,10 @@ class MapHelper {
 
     public static travelToNextRegion() {
         if (MapHelper.ableToTravel()) {
-            Save.download();
+            if (!GameHelper.isDevelopmentBuild()) {
+                Save.download();
+            }
+
             // Gain queue slots based on highest region
             App.game.breeding.gainQueueSlot(App.game.breeding.queueSlotsGainedFromRegion(player.highestRegion()));
             GameHelper.incrementObservable(player.highestRegion);
