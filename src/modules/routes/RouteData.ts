@@ -132,7 +132,10 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Spearow', 'Ekans', 'Sandshrew', 'Drowzee'],
         water: ['Tentacool', 'Krabby', 'Horsea', 'Magikarp'],
-        special: [new SpecialRoutePokemon(['Squad Leader Squirtle'], new ObtainedPokemonRequirement('Squad Leader Squirtle'))],
+        special: [
+            new SpecialRoutePokemon(['Squad Leader Squirtle'], new ObtainedPokemonRequirement('Squad Leader Squirtle')),
+            new SpecialRoutePokemon(['Squirtle Squad'], new StatisticRequirement(['pokemonEncountered', getPokemonByName('Squad Leader Squirtle').id], 331)),
+        ],
     }),
     [new RouteKillRequirement(10, Region.kanto, 6)],
     6.1,
@@ -504,6 +507,10 @@ Routes.add(new RegionRoute(
     'Pinkan Forest', Region.kanto, 41,
     new RoutePokemon({
         land: ['Pinkan Caterpie', 'Pinkan Weedle', 'Pinkan Pidgey', 'Pinkan Vileplume', 'Pinkan Paras', 'Pinkan Venonat', 'Pinkan Mankey', 'Pinkan Exeggutor'],
+        special: [
+            new SpecialRoutePokemon(['Squad Leader Wartortle'], new MultiRequirement([new ObtainedPokemonRequirement('Squad Leader Wartortle'), new WeatherRequirement([WeatherType.Harsh_Sunlight])])),
+            new SpecialRoutePokemon(['Blastoise (Firefighter)'], new MultiRequirement([new ObtainedPokemonRequirement('Blastoise (Firefighter)'), new WeatherRequirement([WeatherType.Harsh_Sunlight])])),
+        ],
     }),
     [
         new ClearDungeonRequirement(1, getDungeonIndex('Altering Cave')),

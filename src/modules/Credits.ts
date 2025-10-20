@@ -815,6 +815,7 @@ export const SpriteCredits: Credit[] = [
             'Cyllene',
             'Dendra',
             'Fairy Tale Girl',
+            'Firefighter',
             'Gaeric',
             'Geeta',
             'Gen 8 Reporter (Lucy Stevens)',
@@ -1155,6 +1156,16 @@ export const SpriteCredits: Credit[] = [
             'Paldea Sprites',
         ],
         // NOTES: free for non-profit use.
+    },
+    {
+        name: 'Smokeforst',
+        link: 'https://discordapp.com/users/1104416478964498432',
+        image: 'assets/images/profile/trainer-162.png',
+        resources: [
+            'Squirtle Squad',
+            'Squad Leader Wartortle',
+        ],
+        // NOTES: Made specifically for Pokeclicker.
     },
     {
         name: 'Someone Soul',

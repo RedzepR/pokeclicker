@@ -424,13 +424,25 @@ const VermilionEusine = new NPC('Eusine', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Eusine\'s Chase', 5), new QuestLineStepCompletedRequirement('Eusine\'s Chase', 7, GameConstants.AchievementOption.less )]),
 });
 
-const SquirtleJenny = new NPC('Officer Jenny', [
+const SquirtleJenny1 = new NPC('Officer Jenny', [
     'Watch out for mischievous Squirtle around here.',
     'You can\'t miss them: they wear black glasses and they\'ll try to play tricks on you.',
 ],
 {
     image: 'assets/images/npcs/Officer Jenny.png',
-    requirement: new MultiRequirement([new ObtainedPokemonRequirement('Squirtle'), new MaxRegionRequirement(GameConstants.Region.johto)]),
+    requirement: new MultiRequirement([new ObtainedPokemonRequirement('Squirtle'), new MaxRegionRequirement(GameConstants.Region.johto), new ObtainedPokemonRequirement('Squad Leader Squirtle', true), new ObtainedPokemonRequirement('Squad Leader Wartortle', true)]),
+});
+
+const SquirtleJenny2 = new NPC('Officer Jenny', [
+    'Watch out for mischievous Squirtle around here.',
+    'You can\'t miss them: they wear black glasses and they\'ll try to play tricks on you.',
+    'Oh, you actually caught one of those little troublemakers? Impressive!',
+    'Lately, Squirtle Squad activity has been increasing. The Squad Leaders usually battle solo, but lately, those who defeat a lot of rival Leaders end up being challenged by entire Squads!',
+    'I\'ve heard the Sevii Firefighter Academy is recruiting new members. If your glasses-wearing friend keeps training hard, it might one day lead its own Blastoise Squad!',
+],
+{
+    image: 'assets/images/npcs/Officer Jenny.png',
+    requirement: new OneFromManyRequirement([new ObtainedPokemonRequirement('Squad Leader Squirtle'), new ObtainedPokemonRequirement('Squad Leader Wartortle')]),
 });
 
 const LavenderMrFuji = new NPC('Mr. Fuji', [
@@ -697,6 +709,11 @@ const PinkanOfficerJenny3 = new NPC ('Officer Jenny', [
     image: 'assets/images/npcs/Officer Jenny.png',
     requirement: new QuestLineCompletedRequirement('Team Rocket\'s Pinkan Theme Park'),
 });
+const CaptainAiden = new NPC('Captain Aiden', [
+    'Because of its location, Pinkan Island sometimes suffers from wildfires — especially during Harsh Sunlight.',
+    'That\'s when the Wartortle and Blastoise Squads spring into action. If yours is strong enough, come lend us a hand in the Pinkan Forest!',
+], { image: 'assets/images/npcs/Firefighter.png' });
+
 const ThemeparkTeamRocket1 = new NPC('Jessie & James', [
     'Oh hello there trainer! What do you mean we\'re not supposed to be here? We toootally got permission from Officer Jenny!',
     'Isn\'t your whole "thing" being helpful? We want to build a theme park to help fund the Pinkan Reserve, but this meddlesome twerp named Ash keeps getting in the way. He\'s even electrocuted us with his damn Pikachu!',
@@ -974,7 +991,7 @@ TownList['Vermilion City'] = new Town(
     [VermilionCityShop, new ShardTraderShop(GameConstants.ShardTraderLocations['Vermilion City'])],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)],
-        npcs: [VermilionFanClubChairman, VermilionShardApprentice, VermilionEusine, SquirtleJenny],
+        npcs: [VermilionFanClubChairman, VermilionShardApprentice, VermilionEusine, SquirtleJenny1, SquirtleJenny2],
     }
 );
 TownList['Lavender Town'] = new Town(
@@ -1246,7 +1263,7 @@ TownList['Pinkan Pokémon Reserve'] = new Town(
     [PinkanPokémonReserveShop, PinkanBerryMaster, TemporaryBattleList['Pinkan Jessie & James'], TemporaryBattleList['Pinkan Officer Jenny']],
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 42)],
-        npcs: [PinkanOfficerJenny1, PinkanOfficerJenny2, PinkanOfficerJenny3, ThemeparkTeamRocket1, ThemeparkTeamRocket2, ThemeparkTeamRocket3, ThemeparkTeamRocket4],
+        npcs: [PinkanOfficerJenny1, PinkanOfficerJenny2, PinkanOfficerJenny3, ThemeparkTeamRocket1, ThemeparkTeamRocket2, ThemeparkTeamRocket3, ThemeparkTeamRocket4, CaptainAiden],
     }
 );
 

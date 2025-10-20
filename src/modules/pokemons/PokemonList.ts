@@ -652,7 +652,7 @@ export const pokemonList = createPokemonArray(
         'exp': 63,
         'eggCycles': 20,
         'evolutions': [
-            LevelEvolution('Squad Leader Squirtle', 'Squad Leader Wartortle', 16),
+            AttackEvolution(5000, false, 'Squad Leader Squirtle', 'Squad Leader Wartortle', 16),
             DummyEvolution('Squad Leader Squirtle', 'Squirtle Squad'),
         ],
         'base': {
@@ -740,7 +740,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 142,
         'eggCycles': 20,
-        'evolutions': [LevelEvolution('Squad Leader Wartortle', 'Blastoise (Firefighter)', 36)],
+        'evolutions': [AttackEvolution(10000, false, 'Squad Leader Wartortle', 'Blastoise (Firefighter)', 36)],
         'base': {
             'hitpoints': 59,
             'attack': 63,
