@@ -1147,6 +1147,15 @@ export const SpriteCredits: Credit[] = [
         // Notes: Permission given on image page if credited
     },
     {
+        name: 'Slugnir',
+        link: 'https://www.deviantart.com/918956186164928573',
+        image: 'assets/images/profile/trainer-16.png',
+        resources: [
+            'Blastoise (Firefighter)',
+        ],
+        // Notes: Permission given on image page if credited
+    },
+    {
         name: 'Smogon Sprite Project',
         link: 'https://www.smogon.com/forums/forums/smeargles-laptop.325/',
         resources: [
