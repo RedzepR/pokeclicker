@@ -494,7 +494,7 @@ class Game implements TmpGameType {
                 if (this.party.getPokemonByName('Milcery')) {
                     BattleCafeController.accumulateSpins();
                 }
-                
+
                 // Generate the weather forecast
                 WeatherApp.initialize();
                 // Refresh Friend Safari Pokemon List

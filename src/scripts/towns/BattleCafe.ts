@@ -51,7 +51,7 @@ class BattleCafeController {
     static clockwise = ko.observable<boolean>(false);
 
     static spinsPerDay() : number {
- // Give additional spins for each sweet type completed, shiny, and resistant
+        // Give additional spins for each sweet type completed, shiny, and resistant
         let spins = this.baseDailySpins;
         const sweetStatus = GameHelper.enumStrings(GameConstants.AlcremieSweet)
             .map((s) => ({
