@@ -312,10 +312,6 @@ class MapHelper {
 
     public static travelToNextRegion() {
         if (MapHelper.ableToTravel()) {
-            if (!GameHelper.isDevelopmentBuild()) {
-                Save.download();
-            }
-
             // Gain queue slots based on highest region
             App.game.breeding.gainQueueSlot(App.game.breeding.queueSlotsGainedFromRegion(player.highestRegion()));
             GameHelper.incrementObservable(player.highestRegion);
