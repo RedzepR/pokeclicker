@@ -491,7 +491,7 @@ class Game implements TmpGameType {
                     });
                 }
                 // Give the players more Battle Cafe spins
-                BattleCafeController.spinsLeft(BattleCafeController.spinsPerDay());
+                BattleCafeController.accumulateSpins();
                 // Generate the weather forecast
                 WeatherApp.initialize();
                 // Refresh Friend Safari Pokemon List
