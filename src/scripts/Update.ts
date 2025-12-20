@@ -2943,6 +2943,7 @@ class Update implements Saveable {
             }
 
             // Mark new Pokemon Gifts as claimed if they are already owned
+            saveData.statistics.npcTalkedTo = saveData.statistics.npcTalkedTo || {};
             const ownsFloetteEternal = saveData.party.caughtPokemon.find((p: PartyPokemon) => p.id === 670.05);
             if (ownsFloetteEternal) {
                 saveData.statistics.npcTalkedTo[GameHelper.hash('eternalfloettegift')] = 1;
@@ -2950,6 +2951,13 @@ class Update implements Saveable {
             const ownsMagearnaOriginal = saveData.party.caughtPokemon.find((p: PartyPokemon) => p.id === 801.01);
             if (ownsMagearnaOriginal) {
                 saveData.statistics.npcTalkedTo[GameHelper.hash('magearnamysterygift')] = 1;
+            }
+        },
+
+        '0.10.26': ({ playerData, saveData, settingsData }) => {
+            // Fix old saves missing Johto Rocket questline blocking them from entering the Mahogany Town hideout, hopefully for good
+            if (saveData.badgeCase[17]) {
+                Update.startQuestLine(saveData, 'Team Rocket Again');
             }
         },
     };
