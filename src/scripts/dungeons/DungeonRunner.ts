@@ -78,7 +78,7 @@ class DungeonRunner {
             return { tier, loot };
         };
         // Dungeon size minimum of MIN_DUNGEON_SIZE
-        DungeonRunner.map = new DungeonMap(Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize), generateChestLoot, flash);
+        DungeonRunner.map = new DungeonMap(dungeonSize, generateChestLoot, flash);
 
         DungeonRunner.chestsOpened(0);
         DungeonRunner.encountersWon(0);

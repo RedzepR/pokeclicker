@@ -191,7 +191,7 @@ class Dungeon {
     }
 
     get tokenCost(): number {
-        return Math.ceil(this.baseTokenCost * Math.max(GameConstants.MIN_DUNGEON_SIZE, this.getDungeonSize(false)) / this.getDungeonSize(true));
+        return Math.ceil(this.baseTokenCost * this.getDungeonSize(false) / this.getDungeonSize(true));
     }
 
     public getDungeonSize(ignoreReduction = true) {
@@ -199,7 +199,7 @@ class Dungeon {
         if (!ignoreReduction) {
             dungeonSize -= Math.max(0, App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(this.name)]().toString().length - 1);
         }
-        return dungeonSize;
+        return Math.max(GameConstants.MIN_DUNGEON_SIZE, dungeonSize);
     }
 
     /**
