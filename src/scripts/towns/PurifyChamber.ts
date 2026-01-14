@@ -80,7 +80,7 @@ class PurifyChamber implements Saveable {
         if (!PurifyChamber.requirements.isCompleted() || !App.game.party.hasShadowPokemon()) {
             return;
         }
-        const newFlow = Math.round(this.currentFlow() + exp / 1000);
+        const newFlow = Math.round(this.currentFlow() + exp * FluteEffectRunner.getFluteMultiplier(GameConstants.FluteItemType.Time_Flute) / 1000);
         this.currentFlow(Math.min(newFlow, this.flowNeeded()));
 
         if (!this.notified && this.currentFlow() >= this.flowNeeded()) {
