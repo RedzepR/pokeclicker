@@ -14412,7 +14412,6 @@ export const pokemonList = createPokemonArray(
         'catchRate': 50,
         'evolutions': [
             StoneEvolution('Munchlax', 'Snorlax', StoneType.Soothe_bell),
-            DummyEvolution('Munchlax', 'Snorlax (Snowman)'),
         ],
         'baby': true,
         'base': {
