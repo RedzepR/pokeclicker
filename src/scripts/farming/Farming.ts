@@ -1524,7 +1524,7 @@ class Farming implements Feature {
                 BerryType.Oran,
                 BerryType.Chesto,
                 BerryType.Kelpsy,
-                BerryType.Coba,
+                BerryType.Belue,
             ]));
         // Wacan
         this.mutations.push(new GrowNearBerryMutation(.0001, BerryType.Wacan,
