@@ -23,7 +23,7 @@ class Pokeballs implements Feature {
                     return 15;
                 }
                 return 0;
-            }, 500, 'Reduced catch time and increased catch rate on roaming Pokémon', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
+            }, 500, 'Reduced catch time, also increased catch rate on roaming Pokémon', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
             new Pokeball(GameConstants.Pokeball.Quickball, (opts) => {
                 if (opts.encounterType === EncounterType.wanderer) {
                     return 0;
@@ -107,7 +107,9 @@ class Pokeballs implements Feature {
             }, 1250, 'Increased catch rate for Pokémon captured more times, plus higher EV gains', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
 
             new Pokeball(GameConstants.Pokeball.Beastball, () => {
-                return 20;
+                const UBQuestFinished = App.game.quests.getQuestLine('Ultra Beast Hunt').state() === QuestLineState.ended;
+
+                return 10 + (UBQuestFinished ? 10 : 0);
             }, 750, 'Can only be used on Ultra Beasts', new TemporaryBattleRequirement('Anabel')),
 
             new Pokeball(GameConstants.Pokeball.Moonball, (opts) => {
