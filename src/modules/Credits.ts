@@ -1289,6 +1289,15 @@ export const SpriteCredits: Credit[] = [
         // Notes: Permission given on image page if credited.
     },
     {
+        name: 'The Boy',
+        link: 'https://discordapp.com/users/305776563801030657',
+        image: 'assets/images/profile/trainer-96.png',
+        resources: [
+            'Squirtle Squad',       
+        ],
+        // Notes: Made specifically for PokéClicker.
+    },
+    {
         name: 'TintjeMadelintje101',
         link: 'https://www.deviantart.com/tintjemadelintje101',
         image: 'https://a.deviantart.net/avatars-big/t/i/tintjemadelintje101.jpg',
