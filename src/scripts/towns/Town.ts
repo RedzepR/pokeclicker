@@ -6,6 +6,7 @@
 ///<reference path="RoamerNPC.ts"/>
 ///<reference path="GiftNPC.ts"/>
 ///<reference path="TownContent.ts"/>
+///<reference path="MassOutbreakNPC.ts"/>
 
 type TownOptionalArgument = {
     requirements?: Requirement[],

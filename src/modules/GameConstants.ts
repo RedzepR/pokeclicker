@@ -446,6 +446,10 @@ export const EP_CHALLENGE_MODIFIER = 10;
 // Mega Evolution
 export const MEGA_REQUIRED_ATTACK_MULTIPLIER = 500;
 
+//Alpha
+export  const ALPHA_CHANCE_BATTLE = 8192;
+export  const ALPHA_CHANCE_DUNGEON = 4096;
+
 /**
  * idle: The game is not doing anything, the battle view isn't shown
  * paused: The battle view is shown, but there are no game ticks
@@ -1073,6 +1077,8 @@ export enum StoneType {
     'White_mane_hair',
     'Black_augurite',
     'Peat_block',
+    'Adamant_crystal',
+    'Lustrous_globe',
     'Auspicious_armor',
     'Malicious_armor',
     'Leaders_crest',
@@ -1781,11 +1787,12 @@ export const HisuiDungeons = [
     'Ancient Lake Valor',
     'Ancient Lake Acuity',
     'Temple of Sinnoh',
-    'Turnback Cave', // 212
+    'Turnback Cave',
+    'Eternal Battle Reverie', // 213
 ];
 
 export const PaldeaDungeons = [
-    'Inlet Grotto', // 213
+    'Inlet Grotto', // 214
     'Glaseado Mountain',
     'Grasswither Shrine',
     'Icerend Shrine',
@@ -2272,6 +2279,7 @@ export const TemporaryBattles = [
     'Coin 1',
     'Ursaluna',
     'Irida 2',
+    'Dusclops',
     'Clover',
     'Coin 2',
     'Charm 1',
@@ -2279,13 +2287,17 @@ export const TemporaryBattles = [
     'Melli 1',
     'Warden Ingo',
     'Melli 2',
+    'Akari 3',
     'Warden Gaeric',
     'Warden Sabi',
     'Hisuian Braviary',
     'Beni',
+    'Space-Time Rift',
     'Charm 2',
     'Dialga (Origin)',
     'Palkia (Origin)',
+    'Alpha Vespiquen',
+    'Cresselia',
     'Volo 3',
     'Tornadus 1',
     'Tornadus 2',

@@ -115,6 +115,7 @@ import HatchRequirement from './requirements/HatchRequirement';
 import HatcheryHelperRequirement from './requirements/HatcheryHelperRequirement';
 import InRegionRequirement from './requirements/InRegionRequirement';
 import MoneyRequirement from './requirements/MoneyRequirement';
+import MassOutbreakRequirement from './requirements/MassOutbreakRequirement';
 import MaxLevelOakItemRequirement from './requirements/MaxLevelOakItemRequirement';
 import MaxRegionRequirement from './requirements/MaxRegionRequirement';
 import ObtainedPokemonRequirement from './requirements/ObtainedPokemonRequirement';
@@ -219,6 +220,7 @@ import DamageCalculator from './types/DamageCalculator';
 import GameLoadState from './utilities/GameLoadState';
 import GenericDeal, { DealCostOrProfitType } from './deal/GenericDeal';
 import areaStatus from './enums/AreaStatus';
+import MassOutbreak from './pokemons/MassOutbreak';
 
 Object.assign(<any>window, {
     SaveSelector,
@@ -343,6 +345,7 @@ Object.assign(<any>window, {
     HatcheryHelperRequirement,
     InRegionRequirement,
     MoneyRequirement,
+    MassOutbreakRequirement,
     MaxLevelOakItemRequirement,
     MaxRegionRequirement,
     ObtainedPokemonRequirement,
@@ -452,4 +455,5 @@ Object.assign(<any>window, {
     DamageCalculator,
     GameLoadState,
     areaStatus,
+    MassOutbreak,
 });

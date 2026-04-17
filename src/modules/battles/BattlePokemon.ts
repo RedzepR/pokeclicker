@@ -52,6 +52,7 @@ export default class BattlePokemon implements EnemyPokemonInterface {
         public gemReward = 1,
         public gender: number,
         public shadow: GameConstants.ShadowStatus,
+        public alpha: boolean,
         public encounterType: EncounterType,
         public heldItem?: BagItem,
         public ep: number = GameConstants.BASE_EP_YIELD,

@@ -294,6 +294,7 @@ export type TmpPartyPokemonType = {
     displayName: string,
     shadow: GameConstants.ShadowStatus,
     showShadowImage: boolean,
+    alpha: boolean,
     vitaminsUsed: Record<GameConstants.VitaminType, KnockoutObservable<number>>;
     heldItem: KnockoutObservable<TmpHeldItemType>;
     defaultFemaleSprite: KnockoutObservable<boolean>;
@@ -307,8 +308,9 @@ export type TmpPartyPokemonType = {
 export type TmpPartyType = {
     caughtPokemon: ReadonlyArray<TmpPartyPokemonType>;
     activePartyPokemon: ReadonlyArray<TmpPartyPokemonType>;
-    gainPokemonByName: (name: PokemonNameType, shiny?: boolean, suppressNewCatchNotification?: boolean, gender?: GameConstants.BattlePokemonGender, shadow?: GameConstants.ShadowStatus) => void;
-    gainPokemonById: (id: number, shiny?: boolean, suppressNewCatchNotification?: boolean, gender?: GameConstants.BattlePokemonGender, shadow?: GameConstants.ShadowStatus) => void;
+    // eslint-disable-next-line max-len
+    gainPokemonByName: (name: PokemonNameType, shiny?: boolean, suppressNewCatchNotification?: boolean, gender?: GameConstants.BattlePokemonGender, shadow?: GameConstants.ShadowStatus, alpha?: boolean) => void;
+    gainPokemonById: (id: number, shiny?: boolean, suppressNewCatchNotification?: boolean, gender?: GameConstants.BattlePokemonGender, shadow?: GameConstants.ShadowStatus, alpha?: boolean) => void;
     gainExp: (exp: number, level?: number, trainer?: boolean) => void;
     calculatePokemonAttack: (
         type1: PokemonType,
@@ -340,7 +342,7 @@ export type TmpPartyType = {
     getPokemonByName: (name: PokemonNameType) => TmpPartyPokemonType | undefined;
     partyPokemonActiveInSubRegion: (region: GameConstants.Region, subregion: GameConstants.SubRegions) => Array<TmpPartyPokemonType>;
     alreadyCaughtPokemonByName: (name: PokemonNameType, shiny?: boolean) => boolean;
-    alreadyCaughtPokemon: (id: number, shiny?: boolean, shadow?: boolean, purified?: boolean) => boolean;
+    alreadyCaughtPokemon: (id: number, shiny?: boolean, shadow?: boolean, purified?: boolean, alpha?: boolean) => boolean;
     calculateClickAttack: (useItem?: boolean) => number;
 };
 

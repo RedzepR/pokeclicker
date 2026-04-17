@@ -50,16 +50,17 @@ class Party implements Feature, TmpPartyType {
 
     }
 
-    gainPokemonByName(name: PokemonNameType, shiny?: boolean, suppressNotification?: boolean, gender?: GameConstants.BattlePokemonGender, shadow?: GameConstants.ShadowStatus) {
+    gainPokemonByName(name: PokemonNameType, shiny?: boolean, suppressNotification?: boolean, gender?: GameConstants.BattlePokemonGender, shadow?: GameConstants.ShadowStatus, alpha?: boolean) {
         const pokemon = pokemonMap[name];
-        this.gainPokemonById(pokemon.id, shiny, suppressNotification, gender, shadow);
+        this.gainPokemonById(pokemon.id, shiny, suppressNotification, gender, shadow, alpha);
     }
 
     gainPokemonById(id: number,
         shiny = false,
         suppressNewCatchNotification = false,
         gender: GameConstants.BattlePokemonGender = PokemonFactory.generateGenderById(id),
-        shadow: GameConstants.ShadowStatus = GameConstants.ShadowStatus.None
+        shadow: GameConstants.ShadowStatus = GameConstants.ShadowStatus.None,
+        alpha = false
     ) {
         const isShadow = shadow === GameConstants.ShadowStatus.Shadow;
         PokemonHelper.incrementPokemonStatistics(id, GameConstants.PokemonStatisticsType.Captured, shiny, gender, shadow);
@@ -67,10 +68,11 @@ class Party implements Feature, TmpPartyType {
         const newCatch = !this.alreadyCaughtPokemon(id);
         const newShiny = shiny && !this.alreadyCaughtPokemon(id, true);
         const newShadow = isShadow && !this.alreadyCaughtPokemon(id, false, true);
+        const newAlpha = alpha && !this.alreadyCaughtPokemon(id, false, false, false, true);
 
         if (newCatch) {
             // Create new party pokemon
-            this._caughtPokemon.push(PokemonFactory.generatePartyPokemon(id, shiny, gender, shadow));
+            this._caughtPokemon.push(PokemonFactory.generatePartyPokemon(id, shiny, gender, shadow, alpha));
 
             // Keep caughtPokemon array sorted by ID
             this._caughtPokemon.sort((a, b) => a.id - b.id);
@@ -83,6 +85,9 @@ class Party implements Feature, TmpPartyType {
         }
         if (newShadow) {
             partyPokemon.shadow = GameConstants.ShadowStatus.Shadow;
+        }
+        if (newAlpha) {
+            partyPokemon.alpha = true;
         }
 
         // Properties of the PartyPokemon used for notifications -- shininess, shadow status, etc. comes from this catch
@@ -116,6 +121,15 @@ class Party implements Feature, TmpPartyType {
                 setting: NotificationConstants.NotificationSetting.General.new_catch,
             });
         }
+        if (newAlpha) {
+            Notifier.notify({
+                message: `You have captured an alpha ${displayName}!`,
+                pokemonImage: PokemonHelper.getImage(id, shiny, gender, shadow),
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.General.new_catch,
+                setting: NotificationConstants.NotificationSetting.General.new_catch,
+            });
+        }
 
         // Logbook entries
         if (newCatch) {
@@ -128,6 +142,9 @@ class Party implements Feature, TmpPartyType {
         }
         if (newShadow) {
             App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedShadow({ pokemon: name }));
+        }
+        if (newAlpha) {
+            App.game.logbook.newLog(LogBookTypes.CAUGHT, createLogContent.capturedAlpha({ pokemon: name }));
         }
     }
 
@@ -299,14 +316,15 @@ class Party implements Feature, TmpPartyType {
         return this.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(name).id, shiny);
     }
 
-    alreadyCaughtPokemon(id: number, shiny = false, shadow = false, purified = false) {
+    alreadyCaughtPokemon(id: number, shiny = false, shadow = false, purified = false, alpha = false) {
         const pokemon = this.getPokemon(id);
 
         if (pokemon) {
             const shinyOkay = (!shiny || pokemon.shiny);
             const shadowOkay = (!shadow || (pokemon.shadow > GameConstants.ShadowStatus.None));
             const purifiedOkay = (!purified || (pokemon.shadow == GameConstants.ShadowStatus.Purified));
-            return shinyOkay && shadowOkay && purifiedOkay;
+            const alphaOkay =  (!alpha || pokemon.alpha);
+            return shinyOkay && shadowOkay && purifiedOkay && alphaOkay;
         }
         return false;
     }

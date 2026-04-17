@@ -743,6 +743,7 @@ export type PokemonNameType
     | 'Handout Happiny'
     | 'Chatot'
     | 'Spiritomb'
+    | 'Wisp'
     | 'Gible'
     | 'Gabite'
     | 'Garchomp'

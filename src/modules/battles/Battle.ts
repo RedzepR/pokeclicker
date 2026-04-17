@@ -88,7 +88,8 @@ export default class Battle {
         App.game.breeding.progressEggsBattle(Battle.route, player.region);
         const isShiny: boolean = enemyPokemon.shiny;
         const isShadow: boolean = enemyPokemon.shadow == GameConstants.ShadowStatus.Shadow;
-        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny, isShadow, enemyPokemon.encounterType);
+        const isAlpha: boolean = enemyPokemon.alpha;
+        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny, isShadow, isAlpha, enemyPokemon.encounterType);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
             this.prepareCatch(enemyPokemon, pokeBall);
@@ -185,7 +186,7 @@ export default class Battle {
     public static catchPokemon(enemyPokemon: BattlePokemon, route: number, region: GameConstants.Region) {
         this.gainTokens(route, region);
         App.game.oakItems.use(OakItemType.Magic_Ball);
-        App.game.party.gainPokemonById(enemyPokemon.id, enemyPokemon.shiny, undefined, enemyPokemon.gender, enemyPokemon.shadow);
+        App.game.party.gainPokemonById(enemyPokemon.id, enemyPokemon.shiny, undefined, enemyPokemon.gender, enemyPokemon.shadow, enemyPokemon.alpha);
         const partyPokemon = App.game.party.getPokemon(enemyPokemon.id);
         const epBonus = App.game.pokeballs.getEPBonus(this.pokeball());
         partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, enemyPokemon.shiny, enemyPokemon.shadow, enemyPokemon.ep * epBonus);

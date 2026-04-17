@@ -136,7 +136,7 @@ class Game implements TmpGameType {
         if (player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None) {
             Battle.generateNewEnemy();
         } else {
-            const battlePokemon = new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender, GameConstants.ShadowStatus.None, EncounterType.route);
+            const battlePokemon = new BattlePokemon('MissingNo.', 0, PokemonType.None, PokemonType.None, 0, 0, 0, 0, new Amount(0, GameConstants.Currency.money), false, 0, GameConstants.BattlePokemonGender.NoGender, GameConstants.ShadowStatus.None, false, EncounterType.route);
             Battle.enemyPokemon(battlePokemon);
         }
         //Safari.load();
@@ -151,6 +151,7 @@ class Game implements TmpGameType {
         GenericDeal.generateDeals();
         SafariPokemonList.generateSafariLists();
         RoamingPokemonList.generateIncreasedChanceRoutes(now);
+        MassOutbreak.generateIncreasedChanceRoutes(now);
         WeatherApp.initialize();
         DamageCalculator.initialize();
 
@@ -505,6 +506,7 @@ class Game implements TmpGameType {
             if (old.getHours() !== now.getHours()) {
                 Weather.generateWeather(now);
                 RoamingPokemonList.generateIncreasedChanceRoutes(now);
+                MassOutbreak.generateIncreasedChanceRoutes(now);
                 // Check if it's weather change time
                 if (now.getHours() % Weather.period === 0) {
                     WeatherApp.checkDateHasPassed();

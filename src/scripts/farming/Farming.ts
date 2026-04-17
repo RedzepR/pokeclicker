@@ -2300,7 +2300,7 @@ class Farming implements Feature {
         const shinyModifier = wanderer.shiny ? GameConstants.WANDER_SHINY_FP_MODIFIER : 1;
         App.game.wallet.gainFarmPoints(farmPoints * shinyModifier);
 
-        const pokeball = App.game.pokeballs.calculatePokeballToUse(pokemonData.id, wanderer.shiny, false, EncounterType.wanderer);
+        const pokeball = App.game.pokeballs.calculatePokeballToUse(pokemonData.id, wanderer.shiny, false, false, EncounterType.wanderer);
         if (pokeball !== GameConstants.Pokeball.None) {
             wanderer.pokeball(pokeball);
             wanderer.catching(true);

@@ -47,11 +47,13 @@ class RouteInfo {
             }
         } else if (pokemon.type == 'special') {
             if (RouteInfo.hasRequirement(pokemon.requirement, SpecialEventRequirement)) {
-                return {tooltip: 'Event Pokémon', image: 'event.png'};
+                return { tooltip: 'Event Pokémon', image: 'event.png' };
             } else if (RouteInfo.hasRequirement(pokemon.requirement, WeatherRequirement)) {
-                return {tooltip: 'Weather Pokémon', image: 'weather.png'};
+                return { tooltip: 'Weather Pokémon', image: 'weather.png' };
             } else if (RouteInfo.hasRequirement(pokemon.requirement, DayOfWeekRequirement)) {
-                return {tooltip: 'Day of Week Pokémon', image: 'day_of_week.png'};
+                return { tooltip: 'Day of Week Pokémon', image: 'day_of_week.png' };
+            } else if (RouteInfo.hasRequirement(pokemon.requirement, MassOutbreakRequirement)) {
+                return { tooltip: 'Mass Outbreak Pokémon', image: 'mass_outbreak.png' };
             }
         } else if (pokemon.type == 'water' && pokemon.fishing) {
             return {tooltip: 'Fishing Pokémon', image: 'fishing.png'};

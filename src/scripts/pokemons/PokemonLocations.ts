@@ -151,7 +151,14 @@ class PokemonLocations {
                     dungeon: dungeonName,
                     requirements: boss.options?.requirement,
                 };
-                cacheLine[boss.name].push(data);
+                try {
+                    cacheLine[boss.name].push(data);
+                } catch (error) {
+                    console.log(boss.name);
+
+                }
+
+
             });
         });
         return cacheLine[pokemonName];
