@@ -10,6 +10,7 @@ enum MultiplierType {
     roaming,
     ev,
     undergroundCharge,
+    alpha,
 }
 
 export default MultiplierType;

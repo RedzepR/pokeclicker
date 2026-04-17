@@ -83,6 +83,7 @@ export class ShardDeal {
         this.generateKalosDeals();
         this.generateAlolaDeals();
         this.generateGalarDeals();
+        this.generateHisuiDeals();
     }
 
     public static generateKantoDeals() {
@@ -1997,5 +1998,9 @@ export class ShardDeal {
                     1),
             ],
         );
+    }
+
+    public static generateHisuiDeals() {
+       
     }
 }

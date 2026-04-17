@@ -1108,7 +1108,7 @@ class Farming implements Feature {
         GameHelper.incrementObservable(App.game.statistics.farmWandererFarmPointsObtained, amount.amount);
         player.lowerItemMultipliers(MultiplierDecreaser.Berry, berry.exp);
 
-        const pokeball = App.game.pokeballs.calculatePokeballToUse(pokemonData.id, wanderer.shiny, false, EncounterType.wanderer);
+        const pokeball = App.game.pokeballs.calculatePokeballToUse(pokemonData.id, wanderer.shiny, false, false, EncounterType.wanderer);
         if (pokeball !== GameConstants.Pokeball.None) {
             wanderer.pokeball(pokeball);
             wanderer.catching(true);

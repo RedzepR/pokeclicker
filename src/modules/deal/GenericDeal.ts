@@ -17,6 +17,7 @@ export type GenericTraderShopIdentifier =
     'FossilNacreneMuseum' |
     'FossilAmbretteFossilLab' |
     'FossilMasterGalarRoute6' |
+    'UnlockArceusPower' |
     'ScentTrader';
 
 /* eslint-disable @typescript-eslint/no-shadow */
@@ -425,6 +426,94 @@ export default class GenericDeal {
                 ],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Arctovish, amount: 1, hidePlayerInventory: true }],
                 tradeButtonOverride: 'Revive',
+            }),
+        ]);
+
+        GenericDeal.list.UnlockArceusPower = ko.observableArray([
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Mind_plate, amount: 1000 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Arceus (Psychic)'], amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Unlock',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Insect_plate, amount: 1000 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Arceus (Bug)'], amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Unlock',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Earth_plate, amount: 1000 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Arceus (Ground)'], amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Unlock',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Meadow_plate, amount: 1000 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Arceus (Grass)'], amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Unlock',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Splash_plate, amount: 1000 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Arceus (Water)'], amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Unlock',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Flame_plate, amount: 1000 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Arceus (Fire)'], amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Unlock',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Toxic_plate, amount: 1000 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Arceus (Poison)'], amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Unlock',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Zap_plate, amount: 1000 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Arceus (Electric)'], amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Unlock',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Sky_plate, amount: 1000 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Arceus (Flying)'], amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Unlock',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Icicle_plate, amount: 1000 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Arceus (Ice)'], amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Unlock',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Stone_plate, amount: 1000 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Arceus (Rock)'], amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Unlock',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Draco_plate, amount: 1000 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Arceus (Dragon)'], amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Unlock',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Iron_plate, amount: 1000 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Arceus (Steel)'], amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Unlock',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Dread_plate, amount: 1000 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Arceus (Dark)'], amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Unlock',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Fist_plate, amount: 1000 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Arceus (Fighting)'], amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Unlock',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Pixie_plate, amount: 1000 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Arceus (Fairy)'], amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Unlock',
+            }),
+            new GenericDeal({
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Spooky_plate, amount: 1000 }],
+                profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Arceus (Ghost)'], amount: 1, hidePlayerInventory: true }],
+                tradeButtonOverride: 'Unlock',
             }),
         ]);
         GenericDeal.list.ScentTrader = ko.observableArray([

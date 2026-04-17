@@ -41,6 +41,11 @@
                             <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">
                                 <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}.svg`}"/>
                             </div>
+                            <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)">
+                                <img style="position: absolute; top: 48px; right: 0px;" class="alpha-icon" src="assets/images/status/alpha.svg" data-bind="visible: App.game.party.getPokemon($data.id)?.alpha == true"/>
+
+                            </div>
+
                             <!-- ko if: App.game.party.alreadyCaughtPokemonByName(name) -->
                             <div data-bind="if: App.game.party.getPokemon($data.id)?.pokerus" style="position: absolute;left: 2px;top: -11px;">
                                 <img width="32px" src="" data-bind="attr: { src: `assets/images/breeding/pokerus/${GameConstants.Pokerus[App.game.party.getPokemon($data.id)?.pokerus]}.png`},

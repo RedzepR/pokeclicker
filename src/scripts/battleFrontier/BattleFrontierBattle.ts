@@ -71,7 +71,7 @@ class BattleFrontierBattle extends Battle {
             GameHelper.incrementObservable(App.game.statistics.totalShinyTrainerPokemonSeen);
         }
 
-        const enemyPokemon = new BattlePokemon(enemy.name, enemy.id, enemy.type[0], enemy.type[1], health, level, 0, enemy.exp, new Amount(money, GameConstants.Currency.money), shiny, gems, gender, GameConstants.ShadowStatus.None, EncounterType.trainer);
+        const enemyPokemon = new BattlePokemon(enemy.name, enemy.id, enemy.type[0], enemy.type[1], health, level, 0, enemy.exp, new Amount(money, GameConstants.Currency.money), shiny, gems, gender, GameConstants.ShadowStatus.None, false, EncounterType.trainer);
         this.enemyPokemon(enemyPokemon);
     }
 }

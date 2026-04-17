@@ -70,15 +70,16 @@
                                     <div class="pokemonName">
                                         <span data-bind="text: displayName">Name</span>
                                         <sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
-                                        <img class="shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow"/>
-                                        <img class="shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified"/>
+                                        <img class="shadow-icon" src="assets/images/status/shadow.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Shadow" />
+                                        <img class="shadow-icon" src="assets/images/status/purified.svg" data-bind="visible: $data.shadow == GameConstants.ShadowStatus.Purified" />
+                                        <img class="alpha-icon" src="assets/images/status/alpha.svg" data-bind="visible: $data.alpha == true" />
                                         <!-- ko foreach: PokemonHelper.getMegaStones($data.name).filter(s => player.hasMegaStone(s.megaStone)) -->
                                         <img width="20px" data-bind="attr: { src: $data.image },
-                                            tooltip: {
-                                                title: pokemonMap[$parent.name].evolutions.flatMap(e => e.restrictions)
-                                                    .find(r => r instanceof MegaEvolveRequirement && r.megaStone == $data.megaStone)?.hint() ?? '',
-                                                trigger: 'hover',
-                                                placement: 'bottom'
+                                             tooltip: {
+                                             title: pokemonMap[$parent.name].evolutions.flatMap(e=> e.restrictions)
+                                        .find(r => r instanceof MegaEvolveRequirement && r.megaStone == $data.megaStone)?.hint() ?? '',
+                                        trigger: 'hover',
+                                        placement: 'bottom'
                                         }"/>
                                         <!-- /ko -->
                                     </div>

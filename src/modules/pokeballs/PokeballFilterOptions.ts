@@ -1,4 +1,4 @@
-import { Pokerus } from '../GameConstants';
+import { Pokerus, Region } from '../GameConstants';
 import BooleanSetting from '../settings/BooleanSetting';
 import Setting from '../settings/Setting';
 import GameHelper from '../GameHelper';
@@ -10,6 +10,7 @@ import PokemonType from '../enums/PokemonType';
 import EncounterType from '../enums/EncounterType';
 import QuestLineStepCompletedRequirement from '../requirements/QuestLineStepCompletedRequirement';
 import PokemonCategories from '../party/Category';
+import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
 
 class PokeballFilterOption<T, M = T> {
     public defaultSetting: Setting<T>;
@@ -31,6 +32,7 @@ class PokeballFilterOption<T, M = T> {
 }
 
 const tempShadowRequirement = new QuestLineStepCompletedRequirement('Shadows in the Desert', 3);
+const tempAlphaRequirement = new MaxRegionRequirement(Region.hisui);
 
 const encounterTypeRequirements: Partial<Record<EncounterType, Requirement>> = {
     [EncounterType.trainer]: tempShadowRequirement,
@@ -59,6 +61,18 @@ export const pokeballFilterOptions = {
             isShadow ? '' : 'not '
         }Shadow`,
         tempShadowRequirement,
+    ),
+
+    alpha: new PokeballFilterOption<boolean>(
+        (bool = true) => new BooleanSetting(
+            'pokeballFilterAlpha',
+            'Alpha',
+            bool,
+        ),
+        (isAlpha) => `Are ${
+            isAlpha ? '' : 'not '
+        }Alpha`,
+        tempAlphaRequirement,
     ),
 
     caught: new PokeballFilterOption<boolean>(
@@ -93,6 +107,17 @@ export const pokeballFilterOptions = {
             isCaughtShadow ? 'already ' : 'not yet '
         }caught`,
         tempShadowRequirement,
+    ),
+    caughtAlpha: new PokeballFilterOption<boolean>(
+        (bool = true) => new BooleanSetting(
+            'pokeballFilterCaughtAlpha',
+            'Caught Alpha',
+            bool,
+        ),
+        (isCaughtAlpha) => `Alpha form ${
+            isCaughtAlpha ? 'already ' : 'not yet '
+        }caught`,
+        tempAlphaRequirement,
     ),
 
     pokerus: new PokeballFilterOption<Pokerus>(

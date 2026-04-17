@@ -13487,7 +13487,7 @@ dungeonList['Max Lair'] = new Dungeon('Max Lair',
 //Hisui Dungeons
 
 dungeonList['Floaro Gardens'] = new Dungeon('Floaro Gardens',
-    ['Wurmple', 'Silcoon', 'Cascoon', 'Pichu', 'Drifloon', 'Shinx', 'Luxio'],
+    ['Pichu', 'Wurmple', 'Silcoon', 'Cascoon', 'Shinx', 'Drifloon', 'Luxio'],
     {
         common: [
             {loot: 'Cheri'},
@@ -13505,16 +13505,16 @@ dungeonList['Floaro Gardens'] = new Dungeon('Floaro Gardens',
         ],
         legendary: [{loot: 'Miracle_Seed'}],
     },
-    2603000,
+    35537738,
     [
-        new DungeonBossPokemon('Beautifly', 10000000, 31),
-        new DungeonBossPokemon('Dustox', 10000000, 31),
-        new DungeonBossPokemon('Shaymin (Land)', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
+        new DungeonBossPokemon('Beautifly', 177688690, 31),
+        new DungeonBossPokemon('Dustox', 177688690, 31),
+        new DungeonBossPokemon('Shaymin (Land)', 313079487, 70, {hide: true, requirement: new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 9)}),
     ],
-    96500, 1);
+    2550000, 1);
 
 dungeonList['Oreburrow Tunnel'] = new Dungeon('Oreburrow Tunnel',
-    ['Geodude', 'Machop', 'Zubat', 'Happiny'],
+    ['Zubat', 'Geodude', 'Machop', 'Shinx', 'Luxio', 'Combee', 'Happiny', 'Magikarp'],
     {
         common: [
             {loot: 'Cheri'},
@@ -13524,6 +13524,7 @@ dungeonList['Oreburrow Tunnel'] = new Dungeon('Oreburrow Tunnel',
             {loot: 'Sitrus'},
             {loot: 'Nanab'},
             {loot: 'Pinap'},
+            {loot: 'Geodude'},
         ],
         rare: [
             {loot: 'Brown Shard'},
@@ -13532,12 +13533,15 @@ dungeonList['Oreburrow Tunnel'] = new Dungeon('Oreburrow Tunnel',
         epic: [{loot: 'Stone Plate'}],
         legendary: [{loot: 'Rock_Incense'}],
     },
-    2603000,
-    [new DungeonBossPokemon('Graveler', 10000000, 28)],
-    96500, 11);
+    38547348,
+    [
+        new DungeonBossPokemon('Golbat', 192736740, 35),
+        new DungeonBossPokemon('Graveler', 192736740, 28),
+    ],
+    2666000, 9);
 
 dungeonList.Heartwood = new Dungeon('Heartwood',
-    ['Geodude', 'Zubat', 'Golbat', 'Psyduck', 'Wurmple', 'Silcoon', 'Cascoon', 'Combee', 'Buneary'],
+    ['Zubat', 'Golbat', 'Psyduck', 'Scyther', 'Wurmple', 'Silcoon', 'Cascoon', 'Combee', 'Buneary', 'Beautifly', 'Dustox'],
     {
         common: [
             {loot: 'Cheri'},
@@ -13555,13 +13559,13 @@ dungeonList.Heartwood = new Dungeon('Heartwood',
         epic: [{loot: 'Insect Plate'}],
         legendary: [{loot: 'Silver_Powder'}],
     },
-    2603000,
+    38933988,
     [
-        new DungeonBossPokemon('Scyther', 10000000, 31),
-        new DungeonBossPokemon('Beautifly', 10000000, 31),
-        new DungeonBossPokemon('Dustox', 10000000, 31),
+        new DungeonBossPokemon('Scyther', 194669940, 31),
+        new DungeonBossPokemon('Golduck', 194669940, 31),
+        new DungeonBossPokemon('Lopunny', 194669940, 31),
     ],
-    96500, 10);
+    2705000, 10);
 
 // All Unown
 const AncientSolaceonUnownList = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ?!'.split('');
@@ -13584,7 +13588,7 @@ dungeonList['Ancient Solaceon Ruins'] = new Dungeon('Ancient Solaceon Ruins',
         epic: [{loot: 'Mind Plate'}],
         legendary: [{loot: 'Twisted_Spoon'}],
     },
-    960000,
+    40107944,
     [
         ...AncientSolaceonUnownList.map((char, index) => {
             const req = new OneFromManyRequirement([
@@ -13592,16 +13596,16 @@ dungeonList['Ancient Solaceon Ruins'] = new Dungeon('Ancient Solaceon Ruins',
                 new MultiRequirement([new SeededDateSelectNRequirement(index, AncientSolaceonUnownList.length, 2), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Ancient Solaceon Ruins'))]),
                 new MultiRequirement([new SeededDateSelectNRequirement(index, AncientSolaceonUnownList.length, 3), new ClearDungeonRequirement(250, GameConstants.getDungeonIndex('Ancient Solaceon Ruins'))]),
             ]);
-            return new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 4100000, 30, {
+            return new DungeonBossPokemon(`Unown (${char})` as PokemonNameType, 200539720, 30, {
                 hide: true,
                 requirement: new CustomRequirement(ko.pureComputed(() => req.isCompleted()), true, UnownHint),
             });
         }),
     ],
-    96500, 13);
+    2764000, 13, undefined, { requirement: new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 31) });
 
 dungeonList['Shrouded Ruins'] = new Dungeon('Shrouded Ruins',
-    ['Geodude', 'Graveler', 'Rhyhorn', 'Gastly', 'Haunter', 'Lickitung', 'Ralts', 'Kirlia', 'Carnivine', 'Burmy (Sand)'],
+    ['Gastly', 'Haunter', 'Lickitung', 'Rhyhorn', 'Ralts', 'Kirlia', 'Carnivine', 'Burmy (Sand)', 'Geodude', 'Graveler'],
     {
         common: [
             {loot: 'Cheri'},
@@ -13616,6 +13620,7 @@ dungeonList['Shrouded Ruins'] = new Dungeon('Shrouded Ruins',
         rare: [
             {loot: 'Black Shard'},
             // {loot: 'Beige Shard'},
+            {loot: 'Wisp', ignoreDebuff: true, requirement: new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 16) },
         ],
         epic: [
             {loot: 'Spooky Plate'},
@@ -13623,15 +13628,15 @@ dungeonList['Shrouded Ruins'] = new Dungeon('Shrouded Ruins',
         ],
         legendary: [{loot: 'Black_Glasses'}],
     },
-    2603000,
+    42929668,
     [
-        new DungeonBossPokemon('Lickilicky', 10000000, 52),
-        new DungeonBossPokemon('Spiritomb', 10000000, 80),
+        new DungeonBossPokemon('Lickilicky', 214648340, 52),
+        new DungeonBossPokemon('Spiritomb', 344387435, 60, {hide: true, requirement: new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 17) }),
     ],
-    96500, 16);
+    2880000, 20);
 
 dungeonList['Veilstone Cape'] = new Dungeon('Veilstone Cape',
-    ['Glameow', 'Murkrow', 'Vulpix', 'Mothim', 'Burmy (Trash)', 'Wormadam (Trash)', 'Geodude', 'Graveler'],
+    ['Glameow', 'Murkrow', 'Vulpix', 'Burmy (Trash)', 'Wormadam (Trash)', 'Geodude', 'Graveler', 'Beautifly', 'Dustox'],
     {
         common: [
             {loot: 'Cheri', weight: 2},
@@ -13655,17 +13660,16 @@ dungeonList['Veilstone Cape'] = new Dungeon('Veilstone Cape',
             {loot: 'Rock_Incense'},
         ],
     },
-    2603000,
+    47600476,
     [
-        new DungeonBossPokemon('Purugly', 10000000, 45),
-        new DungeonBossPokemon('Beautifly', 10000000, 47),
-        new DungeonBossPokemon('Dustox', 10000000, 47),
-        new DungeonBossPokemon('Hisuian Growlithe', 10000000, 47),
+        new DungeonBossPokemon('Purugly', 238002380, 45),
+        new DungeonBossPokemon('Mothim', 238002380, 47),
+        new DungeonBossPokemon('Hisuian Growlithe', 238002380, 47),
     ],
-    96500, 31);
+    3036000, 31);
 
 dungeonList['Firespit Island'] = new Dungeon('Firespit Island',
-    ['Graveler', 'Magby', 'Magmar'],
+    ['Graveler', 'Magby', 'Magmar', 'Drifloon', 'Drifblim'],
     {
         common: [
             {loot: 'Cheri'},
@@ -13690,12 +13694,12 @@ dungeonList['Firespit Island'] = new Dungeon('Firespit Island',
             {loot: 'Metal_Powder'},
         ],
     },
-    2603000,
+    49820652,
     [
-        new DungeonBossPokemon('Ninetales', 10000000, 61),
-        new DungeonBossPokemon('Heatran', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
+        new DungeonBossPokemon('Ninetales', 249103260, 61),
+        new DungeonBossPokemon('Heatran', 10000000, 70, {hide: true, requirement: new QuestLineStepCompletedRequirement('Volo\'s Dream', 4) }),
     ],
-    96500, 36);
+    3118000, 36);
 
 dungeonList['Ancient Wayward Cave'] = new Dungeon('Ancient Wayward Cave',
     ['Zubat', 'Golbat', 'Barboach', 'Whiscash', 'Gible'],
@@ -13735,12 +13739,12 @@ dungeonList['Ancient Wayward Cave'] = new Dungeon('Ancient Wayward Cave',
             {loot: 'Lum', requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Ancient Wayward Cave'))},
         ],
     },
-    2603000,
-    [new DungeonBossPokemon('Crobat', 10000000, 60)],
-    96500, 38);
+    50725908,
+    [new DungeonBossPokemon('Crobat', 253629540, 60)],
+    3203000, 38);
 
 dungeonList['Ancient Quarry'] = new Dungeon('Ancient Quarry',
-    ['Bronzor', 'Goomy', 'Stunky', 'Croagunk', 'Skuntank', 'Toxicroak'],
+    ['Zubat', 'Golbat', 'Geodude', 'Graveler', 'Stunky', 'Bronzor', 'Bronzong', 'Croagunk', 'Goomy'],
     {
         common: [
             {loot: 'Cheri', weight: 2},
@@ -13778,15 +13782,16 @@ dungeonList['Ancient Quarry'] = new Dungeon('Ancient Quarry',
             {loot: 'Lum', requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Ancient Quarry'))},
         ],
     },
-    2603000,
+    51182238,
     [
-        new DungeonBossPokemon('Bronzong', 10000000, 55),
-        new DungeonBossPokemon('Hisuian Sliggoo', 10000000, 55),
+        new DungeonBossPokemon('Skuntank', 255911190, 61),
+        new DungeonBossPokemon('Toxicroak', 255911190, 61),
+        new DungeonBossPokemon('Hisuian Sliggoo', 255911190, 70),
     ],
-    96500, 39);
+    3252000, 39, undefined, { requirement: new TemporaryBattleRequirement('Melli 1') });
 
 dungeonList['Primeval Grotto'] = new Dungeon('Primeval Grotto',
-    ['Bronzor', 'Scyther', 'Gligar', 'Nosepass', 'Gyarados', 'Cherubi', 'Cherrim (Overcast)'],
+    ['Bronzor', 'Scyther', 'Gligar', 'Nosepass', 'Gyarados', 'Cherubi', 'Cherrim (Overcast)', 'Hisuian Sneasel', 'Chimecho', 'Chingling'],
     {
         common: [
             {loot: 'Cheri', weight: 2},
@@ -13824,16 +13829,16 @@ dungeonList['Primeval Grotto'] = new Dungeon('Primeval Grotto',
             {loot: 'Lum', requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Primeval Grotto'))},
         ],
     },
-    2603000,
+    56366146,
     [
-        new DungeonBossPokemon('Probopass', 10000000, 71),
-        new DungeonBossPokemon('Gliscor', 10000000, 71),
-        new DungeonBossPokemon('Hisuian Sneasel', 10000000, 71),
+        new DungeonBossPokemon('Probopass', 281830730, 73),
+        new DungeonBossPokemon('Gliscor', 281830730, 77),
+        new DungeonBossPokemon('Gyarados', 281830730, 71),
     ],
-    96500, 42);
+    3575000, 50);
 
 dungeonList['Clamberclaw Cliffs'] = new Dungeon('Clamberclaw Cliffs',
-    ['Gligar', 'Geodude', 'Graveler', 'Gastly', 'Haunter', 'Gible', 'Burmy (Sand)', 'Wormadam (Sand)', 'Bronzor'],
+    ['Geodude', 'Graveler', 'Gastly', 'Haunter', 'Gligar', 'Bronzong', 'Gible', 'Burmy (Sand)', 'Wormadam (Sand)'],
     {
         common: [
             {loot: 'Cheri', weight: 2},
@@ -13876,16 +13881,16 @@ dungeonList['Clamberclaw Cliffs'] = new Dungeon('Clamberclaw Cliffs',
             {loot: 'Lum', requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Clamberclaw Cliffs'))},
         ],
     },
-    2603000,
+    51641042,
     [
-        new DungeonBossPokemon('Bronzong', 10000000, 44),
-        new DungeonBossPokemon('Gabite', 10000000, 47),
-        new DungeonBossPokemon('Darkrai', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
+        new DungeonBossPokemon('Bronzong', 258205210, 55),
+        new DungeonBossPokemon('Gabite', 258205210, 56),
+        new DungeonBossPokemon('Darkrai', 344387435, 70, {hide: true, requirement: new QuestLineStepCompletedRequirement('Arceus: The Deified Pokémon', 11)}),
     ],
-    96500, 40);
+    3293000, 40, undefined, { requirement: new TemporaryBattleRequirement('Warden Ingo') });
 
 dungeonList['Celestica Ruins'] = new Dungeon('Celestica Ruins',
-    ['Geodude', 'Graveler', 'Nosepass', 'Gligar', 'Burmy (Sand)', 'Gastly', 'Haunter', 'Bonsly', 'Misdreavus'],
+    ['Geodude', 'Graveler', 'Gastly', 'Haunter', 'Misdreavus', 'Gligar', 'Nosepass', 'Bronzor', 'Bronzong', 'Burmy (Sand)', 'Bonsly', 'Rotom'],
     {
         common: [
             {loot: 'Cheri', weight: 2},
@@ -13910,6 +13915,7 @@ dungeonList['Celestica Ruins'] = new Dungeon('Celestica Ruins',
         rare: [
             {loot: 'Lime Shard'},
             // {loot: 'Beige Shard'},
+            {loot: 'Hisuian Voltorb'},
         ],
         epic: [{loot: 'Revive'}],
         legendary: [
@@ -13923,15 +13929,15 @@ dungeonList['Celestica Ruins'] = new Dungeon('Celestica Ruins',
             {loot: 'Lum', requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Celestica Ruins'))},
         ],
     },
-    2603000,
+    52234273,
     [
-        new DungeonBossPokemon('Sudowoodo', 10000000, 57),
-        new DungeonBossPokemon('Wormadam (Sand)', 10000000, 57),
+        new DungeonBossPokemon('Sudowoodo', 261171365, 57),
+        new DungeonBossPokemon('Wormadam (Sand)', 261171365, 57),
     ],
-    96500, 40);
+    3315000, 40);
 
 dungeonList['Sacred Plaza'] = new Dungeon('Sacred Plaza',
-    ['Geodude', 'Graveler', 'Rhyhorn', 'Gastly', 'Haunter', 'Burmy (Sand)', 'Wormadam (Sand)', 'Nosepass', 'Luxio', 'Chingling', 'Chimecho', 'Misdreavus', 'Rotom', 'Hisuian Voltorb'],
+    ['Geodude', 'Graveler', 'Gastly', 'Haunter', 'Rhyhorn', 'Rhydon', 'Misdreavus', 'Chimecho', 'Shinx', 'Luxio', 'Luxray', 'Chingling', 'Rotom', 'Burmy (Sand)', 'Wormadam (Sand)', 'Nosepass'],
     {
         common: [
             {loot: 'Cheri', weight: 2},
@@ -13969,15 +13975,16 @@ dungeonList['Sacred Plaza'] = new Dungeon('Sacred Plaza',
             {loot: 'Lum', requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Celestica Ruins'))},
         ],
     },
-    2603000,
+    52566088,
     [
-        new DungeonBossPokemon('Rhydon', 10000000, 71),
-        new DungeonBossPokemon('Luxray', 10000000, 55),
+        new DungeonBossPokemon('Rhyperior', 262830440, 74),
+        new DungeonBossPokemon('Luxray', 262830440, 55),
+        new DungeonBossPokemon('Hisuian Electrode', 262830440, 55),
     ],
-    96500, 45);
+    3371000, 42);
 
 dungeonList['Avalugg\'s Legacy'] = new Dungeon('Avalugg\'s Legacy',
-    ['Hisuian Sneasel', 'Bergmite', 'Swinub', 'Piloswine', 'Drifloon', 'Drifblim', 'Bibarel', 'Glalie', 'Froslass'],
+    ['Gastly', 'Haunter', 'Eevee', 'Aipom', 'Swinub', 'Piloswine', 'Glalie', 'Bidoof', 'Bibarel', 'Ambipom', 'Drifloon', 'Drifblim', 'Snover', 'Abomasnow', 'Froslass', 'Bergmite', 'Rufflet'],
     {
         common: [
             {loot: 'Chesto'},
@@ -13994,12 +14001,13 @@ dungeonList['Avalugg\'s Legacy'] = new Dungeon('Avalugg\'s Legacy',
         epic: [{loot: 'Icicle Plate'}],
         legendary: [{loot: 'Never_Melt_Ice'}],
     },
-    2603000,
+    55401076,
     [
-        new DungeonBossPokemon('Mamoswine', 10000000, 68),
-        new DungeonBossPokemon('Hisuian Avalugg', 10000000, 51),
+        new DungeonBossPokemon('Hisuian Sneasel', 277005380, 61),
+        new DungeonBossPokemon('Mamoswine', 277005380, 68),
+        new DungeonBossPokemon('Hisuian Avalugg', 277005380, 53),
     ],
-    96500, 48);
+    3478000, 48, undefined, { requirement: new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 62) });
 
 dungeonList['Ice Column Chamber'] = new Dungeon('Ice Column Chamber',
     ['Bergmite', 'Misdreavus'],
@@ -14015,12 +14023,12 @@ dungeonList['Ice Column Chamber'] = new Dungeon('Ice Column Chamber',
         rare: [{loot: 'White Shard'}],
         epic: [{loot: 'Icicle Plate'}],
     },
-    2603000,
-    [new DungeonBossPokemon('Froslass', 10000000, 72)],
-    96500, 51);
+    55882352,
+    [new DungeonBossPokemon('Froslass', 279411760, 72)],
+    3513000, 49);
 
 dungeonList['Icepeak Cavern'] = new Dungeon('Icepeak Cavern',
-    ['Bergmite', 'Misdreavus', 'Hisuian Zorua'],
+    ['Gastly', 'Haunter', 'Bergmite', 'Misdreavus', 'Hisuian Zorua'],
     {
         common: [
             {loot: 'Chesto'},
@@ -14037,9 +14045,9 @@ dungeonList['Icepeak Cavern'] = new Dungeon('Icepeak Cavern',
         epic: [{loot: 'Icicle Plate'}],
         legendary: [{loot: 'Never_Melt_Ice'}],
     },
-    2603000,
-    [new DungeonBossPokemon('Hisuian Zoroark', 10000000, 67)],
-    96500, 49);
+    56623491,
+    [new DungeonBossPokemon('Hisuian Zoroark', 283117455, 67)],
+    3545000, 49);
 
 dungeonList['Ancient Snowpoint Temple'] = new Dungeon('Ancient Snowpoint Temple',
     ['Zubat', 'Golbat', 'Graveler', 'Ralts', 'Kirlia', 'Glalie', 'Froslass', 'Bronzor', 'Bronzong'],
@@ -14056,12 +14064,12 @@ dungeonList['Ancient Snowpoint Temple'] = new Dungeon('Ancient Snowpoint Temple'
         // epic: [{loot: 'Blank Plate'}],
         legendary: [{loot: 'Silk_Scarf'}],
     },
-    2603000,
+    57341312,
     [
-        new DungeonBossPokemon('Gallade', 10000000, 70),
-        new DungeonBossPokemon('Regigigas', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
+        new DungeonBossPokemon('Gallade', 286706560, 70),
+        new DungeonBossPokemon('Regigigas', 318244281, 70, {hide: true, requirement: new QuestLineStepCompletedRequirement('Volo\'s Dream', 9) }),
     ],
-    96500, 54);
+    3621000, 52, undefined, { requirement: new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 64) });
 
 dungeonList['Seaside Hollow'] = new Dungeon('Seaside Hollow',
     ['Octillery', 'Phione'],
@@ -14082,12 +14090,12 @@ dungeonList['Seaside Hollow'] = new Dungeon('Seaside Hollow',
         epic: [{loot: 'Splash Plate'}],
         legendary: [{loot: 'Mystic_Water'}],
     },
-    2603000,
-    [new DungeonBossPokemon('Manaphy', 10000000, 50)],
-    96500, 36);
+    49820652,
+    [new DungeonBossPokemon('Manaphy', 249103260, 50)],
+    3146000, 36);
 
 dungeonList['Ancient Lake Verity'] = new Dungeon('Ancient Lake Verity',
-    ['Magikarp', 'Gyarados', 'Luxio', 'Luxray', 'Wormadam (Plant)', 'Drifblim', 'Togekiss'],
+    ['Magikarp', 'Gyarados', 'Luxio', 'Luxray', 'Wormadam (Plant)', 'Drifblim', 'Togekiss', 'Staraptor'],
     {
         common: [
             {loot: 'Cheri'},
@@ -14106,15 +14114,16 @@ dungeonList['Ancient Lake Verity'] = new Dungeon('Ancient Lake Verity',
         epic: [{loot: 'Draco Plate'}],
         legendary: [{loot: 'Twisted_Spoon'}],
     },
-    2603000,
+    57832692,
     [
-        new DungeonBossPokemon('Hisuian Goodra', 10000000, 58),
-        new DungeonBossPokemon('Mesprit', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
+        new DungeonBossPokemon('Hisuian Goodra', 289163460, 58, { hide: true, requirement: new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 4) }),
+        new DungeonBossPokemon('Hisuian Goodra', 331988568, 58, {hide: true, requirement:  new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 4, GameConstants.AchievementOption.less)}),
+        new DungeonBossPokemon('Mesprit', 331988568, 70, { hide: true, requirement: new QuestLineStepCompletedRequirement('Volo\'s Dream', 2) }),
     ],
-    96500, 3);
+    3668000, 53);
 
 dungeonList['Ancient Lake Valor'] = new Dungeon('Ancient Lake Valor',
-    ['Graveler', 'Barboach', 'Whiscash'],
+    ['Golbat', 'Graveler', 'Gastly', 'Haunter', 'Onix', 'Combee', 'Vespiquen', 'Whiscash', 'Carnivine', 'Burmy (Sand)', 'Barboach'],
     {
         common: [
             {loot: 'Oran'},
@@ -14133,15 +14142,17 @@ dungeonList['Ancient Lake Valor'] = new Dungeon('Ancient Lake Valor',
         epic: [{loot: 'Draco Plate'}],
         legendary: [{loot: 'Twisted_Spoon'}],
     },
-    2603000,
+    57832692,
     [
-        new DungeonBossPokemon('Overqwil', 10000000, 58),
-        new DungeonBossPokemon('Azelf', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
+        new DungeonBossPokemon('Overqwil', 289163460, 58, { hide: true, requirement: new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 4) }),
+        new DungeonBossPokemon('Overqwil', 331988568, 58, {hide: true, requirement:  new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 4, GameConstants.AchievementOption.less)}),
+
+        new DungeonBossPokemon('Azelf', 331988568, 70, {hide: true, requirement: new QuestLineStepCompletedRequirement('Volo\'s Dream', 2) }),
     ],
-    96500, 16);
+    3697000, 53);
 
 dungeonList['Ancient Lake Acuity'] = new Dungeon('Ancient Lake Acuity',
-    ['Abra', 'Kadabra', 'Chingling', 'Chimecho', 'Burmy (Trash)', 'Wormadam (Trash)', 'Rufflet', 'Basculin (White-Striped)'],
+    ['Abra', 'Kadabra', 'Chimecho', 'Chingling', 'Bronzor', 'Bronzong', 'Rufflet', 'Hisuian Braviary', 'Burmy (Trash)', 'Wormadam (Trash)', 'Ralts', 'Kirlia', 'Gardevoir', 'Basculin (White-Striped)'],
     {
         common: [
             {loot: 'Oran'},
@@ -14158,12 +14169,14 @@ dungeonList['Ancient Lake Acuity'] = new Dungeon('Ancient Lake Acuity',
         epic: [{loot: 'Draco Plate'}],
         legendary: [{loot: 'Twisted_Spoon'}],
     },
-    2603000,
+    57832692,
     [
-        new DungeonBossPokemon('Hisuian Zoroark', 10000000, 58),
-        new DungeonBossPokemon('Uxie', 10000000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
+        new DungeonBossPokemon('Hisuian Zoroark', 289163460, 58, { hide: true, requirement: new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 4) }),
+        new DungeonBossPokemon('Hisuian Zoroark', 331988568, 58, {hide: true, requirement:  new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 4, GameConstants.AchievementOption.less)}),
+
+        new DungeonBossPokemon('Uxie', 331988568, 70, {hide: true, requirement: new QuestLineStepCompletedRequirement('Volo\'s Dream', 2) }),
     ],
-    96500, 54);
+    3734000, 53);
 
 dungeonList['Temple of Sinnoh'] = new Dungeon('Temple of Sinnoh',
     ['Bronzong', 'Floatzel', 'Magnezone', 'Lumineon', 'Lucario', 'Bibarel', 'Garchomp'],
@@ -14238,19 +14251,19 @@ dungeonList['Temple of Sinnoh'] = new Dungeon('Temple of Sinnoh',
             {loot: 'Lum', requirement: new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Temple of Sinnoh'))},
         ],
     },
-    1350400,
+    58996642,
     [
         new DungeonTrainer('The Galaxy Team\'s Kamado',
             [
-                new GymPokemon('Hisuian Braviary', 1128000, 61),
-                new GymPokemon('Golem', 1128000, 61),
-                new GymPokemon('Clefable', 1128000, 61),
-                new GymPokemon('Snorlax', 1128000, 61),
+                new GymPokemon('Hisuian Braviary', 66371222, 61),
+                new GymPokemon('Golem', 66371222, 61),
+                new GymPokemon('Clefable', 66371222, 61),
+                new GymPokemon('Snorlax', 66371222, 61),
             ], { weight: 4 }),
-        new DungeonBossPokemon('Dialga (Origin)', 11880000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
-        new DungeonBossPokemon('Palkia (Origin)', 11880000, 70, {hide: true, requirement: new DevelopmentRequirement()}),
+        new DungeonBossPokemon('Dialga (Origin)', 294983210, 70, {hide: true, requirement: new ObtainedPokemonRequirement('Dialga (Origin)')}),
+        new DungeonBossPokemon('Palkia (Origin)', 294983210, 70, {hide: true, requirement: new ObtainedPokemonRequirement('Palkia (Origin)')}),
     ],
-    96500, 46);
+    3782000, 54);
 
 dungeonList['Turnback Cave'] = new Dungeon('Turnback Cave',
     ['Gabite', 'Hisuian Sliggoo', 'Dusclops', 'Gengar', 'Rotom', 'Drifblim', 'Hisuian Zorua'],
@@ -14282,15 +14295,112 @@ dungeonList['Turnback Cave'] = new Dungeon('Turnback Cave',
             {loot: 'Dragon_Fang'},
         ],
     },
-    2603000,
+    59671309,
     [
-        new DungeonBossPokemon('Garchomp', 10000000, 58),
-        new DungeonBossPokemon('Dusknoir', 10000000, 58),
-        new DungeonBossPokemon('Mismagius', 10000000, 58),
-        new DungeonBossPokemon('Froslass', 10000000, 58),
-        new DungeonBossPokemon('Giratina (Origin)', 10000000, 70),
+        new DungeonBossPokemon('Garchomp', 298356545, 58),
+        new DungeonBossPokemon('Dusknoir', 298356545, 58),
+        new DungeonBossPokemon('Mismagius', 298356545, 58),
+        new DungeonBossPokemon('Froslass', 298356545, 58),
+        new DungeonBossPokemon('Giratina (Origin)', 331175764, 70),
     ],
-    96500, 32);
+    3805000, 54);
+
+
+const arceusFormList = Object.values(PokemonType)
+    .slice(0, 18)
+    .map((type) => `Arceus (${type})` as PokemonNameType);
+
+const noblePokemonList = pokemonList
+    .filter((x) => x.name.includes('Noble '))
+    .map((x) => x.name as PokemonNameType);
+
+const bossPool = [...arceusFormList, ...noblePokemonList];
+const selectedBossRequirements = bossPool.map((name, index) =>
+    new MultiRequirement([
+        new SeededDateSelectNRequirement(index, bossPool.length, 3),
+        new ObtainedPokemonRequirement(name),
+    ])
+);
+
+dungeonList['Eternal Battle Reverie'] = new Dungeon('Eternal Battle Reverie',
+    [
+        'Snorlax', 'Blissey', 'Hisuian Typhlosion', 'Infernape', 'Rotom (Heat)', 'Hisuian Samurott', 'Empoleon', 'Tentacruel', 'Whiscash', 'Rotom (Wash)', 'Pichu', 'Rotom', 'Rotom (Frost)', 'Rotom (Fan)', 'Rotom (Mow)', 'Rotom (Discord)', 'Magnemite', 'Hisuian Decidueye', 'Wormadam (Plant)', 'Torterra', 'Alolan Ninetales', 'Weavile', 'Froslass', 'Mamoswine', 'Gallade', 'Sneasler', 'Dustox', 'Mothim', 'Vespiquen', 'Scyther', 'Honchkrow', 'Gardevoir', 'Scyther', 'Kleavor', 'Bonsly', 'Rampardos', 'Bastiodon', 'Spiritomb', 'Dusknoir', 'Cleffa', 'Cresselia',
+        new DungeonTrainer('Arceus (Normal)',
+            [new GymPokemon('Regigigas', 64144776, 80)], { weight: 0.5 }, ''),
+        new DungeonTrainer('Arceus (Fire)',
+            [new GymPokemon('Heatran', 64144776, 80)], { weight: 0.5 }, ''),
+        new DungeonTrainer('Arceus (Water)',
+            [
+                new GymPokemon('Palkia', 64144776, 80),
+                new GymPokemon('Palkia (Origin)', 64144776, 80),
+            ], { weight: 0.5 }, ''),
+        new DungeonTrainer('Arceus (Electric)',
+            [
+                new GymPokemon('Thundurus', 64144776, 80),
+                new GymPokemon('Thundurus (Therian)', 64144776, 80),
+            ], { weight: 0.5 }, ''),
+        new DungeonTrainer('Arceus (Flying)',
+            [
+                new GymPokemon('Tornadus', 64144776, 80),
+                new GymPokemon('Tornadus (Therian)', 64144776, 80),
+            ], { weight: 0.5 }, ''),
+        new DungeonTrainer('Arceus (Psychic)',
+            [
+                new GymPokemon('Uxie', 64144776, 80),
+                new GymPokemon('Mesprit', 64144776, 80),
+                new GymPokemon('Azelf', 64144776, 80),
+            ], { weight: 0.25 }, ''),
+        new DungeonTrainer('Arceus (Ghost)',
+            [
+                new GymPokemon('Giratina (Altered)', 64144776, 80),
+                new GymPokemon('Giratina (Origin)', 64144776, 80),
+            ], { weight: 0.5 }, ''),
+        new DungeonTrainer('Arceus (Dragon)',
+            [
+                new GymPokemon('Dialga', 64144776, 80),
+                new GymPokemon('Palkia', 64144776, 80),
+                new GymPokemon('Giratina (Altered)', 64144776, 80),
+            ], { weight: 0.25 }, ''),
+        new DungeonTrainer('Arceus (Dragon)',
+            [
+                new GymPokemon('Dialga (Origin)', 64144776, 80),
+                new GymPokemon('Palkia (Origin)', 64144776, 80),
+                new GymPokemon('Giratina (Origin)', 64144776, 80),
+            ], { weight: 0.25 }, ''),
+        new DungeonTrainer('Arceus (Fairy)',
+            [
+                new GymPokemon('Enamorus', 64144776, 80),
+                new GymPokemon('Enamorus (Therian)', 64144776, 80),
+            ], { weight: 0.5 }, ''),
+    ],
+    {
+        common: [{ loot: 'Cheri', weight: 2 }],
+    },
+    64144776,
+    [
+
+
+        ...bossPool.map((name, index) => {
+            return new DungeonBossPokemon(name, 320723880, 100, {
+                hide: true,
+                requirement: new CustomRequirement(
+                    ko.pureComputed(() => selectedBossRequirements[index].isCompleted()),
+                    true,
+                    ''
+                ),
+            });
+        }),
+
+        new DungeonBossPokemon('Arceus (Normal)', 320723880, 100, {
+            hide: true,
+            requirement: new CustomRequirement(
+                ko.pureComputed(() => !selectedBossRequirements.some((req) => req.isCompleted())),
+                true,
+                ''
+            ),
+        }),
+    ],
+    3824000, 54, undefined, { requirement: new QuestLineCompletedRequirement('Arceus: The Deified Pokémon') });
 
 // Paldea Dungeons
 dungeonList['Inlet Grotto'] = new Dungeon('Inlet Grotto',

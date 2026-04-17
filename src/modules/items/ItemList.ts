@@ -43,6 +43,7 @@ import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import TreasureItem from './TreasureItem';
 import { pokemonMap } from '../pokemons/PokemonList';
 import AttackGainConsumable from './AttackGainConsumable';
+import QuestLineCompletedRequirement from '../requirements/QuestLineCompletedRequirement';
 // eslint-disable-next-line import/prefer-default-export
 export const ItemList: { [name: string]: Item } = {};
 
@@ -486,7 +487,42 @@ ItemList.Dracozolt              = new PokemonItem('Dracozolt', 100000);
 ItemList.Arctozolt              = new PokemonItem('Arctozolt', 100000);
 ItemList.Dracovish              = new PokemonItem('Dracovish', 100000);
 ItemList.Arctovish              = new PokemonItem('Arctovish', 100000);
-ItemList['Zarude (Dada)']       = new PokemonItem('Zarude (Dada)', 500000);
+ItemList['Zarude (Dada)'] = new PokemonItem('Zarude (Dada)', 500000);
+//Hisui
+ItemList['Arceus (Psychic)'] = new PokemonItem('Arceus (Psychic)', undefined, undefined, false, 'Arceus (Psychic)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Psychic)');
+ItemList['Arceus (Bug)'] = new PokemonItem('Arceus (Bug)', undefined, undefined, false, 'Arceus (Bug)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Bug)');
+ItemList['Arceus (Ground)'] = new PokemonItem('Arceus (Ground)', undefined, undefined, false, 'Arceus (Ground)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Ground)');
+ItemList['Arceus (Grass)'] = new PokemonItem('Arceus (Grass)', undefined, undefined, false, 'Arceus (Grass)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Grass)');
+ItemList['Arceus (Water)'] = new PokemonItem('Arceus (Water)', undefined, undefined, false, 'Arceus (Water)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Water)');
+ItemList['Arceus (Fire)'] = new PokemonItem('Arceus (Fire)', undefined, undefined, false, 'Arceus (Fire)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Fire)');
+ItemList['Arceus (Poison)'] = new PokemonItem('Arceus (Poison)', undefined, undefined, false, 'Arceus (Poison)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Poison)');
+ItemList['Arceus (Electric)'] = new PokemonItem('Arceus (Electric)', undefined, undefined, false, 'Arceus (Electric)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Electric)');
+ItemList['Arceus (Flying)'] = new PokemonItem('Arceus (Flying)', undefined, undefined, false, 'Arceus (Flying)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Flying)');
+ItemList['Arceus (Ice)'] = new PokemonItem('Arceus (Ice)', undefined, undefined, false, 'Arceus (Ice)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Ice)');
+ItemList['Arceus (Rock)'] = new PokemonItem('Arceus (Rock)', undefined, undefined, false, 'Arceus (Rock)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Rock)');
+ItemList['Arceus (Dragon)'] = new PokemonItem('Arceus (Dragon)', undefined, undefined, false, 'Arceus (Dragon)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Dragon)');
+ItemList['Arceus (Steel)'] = new PokemonItem('Arceus (Steel)', undefined, undefined, false, 'Arceus (Steel)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Steel)');
+ItemList['Arceus (Dark)'] = new PokemonItem('Arceus (Dark)', undefined, undefined, false, 'Arceus (Dark)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Dark)');
+ItemList['Arceus (Fighting)'] = new PokemonItem('Arceus (Fighting)', undefined, undefined, false, 'Arceus (Fighting)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Fighting)');
+ItemList['Arceus (Fairy)'] = new PokemonItem('Arceus (Fairy)', undefined, undefined, false, 'Arceus (Fairy)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Fairy)');
+ItemList['Arceus (Ghost)'] = new PokemonItem('Arceus (Ghost)', undefined, undefined, false, 'Arceus (Ghost)',
+    { maxAmount: 1, visible: new MultiRequirement([new QuestLineCompletedRequirement('Arceus: The Deified Pokémon'), new ObtainedPokemonRequirement('Arceus (Normal)')]) }, 'Arceus (Ghost)');
 // Dream orbs
 ItemList.Staryu  = new PokemonItem('Staryu');
 ItemList.Igglybuff  = new PokemonItem('Igglybuff');
