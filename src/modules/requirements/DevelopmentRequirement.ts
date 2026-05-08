@@ -23,7 +23,7 @@ export default class DevelopmentRequirement extends AchievementRequirement {
 
     // eslint-disable-next-line class-methods-use-this
     public getProgress() {
-        return +(this.development && (this.requirement?.isCompleted() ?? true) && false);
+        return +(this.development && (this.requirement?.isCompleted() ?? true));
     }
 
     // eslint-disable-next-line class-methods-use-this
