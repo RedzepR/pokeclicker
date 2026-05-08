@@ -125,10 +125,7 @@ class Pokeballs implements Feature {
             new Pokeball(GameConstants.Pokeball.Netball, (opts) => {
                 const pokemonToCatch = PokemonHelper.getPokemonByName(opts.pokemon);
                 const isWanderer = opts.encounterType === EncounterType.wanderer;
-                const isWaterOrBug = pokemonToCatch.type1 == PokemonType.Bug ||
-                                     pokemonToCatch.type1 == PokemonType.Water ||
-                                     pokemonToCatch.type2 == PokemonType.Bug ||
-                                     pokemonToCatch.type2 == PokemonType.Water;
+                const isWaterOrBug = [PokemonType.Bug, PokemonType.Water].some(t => [pokemonToCatch.type1, pokemonToCatch.type2].includes(t));
 
                 if (isWanderer || isWaterOrBug) {
                     return Math.min(20, (isWanderer ? 15 : 0) + (isWaterOrBug ? 15 : 0));
