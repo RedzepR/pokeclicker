@@ -9547,7 +9547,7 @@ const Laventon1 = new NPC('Professor Laventon', [
     'I had just caught up to these three runaway Pokémon when you tumbled out of the sky... It\'s almost as if they knew you\'d appear here! Ah, but do you even know what a Pokémon is?',
     'My, that\'s a relief! Though you fell from the sky, it seems we have some common ground, eh? Yes, well, these three Pokémon belong to me, mysterious creatures that they are!',
     'Oh, but I do apologize! I haven\'t even introduced myself! My name is Laventon. I am something of a Pokémon Professor.',
-    'But I must say, <player>, I was taken aback by how well you fought my Pokémon! How is it that you use Pokémon so ably when you\'ve only just arrived here? And such exceptionally strong Pokémon, too...',
+    'But I must say, $playername$, I was taken aback by how well you fought my Pokémon! How is it that you use Pokémon so ably when you\'ve only just arrived here? And such exceptionally strong Pokémon, too...',
     'One can\'t help but think there\'s a reason you appeared here and now...',
 ], {
     image: 'assets/images/npcs/Laventon.png',
@@ -9585,7 +9585,7 @@ const Laventon3 = new NPC('Professor Laventon', [
 const Cyllene1 = new NPC('Captain Cyllene', [
     'I am the captain of the Galaxy Team\'s Survey Corps. You may call me Cyllene. Professor Laventon has told me how you helped secure his Pokémon when they slipped his control. And now it seems he would like us to feed and house you in exchange for your ongoing labor.',
     'Hmm. You look to be 15 or so. Quite old enough to work for your keep. But we can\'t simply take on a stranger who wanders in among us, without any idea of their skills or origins. Tomorrow we shall see if you can prove yourself worthy.',
-    'Let\'s hope Laventon\'s confidence in you is not misplaced. <player>, was it? For tonight, at least, we will provide you with a place to sleep. You may use our quarters there. But if you fail to pass the trial we put you to tomorrow, you must move on. You will be expelled from the village to meet your fate—and perhaps your death—in the wilds.',
+    'Let\'s hope Laventon\'s confidence in you is not misplaced. $playername$, was it? For tonight, at least, we will provide you with a place to sleep. You may use our quarters there. But if you fail to pass the trial we put you to tomorrow, you must move on. You will be expelled from the village to meet your fate—and perhaps your death—in the wilds.',
     'Meet me in the Galaxy Hall in the morning',
 ], {
     image: 'assets/images/npcs/Cyllene.png',
@@ -9627,12 +9627,12 @@ const Cyllene3 = new NPC('Captain Cyllene', [
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 9), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 11, GameConstants.AchievementOption.less)]),
 });
 const Kamado1 = new NPC('Commander Kamado', [
-    'I have been waiting for you! I am Kamado, commander of the Galaxy Expedition Team! Hrrrm... So, you are <player>.',
+    'I have been waiting for you! I am Kamado, commander of the Galaxy Expedition Team! Hrrrm... So, you are $playername$.',
     'I\'ve been briefed on your situation—including how you fell from the rift in the sky. Now then... Let\'s see what you\'re made of! Face me in combat!',
     'Hrrrm! You’ve got some fight in you! Your sumo needs work, but I do see some potential...',
     'Don\'t expect a warm welcome from everyone! Naturally, some will be slow to trust an outsider who literally fell right out of the blue. The superstitious among us might see your arrival as a portent of disaster!',
     'But you passed the trial that was put to you. No matter how odd you may seem, you\'re part of Jubilife Village now. Dedicate yourself to the work of the Galaxy Expedition Team',
-    'But I warn you, <player>... Pokémon are terrifying creatures. Keep your wits about you as you work!',
+    'But I warn you, $playername$... Pokémon are terrifying creatures. Keep your wits about you as you work!',
 ], {
     image: 'assets/images/npcs/Kamado.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 10), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 12, GameConstants.AchievementOption.less)]),
@@ -9680,7 +9680,7 @@ const AdamanIrida1 = new NPC('Adaman & Irida', [
     '<i>There you go again, insisting on your false image of almighty Sinnoh as a ruler of time! My people follow the true almighty Sinnoh—the font of all creation and ruler of space!</i>',
     'What do you intend to do about that Kleavor, Commander Kamado?! He may be descended from a warrior of almighty Sinnoh, but look at the mess he’s causing. We can’t sit back and let him rage on!',
     '<i>Would the Diamond Clan have the Pearl Clan bring down one of its own honored nobles? We don\'t even know what drove Lord Kleavor into such a violent frenzy.</i>',
-    'Aha, <player>! I hear from Mai you earned Wyrdeer’s favor. I have a proposition. Why not send this one to study Kleavor before deciding what must be done?',
+    'Aha, $playername$! I hear from Mai you earned Wyrdeer’s favor. I have a proposition. Why not send this one to study Kleavor before deciding what must be done?',
     '<i>The Lord of the Woods—Kleavor—is descended from a Pokémon that was blessed with almighty Sinnoh’s own power. No other Pokémon you’ve yet encountered can compare to his strength. Be warned.</i>',
     'You\'ll find Kleavor at Grandtree Arena. That\'s in the very heart of the Heartwood. His warden is a boy named Lian.',
 ], {
@@ -9707,7 +9707,7 @@ const Kamado2 = new NPC('Commander Kamado', [
 });
 
 const Arezu1 = new NPC('Warden Arezu', [
-    'Oh, hey! You’re <player>, the person who quelled Kleavor, aren\'t you?',
+    'Oh, hey! You’re $playername$, the person who quelled Kleavor, aren\'t you?',
     'I\'m Arezu, by the way! I\'m a warden of the Diamond Clan. My special skill is giving haircuts. Real nice to meet you!',
     'It\'s come to Ursaluna as well... even Pokémon that are not nobles can become frenzied... Adaman\'s got his hands full running our clan and all, and Ursaluna\'s warden, Calaba of the Pearl Clan, wouldn\'t even give me the time of day... she is the most narrow- minded— Ahem! Bound by tradition.',
     'I order you to study Ursaluna in the Crimson Mirelands!',
@@ -9767,10 +9767,10 @@ const Kamado3 = new NPC('Commander Kamado', [
 });
 
 const ArezuCalaba = new NPC('Arezu & Calaba', [
-    'Thanks a bunch, <player>. But...how\'d you find me all the way out here? Ursaluna  tracked me all the way here by the scent of those potato mochi I ate? He sure is something.',
+    'Thanks a bunch, $playername$. But...how\'d you find me all the way out here? Ursaluna  tracked me all the way here by the scent of those potato mochi I ate? He sure is something.',
     '<i>Ahhh, there you are. Arezu, right? I owe you an apology. I treated you with disrespect, thinking you were just some whelp from the Diamond Clan. I\'m sorry for that. It\'s not your fault that Lilligant became frenzied nor that my Ursaluna was so enraged.</i>',
     'It\'s OK... I didn\'t do a good job explaining myself, either. Ursaluna only started acting weird after he got too close to Lilligant and smelled her perfume. She was already frenzied by that point, so I\'m sure that\'s what caused it...',
-    'Don\'t you worry, Arezu. <player> will calm Lilligant, and that will be that. Things should settle down. Head to Brava Arena, <player>. That\'s where Lilligant\'s seat lies.',
+    'Don\'t you worry, Arezu. $playername$ will calm Lilligant, and that will be that. Things should settle down. Head to Brava Arena, $playername$. That\'s where Lilligant\'s seat lies.',
 ], {
     image: 'assets/images/npcs/Calaba.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 35), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 36, GameConstants.AchievementOption.less)]),
@@ -9797,7 +9797,7 @@ const Palina = new NPC('Palina', [
 });
 
 const Iscan = new NPC('Warden Iscan', [
-    'I\'m Iscan of...of the Diamond Clan... A Galaxy Team member...with a Celestica Flute? O-oh. You must be <player>, right? H-have I done something to warrant your visit?',
+    'I\'m Iscan of...of the Diamond Clan... A Galaxy Team member...with a Celestica Flute? O-oh. You must be $playername$, right? H-have I done something to warrant your visit?',
     'So you...you want to go to Firespit Island? W-well, if you insist...then you\'d probably need Basculegion\'s favorite snack. That should help help him warm up to you. But preparing his favorite... Oh... It\'s, um, more than a little difficult... More like an impossibly high hurdle...',
     'I-I\'ll tell you... I have the right materials, but... It\'s D... D... Dus... Dusclops... Oooh, even saying its name fills me with dread... So...the materials for the food...have to be imbued with flavor by Dusclops\'s Dark Pulse...',
     'Well, the Pokémon I need has only one eye and can be found wandering around Deadwood Haunt...',
@@ -9807,7 +9807,7 @@ const Iscan = new NPC('Warden Iscan', [
 });
 
 const IscanPalina1 = new NPC('Iscan & Palina', [
-    'Oh, hello, <player>... I-I was just waiting for you... O-oh, Palina! I...I thought you said we shouldn\'t be seen together?',
+    'Oh, hello, $playername$... I-I was just waiting for you... O-oh, Palina! I...I thought you said we shouldn\'t be seen together?',
     '<i>Both I and the Growlithe pups were eager to meet with the great Basculegion again. </i>',
     'I see... Well in that case, let me summon Basculegion.',
     '<i>Basculegion opened his heart and learned well the sound of your playing!</i>',
@@ -9833,9 +9833,9 @@ const Ingo = new NPC('Warden Ingo', [
 });
 
 const Volo3 = new NPC('Volo', [
-    '<player>, do you remember what you saw before you fell out of that rift? Was there anything inside? You see, personally, I suspect that whatever is on the other side of that rift is causing the strange lightning that plagues us.',
+    '$playername$, do you remember what you saw before you fell out of that rift? Was there anything inside? You see, personally, I suspect that whatever is on the other side of that rift is causing the strange lightning that plagues us.',
     'I did some digging and found records indicating that this same space-time rift also appeared in Hisui in the distant past. That\'s why we already had a name for it as it appeared, in fact. Now, what kind of world do you suppose stretches out on the other side of the rift?',
-    'But then that begs the question: Why has the space-time rift reopened, when it closed once so long ago? Oh, I am a mere admirer of ruins and little more! If something needs investigating, then I would entrust that task to <player>! Until next time, then!',
+    'But then that begs the question: Why has the space-time rift reopened, when it closed once so long ago? Oh, I am a mere admirer of ruins and little more! If something needs investigating, then I would entrust that task to $playername$! Until next time, then!',
 ], {
     image: 'assets/images/npcs/Volo (Ginkgo).png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 53), new QuestLineStepCompletedRequirement('The Frenzied Nobles of Hisui', 55, GameConstants.AchievementOption.less)]),
@@ -9851,7 +9851,7 @@ const Kamado6 = new NPC('Commander Kamado', [
 });
 
 const AdamanIrida2 = new NPC('Adaman & Irida', [
-    '<player>! Brisk out here, isn\'t it? I\'m practically sweating. If you think this is bad, just wait. This is nothing compared to where we\'re headed.',
+    '$playername$! Brisk out here, isn\'t it? I\'m practically sweating. If you think this is bad, just wait. This is nothing compared to where we\'re headed.',
     '<i>You know, I\'m beginning to think the problem between us isn\'t a Diamond Clan thing or a Pearl Clan thing. It\'s just a you-and-me thing. We\'ll never see eye to eye on anything, will we?</i>',
     'I don\'t see how we could, as long as you and your clan cling to your vision of an almighty Sinnoh that reigns over time. We\'re headed to see my teacher. And he\'s only ever found in one place.',
     '<i>Which is? You\'re talking about that Gaeric fellow, right? Where do we find him?</i>',
@@ -9861,7 +9861,7 @@ const AdamanIrida2 = new NPC('Adaman & Irida', [
 });
 
 const Gaeric = new NPC('Warden Gaeric', [
-    'I am Gaeric. I serve as one of the Pearl Clan\'s wardens. And you must be <player>, right? Of the Galaxy Team. Answer me this, would you? On what grounds do you come here seeking to quell Lord Avalugg? What is wrong with him being frenzied?',
+    'I am Gaeric. I serve as one of the Pearl Clan\'s wardens. And you must be $playername$, right? Of the Galaxy Team. Answer me this, would you? On what grounds do you come here seeking to quell Lord Avalugg? What is wrong with him being frenzied?',
     'Setting aside any orders, what is it your heart tells you to do? Our mighty Lord of the Tundra, Avalugg, has done nothing to trouble any person or Pokémon! I must judge whether this child is up to the task!',
     'My musculature is as hard and unyielding as ice! Think you can break through?!',
 ], {
@@ -9870,7 +9870,7 @@ const Gaeric = new NPC('Warden Gaeric', [
 });
 
 const Sabi = new NPC('Warden Sabi', [
-    'My clairvoyance told me...that I\'d lead you on a chase! Think you can reach me? Hello, my name\'s Sabi! Nice to meet you, <player>!',
+    'My clairvoyance told me...that I\'d lead you on a chase! Think you can reach me? Hello, my name\'s Sabi! Nice to meet you, $playername$!',
     'I\'ve heard about you. You\'re super talented, right? I bet you\'re gonna be fun to play with! I know why you\'re here, too! You want Braviary\'s help so you can quell Avalugg\'s frenzy, don\'t you?',
     'Snowpoint Temple! I\'ve opened the front door for you. Be warned! Those who cannot solve the temple\'s puzzles won\'t get very far within.',
 ], {
@@ -9879,7 +9879,7 @@ const Sabi = new NPC('Warden Sabi', [
 });
 
 const Kamado7 = new NPC('Commander Kamado', [
-    'Hrmmm... The way the sky has changed... It is ominous. Very ominous indeed. The first strike of that strange lightning, the one that drove Kleavor into a frenzy... It struck the night that <player> fell from the sky, did it not? It only seems natural to think that the two events might be linked in some way.',
+    'Hrmmm... The way the sky has changed... It is ominous. Very ominous indeed. The first strike of that strange lightning, the one that drove Kleavor into a frenzy... It struck the night that $playername$ fell from the sky, did it not? It only seems natural to think that the two events might be linked in some way.',
     'Did you think to gain our trust by quelling the frenzies you yourself brought about? And having gained our trust, what then? What is it you\'re really after here? Investigate this latest disaster... But not as a member of the Galaxy Team.',
     'There are those in our village who cannot trust a stranger like you who fell from the sky. And so I must ask you to leave. You are no longer welcome in the Galaxy Team.',
     'Consider yourself banished from this village until you can explain why these calamities keep befalling our good people... No—until you\'ve restored our world to its rightful state and proven your innocence beyond doubt!',
@@ -9940,7 +9940,7 @@ const Cyllene4 = new NPC('Captain Cyllene', [
     'So you managed not to die. Just as I ordered. Well done. Before moving forward, I must ask... I assume that you are here again because you\'ve managed to learn something of use?',
     '<i> You explain about the Red Chain you obtained. </i>',
     'The Security Corps had been scouting the area near the space-time rift...and they reported sightings of something on the other side of it. The commander made the decision to take the Security Corps to the mountain so as to prepare to fend off any possible threat.',
-    'As the captain of the Survey Corps, I hereby order you to proceed as follows. <player>! Take that Red Chain to Mount Coronet, make your way to the peak, and put an end to all this. You are officially reinstated at your former rank.',
+    'As the captain of the Survey Corps, I hereby order you to proceed as follows. $playername$! Take that Red Chain to Mount Coronet, make your way to the peak, and put an end to all this. You are officially reinstated at your former rank.',
 ], {
     image: 'assets/images/npcs/Cyllene.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 5), new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 7, GameConstants.AchievementOption.less)]),
@@ -9959,15 +9959,15 @@ const Laventon4 = new NPC('Professor Laventon', [
 });
 
 const Akari4 = new NPC('Akari', [
-    'It\'s all in pieces now, but this is what\'s left of the Red Chain. Next comes the stone of creation\'s beginning. This is my true battlefield, <player>. Even if it may be safe indoors.',
-    'This may take us some time. Perhaps you best wait outside while I work... We\'ve done it! It\'s complete! I dub it...the Origin Ball! Everything\'s ready now, <player>. Take the Origin Ball, and hurry back to the Temple of Sinnoh!',
+    'It\'s all in pieces now, but this is what\'s left of the Red Chain. Next comes the stone of creation\'s beginning. This is my true battlefield, $playername$. Even if it may be safe indoors.',
+    'This may take us some time. Perhaps you best wait outside while I work... We\'ve done it! It\'s complete! I dub it...the Origin Ball! Everything\'s ready now, $playername$. Take the Origin Ball, and hurry back to the Temple of Sinnoh!',
 ], {
     image: 'assets/images/npcs/Akari.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 11), new QuestLineStepCompletedRequirement('The Origin of Sinnoh', 13, GameConstants.AchievementOption.less)]),
 });
 
 const Volo5 = new NPC('Volo', [
-    '<player>! There you are! See these patterns modeled after Pokémon? I’ve come to think that they might be letters— rather like hieroglyphs, if you will. I’ve inspected ruins across the region and have concluded that they all seem to tell the same tale.',
+    '$playername$! There you are! See these patterns modeled after Pokémon? I’ve come to think that they might be letters— rather like hieroglyphs, if you will. I’ve inspected ruins across the region and have concluded that they all seem to tell the same tale.',
     'The tale of a brave soul who, together with the Pokémon at his side, went on a journey to search for the fragments of an all-encompassing deity. And its name is... Arceus. But that device you have—I was able to get a good look at it as we were visiting the lakes. You say it’s called an Arc Phone, correct? I could swear that it has some sort of tie to Arceus...',
     'They must surely be the plates! Yes, the very plates you collected as you went about quelling all the frenzied nobles. I think we should try to gather all the plates! And I’ve got just the idea where to start our search...',
     'According to my own investigations... This alpha Vespiqueen has the plate we are looking for! You’re stronger than any other in Hisui! Please, take care of that Vespiquen!',
@@ -9986,7 +9986,7 @@ const Cogita3 = new NPC('Cogita', [
 });
 
 const Irida = new NPC('Irida & Iscan', [
-    'Hello, <player>. Thank you for coming so far out of your way. It seems something is once again very much amiss on Firespit Island. Might as well get this over with.',
+    'Hello, $playername$. Thank you for coming so far out of your way. It seems something is once again very much amiss on Firespit Island. Might as well get this over with.',
 ], {
     image: 'assets/images/npcs/Irida.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Volo\'s Dream', 3), new QuestLineStepCompletedRequirement('Volo\'s Dream', 4, GameConstants.AchievementOption.less)]),
@@ -10003,8 +10003,8 @@ const Melli = new NPC('Warden Melli', [
 });
 
 const Adaman = new NPC('Adaman & Sabi', [
-    'Oh! Wouldn’t have expected to run into you up here, <player>. What are you up to? You’re here to try and find the secrets lurking in Snowpoint Temple, aren’t you?.',
-    'You do tend get mixed up in all kinds of strange goings-on, <player>. This door here—well, they say behind it sleeps a Pokémon so great it could tow around the entirety of the continents that lie to the south.',
+    'Oh! Wouldn’t have expected to run into you up here, $playername$. What are you up to? You’re here to try and find the secrets lurking in Snowpoint Temple, aren’t you?.',
+    'You do tend get mixed up in all kinds of strange goings-on, $playername$. This door here—well, they say behind it sleeps a Pokémon so great it could tow around the entirety of the continents that lie to the south.',
     '<i>The Stone Plate, Iron Plate, and Icicle Plate you’re carrying are reacting to the door!</i>',
 ], {
     image: 'assets/images/npcs/Adaman.png',
@@ -10020,7 +10020,7 @@ const Kamado8 = new NPC('Commander Kamado', [
 
 const Cogita4 = new NPC('Cogita', [
     'Here you are again. Have you collected all the plates?',
-    'If there’s yet more you want to know... Honest work earns honest pay. Here you are, <player> —a reward for the help you’ve brought Hisui.',
+    'If there’s yet more you want to know... Honest work earns honest pay. Here you are, $playername$ —a reward for the help you’ve brought Hisui.',
     'Well, you’ve managed to collect quite a lot of plates by now... But I still don’t know what you’re to do with them, exactly. It’s just a hunch, but perhaps you should have a look around the Celestica Ruins? Volo will see you there.',
 ], {
     image: 'assets/images/npcs/Cogita.png',
@@ -10085,7 +10085,7 @@ const azureFlute = new NPC('Investigate your Azure Flute',
 
 const ArceusAdaman = new NPC('Adaman',
     [
-        'Hey, if it isn’t <player>! Good timing. I found some treasure you’d be interested in.',
+        'Hey, if it isn’t $playername$! Good timing. I found some treasure you’d be interested in.',
         'But come to think of it, what I’ve found seems too valuable to just let you in on it for free. You’ll need to work a little!',
         'Here’s the deal. I want you to show me what’s in your mind, your heart...your soul! In short: battle me!',
     ], {
@@ -10148,7 +10148,7 @@ const ArceusCael = new NPC('Cael',
 
 const ArceusVessa = new NPC('Vessa',
     [
-        'I’ve been waiting for you, <player>. My name’s Vessa. There’s something real important I need to tell you.',
+        'I’ve been waiting for you, $playername$. My name’s Vessa. There’s something real important I need to tell you.',
         'Hundreds of years ago, a being that brought calamity to this region was sealed away by someone using the power of a strange magic. But now, for some unknown reason, the magic has come undone and the seal is broken.',
         'I hate to think what might happen at this rate... So please hear me out. I need you to restore the broken seal...',
         'After the seal was broken, a whooole bunch of wisps scattered across the Shrouded Ruins...',
