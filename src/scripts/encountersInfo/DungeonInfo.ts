@@ -39,7 +39,7 @@ class DungeonInfo {
                 return UndergroundItems.getByName(input).image;
             case pokemonMap[input].name == input:
                 const caught = App.game.party.alreadyCaughtPokemonByName(input);
-                return `assets/images/pokemon/${caught ? pokemonMap[input].id : '-0'}.png`;
+                return caught ? `assets/images/pokemon/${pokemonMap[input].id}.png` : 'assets/images/encountersInfo/unknownMimic.png';
             default:
                 return ItemList[input].image;
         }
