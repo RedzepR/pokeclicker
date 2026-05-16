@@ -7,7 +7,7 @@ class DungeonInfo {
         const rawTable = player.town.dungeon?.lootTable || {};
         const displayTable = {};
         Object.entries(rawTable).forEach(([tier, loots]) => {
-            const filteredLoots = (loots as Loot[]);//.filter(l => ItemList[l.loot] || pokemonMap[l.loot].name == 'MissingNo.');
+            const filteredLoots = (loots as Loot[]);
             if (filteredLoots.length) {
                 displayTable[tier] = filteredLoots;
             }
