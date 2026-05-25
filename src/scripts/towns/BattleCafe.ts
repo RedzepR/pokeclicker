@@ -88,7 +88,7 @@ class BattleCafeController {
             if (!isResistant) {
                 BattleCafeController.spinsLeft(BattleCafeController.spinsLeft() - 1);
             }
-            BattleCafeController.getPrice(sweet).forEach(b => GameHelper.incrementObservable(App.game.farming.berryList[b.berry], b.amount * -1));
+            BattleCafeController.getPrice(sweet).forEach(b => GameHelper.incrementObservable(App.game.farming.berryInventory[b.berry], b.amount * -1));
         },
         spinTime * 1000);
     }
@@ -96,8 +96,9 @@ class BattleCafeController {
     private static unlockAlcremie(clockwise: boolean, spinTime: number, sweet: GameConstants.AlcremieSweet): PokemonItem {
         let spin: GameConstants.AlcremieSpins;
         if (spinTime == 3600) {
-            (new PokemonItem('Milcery (Cheesy)', 0)).gain(1);
-            return;
+            const cheese = new PokemonItem('Milcery (Cheesy)');
+            cheese.gain(1);
+            return cheese;
         }
         if (DayCycle.currentDayCyclePart() === DayCyclePart.Dusk && !clockwise && spinTime > 10) {
             spin = GameConstants.AlcremieSpins.at5Above10;
@@ -175,7 +176,7 @@ class BattleCafeController {
     public static canBuySweet(sweet: GameConstants.AlcremieSweet) : KnockoutComputed<boolean> {
         return ko.pureComputed(() => {
             return BattleCafeController.getPrice(sweet).every(b => {
-                if (App.game.farming.berryList[b.berry]() < b.amount) {
+                if (App.game.farming.berryInventory[b.berry]() < b.amount) {
                     return false;
                 }
                 return true;
@@ -259,7 +260,7 @@ class BattleCafeController {
 
     public static calcMaxSpins(sweet: GameConstants.AlcremieSweet): number {
         const maxSpins = BattleCafeController.getPrice(sweet)
-            .map((cost) => Math.floor(App.game.farming.berryList[cost.berry]() / cost.amount));
+            .map((cost) => Math.floor(App.game.farming.berryInventory[cost.berry]() / cost.amount));
         return Math.min(...maxSpins);
     }
 
