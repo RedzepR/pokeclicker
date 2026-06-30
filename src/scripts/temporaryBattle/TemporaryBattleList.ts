@@ -5640,7 +5640,7 @@ TemporaryBattleList['Sordward & Shielbert'] = new TemporaryBattle(
     'Quite the vexing predicament indeed, surely this must be some kind of mistake...',
     [new QuestLineStepCompletedRequirement('Sword and Shield', 7)],
     undefined,
-    {        
+    {
         isDoubleBattle: true,
     }
 );

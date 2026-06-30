@@ -1,23 +1,20 @@
-/// <reference path="../utilities/BattlePokemonSlotList.ts"/>
-
 class TemporaryBattleBattle extends Battle {
 
     static index: KnockoutObservable<number> = ko.observable(0);
     static totalPokemons: KnockoutObservable<number> = ko.observable(0);
-    static enemyPokemonSlotList = new BattlePokemonSlotList();
     static enemyPokemons: KnockoutComputed<BattlePokemon[]> = ko.pureComputed(() => {
-        return TemporaryBattleBattle.enemyPokemonSlotList.enemyPokemons();
+        return TemporaryBattleBattle.getEnemyPokemons();
     });
     static activeEnemyPokemons: KnockoutComputed<BattlePokemon[]> = ko.pureComputed(() => {
-        return TemporaryBattleBattle.enemyPokemonSlotList.activeEnemyPokemons();
+        return TemporaryBattleBattle.getActiveEnemyPokemons();
     });
     static activeEnemyPokemonSlots: KnockoutComputed<Array<BattlePokemon | null>> = ko.pureComputed(() => {
-        return TemporaryBattleBattle.enemyPokemonSlotList.activeEnemyPokemonSlots(TemporaryBattleBattle.battle?.optionalArgs.isDoubleBattle);
+        return TemporaryBattleBattle.getActiveEnemyPokemonSlots(TemporaryBattleBattle.battle?.optionalArgs.isDoubleBattle);
     });
 
     public static pokemonAttack() {
         if (TemporaryBattleRunner.running()) {
-            this.attackActivePokemon((pokemon) => App.game.party.calculatePokemonAttack(pokemon.type1, pokemon.type2));
+            super.pokemonAttack();
         }
     }
 
@@ -25,25 +22,7 @@ class TemporaryBattleBattle extends Battle {
         if (!TemporaryBattleRunner.running()) {
             return;
         }
-        // click attacks disabled and we already beat the starter
-        if (App.game.challenges.list.disableClickAttack.active() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None) {
-            return;
-        }
-        // TODO: figure out a better way of handling this
-        // Limit click attack speed, Only allow 1 attack per 50ms (20 per second)
-        const now = Date.now();
-        if (this.lastClickAttack > now - 50) {
-            return;
-        }
-        this.lastClickAttack = now;
-        if (!targetPokemon?.isAlive() || !this.enemyPokemons().includes(targetPokemon)) {
-            return;
-        }
-        GameHelper.incrementObservable(App.game.statistics.clickAttacks);
-        targetPokemon.damage(App.game.party.calculateClickAttack(true));
-        if (!targetPokemon.isAlive()) {
-            this.defeatPokemon(targetPokemon);
-        }
+        super.clickAttack(targetPokemon);
     }
 
 
@@ -84,14 +63,12 @@ class TemporaryBattleBattle extends Battle {
         if (TemporaryBattleBattle.index() >= TemporaryBattleBattle.battle.getPokemonList().length) {
             TemporaryBattleRunner.battleWon(TemporaryBattleBattle.battle);
         } else {
-            this.enemyPokemonSlotList.replaceDefeatedPokemon(
+            this.replaceDefeatedEnemyPokemon(
                 enemyPokemon,
                 this.battle.getPokemonList().length,
                 (pokemonIndex) => PokemonFactory.generateTemporaryBattlePokemon(this.battle, pokemonIndex)
             );
-            if (this.enemyPokemon() === enemyPokemon || !this.enemyPokemon()?.isAlive()) {
-                this.enemyPokemon(this.enemyPokemonSlotList.firstActivePokemon());
-            }
+            this.selectFirstActiveEnemyPokemonIfNeeded(enemyPokemon);
         }
         player.lowerItemMultipliers(MultiplierDecreaser.Battle);
     }
@@ -102,12 +79,12 @@ class TemporaryBattleBattle extends Battle {
     public static generateNewEnemy() {
         this.catching(false);
         TemporaryBattleBattle.counter = 0;
-        this.enemyPokemonSlotList.reset(
+        this.resetEnemyPokemonSlots(
             this.maxActivePokemon(),
             this.battle.getPokemonList().length,
             (pokemonIndex) => PokemonFactory.generateTemporaryBattlePokemon(this.battle, pokemonIndex)
         );
-        TemporaryBattleBattle.enemyPokemon(this.enemyPokemonSlotList.firstActivePokemon());
+        TemporaryBattleBattle.enemyPokemon(this.getFirstActiveEnemyPokemon());
     }
 
     public static pokemonsDefeatedComputable: KnockoutComputed<number> = ko.pureComputed(() => {
@@ -124,27 +101,6 @@ class TemporaryBattleBattle extends Battle {
 
     static set battle(battle: TemporaryBattle) {
         TemporaryBattleRunner.battleObservable(battle);
-    }
-
-    private static attackActivePokemon(calculateDamage: (pokemon: BattlePokemon) => number) {
-        const enemyPokemons = this.activeEnemyPokemons();
-        if (!enemyPokemons.length) {
-            return;
-        }
-        const damageMultiplier = enemyPokemons.length > 1 ? 0.75 : 1;
-        enemyPokemons.forEach((pokemon) => {
-            pokemon.damage(this.applyDamageMultiplier(calculateDamage(pokemon), damageMultiplier));
-        });
-        enemyPokemons.filter((pokemon) => !pokemon.isAlive()).forEach((pokemon) => {
-            this.defeatPokemon(pokemon);
-        });
-    }
-
-    private static applyDamageMultiplier(damage: number, damageMultiplier: number): number {
-        if (damage <= 0) {
-            return 0;
-        }
-        return Math.max(1, Math.floor(damage * damageMultiplier));
     }
 
     private static maxActivePokemon() {
