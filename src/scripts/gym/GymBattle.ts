@@ -1,27 +1,19 @@
-interface GymBattlePokemonSlot {
-    pokemon: BattlePokemon;
-    pokemonIndex: number;
-}
+/// <reference path="../utilities/BattlePokemonSlotList.ts"/>
 
 class GymBattle extends Battle {
 
     static gym: Gym;
     static index: KnockoutObservable<number> = ko.observable(0);
     static totalPokemons: KnockoutObservable<number> = ko.observable(0);
-    static enemyPokemonSlots: KnockoutObservableArray<GymBattlePokemonSlot | null> = ko.observableArray([]);
+    static enemyPokemonSlotList = new BattlePokemonSlotList();
     static enemyPokemons: KnockoutComputed<BattlePokemon[]> = ko.pureComputed(() => {
-        return GymBattle.enemyPokemonSlots()
-            .filter((slot): slot is GymBattlePokemonSlot => !!slot)
-            .map((slot) => slot.pokemon);
+        return GymBattle.enemyPokemonSlotList.enemyPokemons();
     });
     static activeEnemyPokemons: KnockoutComputed<BattlePokemon[]> = ko.pureComputed(() => {
-        return GymBattle.enemyPokemons().filter((pokemon) => pokemon.isAlive());
+        return GymBattle.enemyPokemonSlotList.activeEnemyPokemons();
     });
     static activeEnemyPokemonSlots: KnockoutComputed<Array<BattlePokemon | null>> = ko.pureComputed(() => {
-        if (!GymBattle.gym?.optionalArgs.isDoubleBattle) {
-            return GymBattle.activeEnemyPokemons();
-        }
-        return GymBattle.enemyPokemonSlots().map((slot) => slot?.pokemon.isAlive() ? slot.pokemon : null);
+        return GymBattle.enemyPokemonSlotList.activeEnemyPokemonSlots(GymBattle.gym?.optionalArgs.isDoubleBattle);
     });
 
     public static pokemonAttack() {
@@ -71,9 +63,13 @@ class GymBattle extends Battle {
         if (this.index() >= this.gym.getPokemonList().length) {
             GymRunner.gymWon(this.gym);
         } else {
-            this.replaceDefeatedEnemyPokemon(enemyPokemon);
+            this.enemyPokemonSlotList.replaceDefeatedPokemon(
+                enemyPokemon,
+                this.gym.getPokemonList().length,
+                (pokemonIndex) => PokemonFactory.generateGymPokemon(this.gym, pokemonIndex)
+            );
             if (this.enemyPokemon() === enemyPokemon || !this.enemyPokemon()?.isAlive()) {
-                this.enemyPokemon(this.activeEnemyPokemons()[0] ?? null);
+                this.enemyPokemon(this.enemyPokemonSlotList.firstActivePokemon());
             }
         }
     }
@@ -83,12 +79,12 @@ class GymBattle extends Battle {
      */
     public static generateNewEnemy() {
         this.counter = 0;
-        const slots: GymBattlePokemonSlot[] = [];
-        for (let pokemonIndex = 0; pokemonIndex < this.maxActivePokemon() && pokemonIndex < this.gym.getPokemonList().length; pokemonIndex++) {
-            slots.push(this.createEnemyPokemonSlot(pokemonIndex));
-        }
-        this.enemyPokemonSlots(slots);
-        this.enemyPokemon(slots[0]?.pokemon ?? null);
+        this.enemyPokemonSlotList.reset(
+            this.maxActivePokemon(),
+            this.gym.getPokemonList().length,
+            (pokemonIndex) => PokemonFactory.generateGymPokemon(this.gym, pokemonIndex)
+        );
+        this.enemyPokemon(this.enemyPokemonSlotList.firstActivePokemon());
     }
 
     public static pokemonsDefeatedComputable: KnockoutComputed<number> = ko.pureComputed(() => {
@@ -122,24 +118,5 @@ class GymBattle extends Battle {
 
     private static maxActivePokemon() {
         return this.gym.optionalArgs.isDoubleBattle ? 2 : 1;
-    }
-
-    private static createEnemyPokemonSlot(pokemonIndex: number): GymBattlePokemonSlot {
-        return {
-            pokemon: PokemonFactory.generateGymPokemon(this.gym, pokemonIndex),
-            pokemonIndex,
-        };
-    }
-
-    private static replaceDefeatedEnemyPokemon(enemyPokemon: BattlePokemon) {
-        const enemyPokemonSlotIndex = this.enemyPokemonSlots().findIndex((slot) => slot?.pokemon === enemyPokemon);
-        if (enemyPokemonSlotIndex < 0) {
-            return;
-        }
-        const nextPokemonIndex = Math.max(...this.enemyPokemonSlots().map((slot) => slot?.pokemonIndex ?? -1)) + 1;
-        const replacementSlot = nextPokemonIndex < this.gym.getPokemonList().length
-            ? this.createEnemyPokemonSlot(nextPokemonIndex)
-            : null;
-        this.enemyPokemonSlots.splice(enemyPokemonSlotIndex, 1, replacementSlot);
     }
 }
