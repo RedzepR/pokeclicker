@@ -10,6 +10,7 @@
   z-index: 10;
   width: 100%;
   height: 100%;
+  pointer-events: none;
 }
 
 // Applied to gym, dungeon, and tempBattle trainer sprites
@@ -25,6 +26,74 @@
   left: 10px;
 }
 
+.gym-double-title {
+  display: inline-flex;
+  justify-content: center;
+  max-width: 75%;
+  overflow: hidden;
+  font-size: 1.5rem;
+  white-space: nowrap;
+}
+
+.gym-double-battle {
+  .trainer {
+    left: 84%;
+  }
+}
+
+.gym-double-pokemon-list {
+  position: absolute;
+  inset: 74px 5% 104px;
+  display: grid;
+  gap: 8px;
+  align-items: flex-end;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gym-double-pokemon-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 0;
+  min-height: 100%;
+  text-align: center;
+}
+
+.gym-double-pokemon-sprite {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 92px;
+}
+
+.gym-double-pokemon-slot .enemy {
+  width: auto;
+  max-width: 100%;
+  max-height: 96px;
+  min-height: 80px;
+  margin-top: 0;
+}
+
+.gym-double-hitpoints-list {
+  position: absolute;
+  bottom: 56px;
+  left: 5%;
+  display: flex;
+  gap: 8px;
+  width: 90%;
+}
+
+.gym-double-hitpoints-slot {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.gym-double-hitpoints {
+  width: 100%;
+  height: 20px;
+}
+
 // Mobile screen specific stylings
 @media (max-width: 768px) {
   .trainer {
@@ -38,5 +107,38 @@
 
   .stop-auto {
     top: 85px;
+  }
+
+  .gym-double-title {
+    max-width: 62%;
+    font-size: 1rem;
+  }
+
+  .gym-double-battle {
+    .trainer {
+      left: 82%;
+    }
+  }
+
+  .gym-double-pokemon-list {
+    inset: 82px 5% 108px;
+    gap: 6px;
+  }
+
+  .gym-double-pokemon-sprite {
+    min-height: 78px;
+  }
+
+  .gym-double-pokemon-slot .enemy {
+    max-height: 82px;
+    min-height: 70px;
+  }
+
+  .gym-double-hitpoints-list {
+    bottom: 50px;
+  }
+
+  .gym-double-hitpoints .progress-bar span {
+    font-size: 10px !important;
   }
 }
