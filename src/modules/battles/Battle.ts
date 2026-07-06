@@ -181,7 +181,19 @@ export default class Battle {
         this.resetEnemyPokemonSlots(1, 1, () => enemyPokemon);
     }
 
-    protected static resetEnemyPokemonSlots(maxActivePokemon: number, totalPokemons: number, generatePokemon: BattlePokemonGenerator): void {
+    protected static updateEnemyPokemonSequence(totalPokemons: number, generatePokemon: BattlePokemonGenerator, maxActivePokemon = 1, defeatedPokemon?: BattlePokemon): void {
+        if (defeatedPokemon) {
+            this.replaceDefeatedEnemyPokemon(defeatedPokemon, totalPokemons, generatePokemon);
+            if (this.enemyPokemon() === defeatedPokemon || !this.enemyPokemon()?.isAlive()) {
+                this.enemyPokemon(this.getFirstActiveEnemyPokemon());
+            }
+        } else {
+            this.resetEnemyPokemonSlots(maxActivePokemon, totalPokemons, generatePokemon);
+            this.enemyPokemon(this.getFirstActiveEnemyPokemon());
+        }
+    }
+
+    private static resetEnemyPokemonSlots(maxActivePokemon: number, totalPokemons: number, generatePokemon: BattlePokemonGenerator): void {
         const slots: BattlePokemonSlot[] = [];
         for (let pokemonIndex = 0; pokemonIndex < maxActivePokemon && pokemonIndex < totalPokemons; pokemonIndex++) {
             slots.push(this.createEnemyPokemonSlot(pokemonIndex, generatePokemon));
@@ -189,7 +201,7 @@ export default class Battle {
         this.getEnemyPokemonSlots()(slots);
     }
 
-    protected static replaceDefeatedEnemyPokemon(enemyPokemon: BattlePokemon, totalPokemons: number, generatePokemon: BattlePokemonGenerator): void {
+    private static replaceDefeatedEnemyPokemon(enemyPokemon: BattlePokemon, totalPokemons: number, generatePokemon: BattlePokemonGenerator): void {
         const slots = this.getEnemyPokemonSlots();
         const enemyPokemonSlotIndex = slots().findIndex((slot) => slot?.pokemon === enemyPokemon);
         if (enemyPokemonSlotIndex < 0) {
@@ -200,12 +212,6 @@ export default class Battle {
             ? this.createEnemyPokemonSlot(nextPokemonIndex, generatePokemon)
             : null;
         slots.splice(enemyPokemonSlotIndex, 1, replacementSlot);
-    }
-
-    protected static selectFirstActiveEnemyPokemonIfNeeded(previousEnemyPokemon: BattlePokemon): void {
-        if (this.enemyPokemon() === previousEnemyPokemon || !this.enemyPokemon()?.isAlive()) {
-            this.enemyPokemon(this.getFirstActiveEnemyPokemon());
-        }
     }
 
     protected static attackActivePokemon(calculateDamage: (pokemon: BattlePokemon) => number): void {

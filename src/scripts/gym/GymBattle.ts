@@ -43,12 +43,12 @@ class GymBattle extends Battle {
         if (this.index() >= this.gym.getPokemonList().length) {
             GymRunner.gymWon(this.gym);
         } else {
-            this.replaceDefeatedEnemyPokemon(
-                enemyPokemon,
+            this.updateEnemyPokemonSequence(
                 this.gym.getPokemonList().length,
-                (pokemonIndex) => PokemonFactory.generateGymPokemon(this.gym, pokemonIndex)
+                (pokemonIndex) => PokemonFactory.generateGymPokemon(this.gym, pokemonIndex),
+                undefined,
+                enemyPokemon
             );
-            this.selectFirstActiveEnemyPokemonIfNeeded(enemyPokemon);
         }
     }
 
@@ -57,12 +57,11 @@ class GymBattle extends Battle {
      */
     public static generateNewEnemy() {
         this.counter = 0;
-        this.resetEnemyPokemonSlots(
-            this.maxActivePokemon(),
+        this.updateEnemyPokemonSequence(
             this.gym.getPokemonList().length,
-            (pokemonIndex) => PokemonFactory.generateGymPokemon(this.gym, pokemonIndex)
+            (pokemonIndex) => PokemonFactory.generateGymPokemon(this.gym, pokemonIndex),
+            this.gym.optionalArgs.isDoubleBattle ? 2 : 1
         );
-        this.enemyPokemon(this.getFirstActiveEnemyPokemon());
     }
 
     public static pokemonsDefeatedComputable: KnockoutComputed<number> = ko.pureComputed(() => {
@@ -73,7 +72,4 @@ class GymBattle extends Battle {
         return GymBattle.totalPokemons() - GymBattle.index();
     })
 
-    private static maxActivePokemon() {
-        return this.gym.optionalArgs.isDoubleBattle ? 2 : 1;
-    }
 }

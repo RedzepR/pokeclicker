@@ -12,7 +12,7 @@ class DungeonBattle extends Battle {
     static trainerPokemonIndex: KnockoutObservable<number> = ko.observable(0);
     static catchingPokemons: KnockoutObservableArray<DungeonBattleCatchState> = ko.observableArray([]);
     static activeEnemyPokemons: KnockoutComputed<BattlePokemon[]> = ko.pureComputed(() => {
-        return DungeonBattle.visibleEnemyPokemons();
+        return DungeonBattle.activeEnemyPokemonSlots().filter((pokemon): pokemon is BattlePokemon => !!pokemon);
     });
     static activeEnemyPokemonSlots: KnockoutComputed<Array<BattlePokemon | null>> = ko.pureComputed(() => {
         if (!DungeonBattle.trainer()?.options?.isDoubleBattle) {
@@ -173,12 +173,12 @@ class DungeonBattle extends Battle {
             }
         // Generate next trainer Pokemon
         } else {
-            this.replaceDefeatedEnemyPokemon(
-                defeatedPokemon,
+            this.updateEnemyPokemonSequence(
                 trainer.getTeam().length,
-                (pokemonIndex) => this.generateTrainerPokemonByIndex(pokemonIndex)
+                (pokemonIndex) => this.generateTrainerPokemonByIndex(pokemonIndex),
+                undefined,
+                defeatedPokemon
             );
-            this.selectFirstActiveEnemyPokemonIfNeeded(defeatedPokemon);
         }
     }
 
@@ -270,13 +270,11 @@ class DungeonBattle extends Battle {
      */
     public static generateTrainerPokemon() {
         this.counter = 0;
-        this.resetEnemyPokemonSlots(
-            this.maxActiveTrainerPokemon(),
+        this.updateEnemyPokemonSequence(
             this.trainer().getTeam().length,
-            (pokemonIndex) => this.generateTrainerPokemonByIndex(pokemonIndex)
+            (pokemonIndex) => this.generateTrainerPokemonByIndex(pokemonIndex),
+            this.isDoubleTrainerBattle() ? 2 : 1
         );
-
-        this.enemyPokemon(this.getFirstActiveEnemyPokemon());
     }
 
     private static generateTrainerPokemonByIndex(pokemonIndex: number): BattlePokemon {
@@ -327,14 +325,6 @@ class DungeonBattle extends Battle {
 
             this.generateTrainerPokemon();
         }
-    }
-
-    private static maxActiveTrainerPokemon() {
-        return this.isDoubleTrainerBattle() ? 2 : 1;
-    }
-
-    private static visibleEnemyPokemons(): BattlePokemon[] {
-        return this.visibleEnemyPokemonSlots().filter((pokemon): pokemon is BattlePokemon => !!pokemon);
     }
 
     private static visibleEnemyPokemonSlots(): Array<BattlePokemon | null> {
