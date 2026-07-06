@@ -122,8 +122,7 @@ export default class Battle {
     public static generateNewEnemy() {
         this.counter = 0;
         const enemyPokemon = PokemonFactory.generateWildPokemon(player.route, player.region, player.subregionObject());
-        this.enemyPokemon(enemyPokemon);
-        this.resetEnemyPokemonSlots(1, 1, () => enemyPokemon);
+        this.setEnemyPokemon(enemyPokemon);
         PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatisticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender, enemyPokemon.shadow);
         // Shiny
         if (enemyPokemon.shiny) {
@@ -177,6 +176,11 @@ export default class Battle {
         return this.getActiveEnemyPokemons()[0] ?? null;
     }
 
+    protected static setEnemyPokemon(enemyPokemon: BattlePokemon): void {
+        this.enemyPokemon(enemyPokemon);
+        this.resetEnemyPokemonSlots(1, 1, () => enemyPokemon);
+    }
+
     protected static resetEnemyPokemonSlots(maxActivePokemon: number, totalPokemons: number, generatePokemon: BattlePokemonGenerator): void {
         const slots: BattlePokemonSlot[] = [];
         for (let pokemonIndex = 0; pokemonIndex < maxActivePokemon && pokemonIndex < totalPokemons; pokemonIndex++) {
@@ -212,13 +216,13 @@ export default class Battle {
         const damageMultiplier = enemyPokemons.length > 1 ? 0.75 : 1;
         enemyPokemons.forEach((pokemon) => {
             pokemon.damage(this.applyDamageMultiplier(calculateDamage(pokemon), damageMultiplier));
-        });
-        enemyPokemons.filter((pokemon) => !pokemon.isAlive()).forEach((pokemon) => {
-            this.defeatPokemon(pokemon);
+            if (!pokemon.isAlive()) {
+                this.defeatPokemon(pokemon);
+            }
         });
     }
 
-    private static getEnemyPokemonSlots(): KnockoutObservableArray<BattlePokemonSlot | null> {
+    protected static getEnemyPokemonSlots(): KnockoutObservableArray<BattlePokemonSlot | null> {
         const battle = this as typeof Battle;
         const slots = Battle.enemyPokemonSlotsByBattle.get(battle);
         if (slots) {
@@ -262,8 +266,14 @@ export default class Battle {
             this.catching(false);
             return;
         }
-        if (Rand.chance(this.catchRateActual() / 100)) { // Caught
-            this.catchPokemon(enemyPokemon, route, region);
+        this.resolveCatchAttempt(enemyPokemon, route, region, this.catchRateActual(), this.pokeball());
+        this.catching(false);
+        this.catchRateActual(null);
+    }
+
+    protected static resolveCatchAttempt(enemyPokemon: BattlePokemon, route: number, region: GameConstants.Region, catchRateActual: number, pokeball: GameConstants.Pokeball) {
+        if (Rand.chance(catchRateActual / 100)) { // Caught
+            this.catchPokemon(enemyPokemon, route, region, pokeball);
         } else if (enemyPokemon.shiny) { // Failed to catch, Shiny
             App.game.logbook.newLog(
                 LogBookTypes.ESCAPED,
@@ -277,16 +287,14 @@ export default class Battle {
                 createLogContent.escapedWild({ pokemon: enemyPokemon.name }),
             );
         }
-        this.catching(false);
-        this.catchRateActual(null);
     }
 
-    public static catchPokemon(enemyPokemon: BattlePokemon, route: number, region: GameConstants.Region) {
+    public static catchPokemon(enemyPokemon: BattlePokemon, route: number, region: GameConstants.Region, pokeball = this.pokeball()) {
         this.gainTokens(route, region);
         App.game.oakItems.use(OakItemType.Magic_Ball);
         App.game.party.gainPokemonById(enemyPokemon.id, enemyPokemon.shiny, undefined, enemyPokemon.gender, enemyPokemon.shadow);
         const partyPokemon = App.game.party.getPokemon(enemyPokemon.id);
-        const epBonus = App.game.pokeballs.getEPBonus(this.pokeball());
+        const epBonus = App.game.pokeballs.getEPBonus(pokeball);
         partyPokemon.effortPoints += App.game.party.calculateEffortPoints(partyPokemon, enemyPokemon.shiny, enemyPokemon.shadow, enemyPokemon.ep * epBonus);
     }
 
