@@ -39,7 +39,7 @@ class DungeonBattle extends Battle {
     /**
      * Award the player with money and exp, and throw a Pokéball if applicable
      */
-    public static defeatPokemon(enemyPokemon = this.currentEnemyPokemon()) {
+    public static defeatPokemon(enemyPokemon = this.firstEnemyPokemon()) {
         if (!enemyPokemon) {
             return;
         }

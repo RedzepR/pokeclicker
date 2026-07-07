@@ -28,7 +28,7 @@ class TemporaryBattleBattle extends Battle {
         return this.catchingPokemons().find((catchState) => catchState.pokemon === pokemon);
     }
 
-    public static clickAttack(targetPokemon = this.currentEnemyPokemon()) {
+    public static clickAttack(targetPokemon = this.firstEnemyPokemon()) {
         if (!TemporaryBattleRunner.running()) {
             return;
         }
@@ -36,7 +36,7 @@ class TemporaryBattleBattle extends Battle {
     }
 
 
-    public static defeatPokemon(enemyPokemon = this.currentEnemyPokemon()) {
+    public static defeatPokemon(enemyPokemon = this.firstEnemyPokemon()) {
         if (!enemyPokemon) {
             return;
         }
@@ -64,7 +64,7 @@ class TemporaryBattleBattle extends Battle {
         }
     }
 
-    private static endFight(enemyPokemon = this.currentEnemyPokemon()) {
+    private static endFight(enemyPokemon = this.firstEnemyPokemon()) {
         if (!enemyPokemon) {
             return;
         }

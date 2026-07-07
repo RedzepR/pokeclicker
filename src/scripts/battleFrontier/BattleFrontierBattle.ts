@@ -27,7 +27,7 @@ class BattleFrontierBattle extends Battle {
     /**
      * Award the player with exp, gems and go to the next pokemon
      */
-    public static defeatPokemon(enemyPokemon = this.currentEnemyPokemon()) {
+    public static defeatPokemon(enemyPokemon = this.firstEnemyPokemon()) {
         if (!enemyPokemon) {
             return;
         }

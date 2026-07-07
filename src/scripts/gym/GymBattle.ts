@@ -13,7 +13,7 @@ class GymBattle extends Battle {
         }
     }
 
-    public static clickAttack(targetPokemon = this.currentEnemyPokemon()) {
+    public static clickAttack(targetPokemon = this.firstEnemyPokemon()) {
         if (!GymRunner.running()) {
             return;
         }
@@ -23,7 +23,7 @@ class GymBattle extends Battle {
     /**
      * Award the player with exp, and go to the next pokemon
      */
-    public static defeatPokemon(enemyPokemon = this.currentEnemyPokemon()) {
+    public static defeatPokemon(enemyPokemon = this.firstEnemyPokemon()) {
         if (!enemyPokemon) {
             return;
         }
