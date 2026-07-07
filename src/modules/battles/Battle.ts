@@ -152,8 +152,8 @@ export default class Battle {
         return enemyPokemon;
     }
 
-    protected static firstEnemyPokemon(): BattlePokemon | null {
-        return this.activeEnemyPokemon()[0] ?? null;
+    public static firstEnemyPokemon(): BattlePokemon | null {
+        return this.enemyPokemon().find((pokemon): pokemon is BattlePokemon => !!pokemon) ?? null;
     }
 
     protected static allEnemyPokemon(): BattlePokemon[] {

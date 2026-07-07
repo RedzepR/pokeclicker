@@ -2,26 +2,28 @@
     <div class="col no-gutters clickable" style="height: 280px; display: block;"
         data-bind="css: { 'multi-battle': DungeonBattle.isDoubleTrainerBattle }, click: function() { DungeonRunner.handleInteraction() }">
         <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
-            <knockout data-bind="if: DungeonBattle.enemyPokemon() && DungeonBattle.enemyPokemon().health()">
+            <knockout data-bind="if: DungeonBattle.firstEnemyPokemon() && DungeonBattle.firstEnemyPokemon().health()">
                 <knockout data-bind="ifnot: DungeonBattle.isDoubleTrainerBattle">
-                    <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': DungeonBattle.enemyPokemon() } }">Pokémon name</knockout>
+                    <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': DungeonBattle.firstEnemyPokemon() } }">Pokémon name</knockout>
                     <!-- ko if: !DungeonBattle.trainer() -->
-                    <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></knockout>
+                    <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.firstEnemyPokemon().id)}}"></knockout>
                     <knockout style="position: relative; top: -1px;"
                         data-bind="template: { name: 'pokerusStatusTemplate', data: {
-                            'pokerus': PartyController.getPokerusStatus(DungeonBattle.enemyPokemon().id),
-                            'evs': App.game.party.getPokemon(DungeonBattle.enemyPokemon().id)?.evs() }}">
+                            'pokerus': PartyController.getPokerusStatus(DungeonBattle.firstEnemyPokemon().id),
+                            'evs': App.game.party.getPokemon(DungeonBattle.firstEnemyPokemon().id)?.evs() }}">
                     </knockout>
                     <!-- /ko -->
                 </knockout>
                 <knockout data-bind="if: DungeonBattle.isDoubleTrainerBattle">
-                    <span class="multi-battle-title" data-bind="foreach: DungeonBattle.activeEnemyPokemons">
-                        <span data-bind="if: $index() > 0">&nbsp;&&nbsp;</span>
-                        <span data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': $data } }">Pokémon name</span>
+                    <span class="multi-battle-title" data-bind="foreach: DungeonBattle.enemyPokemonView">
+                        <knockout data-bind="if: $data">
+                            <span data-bind="if: $index() > 0">&nbsp;&&nbsp;</span>
+                            <span data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': $data } }">Pokémon name</span>
+                        </knockout>
                     </span>
                 </knockout>
             </knockout>
-            <knockout data-bind="if: !DungeonBattle.enemyPokemon() || !DungeonBattle.enemyPokemon().health()">
+            <knockout data-bind="if: !DungeonBattle.firstEnemyPokemon() || !DungeonBattle.firstEnemyPokemon().health()">
                 &nbsp;
             </knockout>
 
@@ -57,14 +59,14 @@
         </h2>
 
         <!-- ko if: (DungeonRunner.fighting() || DungeonBattle.catching)  -->
-        <div data-bind="if: DungeonBattle.enemyPokemon">
+        <div data-bind="if: DungeonBattle.firstEnemyPokemon()">
             <div class="trainer" data-bind="if: DungeonBattle.trainer() && !DungeonBattle.trainer().options?.hideTrainer">
                 <img data-bind="attr:{ src: DungeonBattle.trainer().image }" onerror="this.src='assets/images/npcs/specialNPCs/Mysterious Trainer.png';"/>
             </div>
             <!-- ko ifnot: DungeonBattle.isDoubleTrainerBattle -->
                 <div class="dungeon-enemy">
                     <div data-bind="ifnot: DungeonBattle.catching">
-                        <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': DungeonBattle.enemyPokemon() } }">Pokémon sprite</knockout>
+                        <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': DungeonBattle.firstEnemyPokemon() } }">Pokémon sprite</knockout>
                     </div>
                     <div data-bind="if: DungeonBattle.catching" class="catchChance">
                         <img class="pokeball-animated"
@@ -77,15 +79,15 @@
                 </div>
                 <div class="progress hitpoints dungeonhitpoints" style="height: 20px;">
                     <div class="progress-bar bg-danger" role="progressbar"
-                         data-bind="attr:{ style: 'width:' + DungeonBattle.enemyPokemon().healthPercentage() + '%'}, css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunner.fightingBoss()}"
+                         data-bind="attr:{ style: 'width:' + DungeonBattle.firstEnemyPokemon().healthPercentage() + '%'}, css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunner.fightingBoss()}"
                          aria-valuemin="0" aria-valuemax="100">
-                         <span data-bind="text: DungeonBattle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + DungeonBattle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
+                         <span data-bind="text: DungeonBattle.firstEnemyPokemon().health().toLocaleString('en-US') + ' / ' + DungeonBattle.firstEnemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
                     </div>
                 </div>
             <!-- /ko -->
 
             <!-- ko if: DungeonBattle.isDoubleTrainerBattle -->
-                <div class="multi-battle-pokemon-list" data-bind="foreach: DungeonBattle.activeEnemyPokemonSlots">
+                <div class="multi-battle-pokemon-list" data-bind="foreach: DungeonBattle.enemyPokemonView">
                     <div class="multi-battle-pokemon-slot" data-bind="css: { clickable: $data && $data.isAlive() && !DungeonBattle.isCatchingPokemon($data) }, click: function() { if ($data && $data.isAlive() && !DungeonBattle.isCatchingPokemon($data)) { DungeonBattle.clickAttack($data); } }, clickBubble: false">
                         <knockout data-bind="if: $data">
                             <knockout data-bind="if: DungeonBattle.isCatchingPokemon($data)">
@@ -107,7 +109,7 @@
                     </div>
                 </div>
 
-                <div class="multi-battle-hitpoints-list" data-bind="foreach: DungeonBattle.activeEnemyPokemonSlots">
+                <div class="multi-battle-hitpoints-list" data-bind="foreach: DungeonBattle.enemyPokemonView">
                     <div class="multi-battle-hitpoints-slot">
                         <knockout data-bind="if: $data">
                             <div class="progress multi-battle-hitpoints">
@@ -181,7 +183,7 @@
               </tr>
               <tr>
                 <td width="50%">
-                    <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
+                    <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.firstEnemyPokemon() } }"></knockout>
                 </td>
                 <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
                     <span style="display: inline;">Click Attack:

@@ -2,12 +2,14 @@
     <div class="col no-gutters" data-bind="css: { clickable: !TemporaryBattleBattle.isDoubleBattle(), 'multi-battle': TemporaryBattleBattle.isDoubleBattle() }, click: function() { if (!TemporaryBattleBattle.isDoubleBattle()) { TemporaryBattleBattle.clickAttack(); } }" style="height: 280px; display: block;">
         <h2 class="pageItemTitle mobileBattleTitle" style="display: block;">
             <knockout data-bind="ifnot: TemporaryBattleBattle.isDoubleBattle()">
-                <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': TemporaryBattleBattle.enemyPokemon() } }">PokÃ©mon name</knockout>
+                <knockout data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': TemporaryBattleBattle.currentEnemyPokemon() } }">PokÃƒÂ©mon name</knockout>
             </knockout>
             <knockout data-bind="if: TemporaryBattleBattle.isDoubleBattle()">
-                <span class="multi-battle-title" data-bind="foreach: TemporaryBattleBattle.activeEnemyPokemons">
-                    <span data-bind="if: $index() > 0">&nbsp;&&nbsp;</span>
-                    <span data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': $data } }">PokÃ©mon name</span>
+                <span class="multi-battle-title" data-bind="foreach: TemporaryBattleBattle.enemyPokemonView">
+                    <knockout data-bind="if: $data">
+                        <span data-bind="if: $index() > 0">&nbsp;&&nbsp;</span>
+                        <span data-bind="template: { name: 'pokemonNameTemplate', data: { 'pokemon': $data } }">PokÃƒÂ©mon name</span>
+                    </knockout>
                 </span>
             </knockout>
 
@@ -44,7 +46,7 @@
 
         <!-- ko ifnot: TemporaryBattleBattle.isDoubleBattle() -->
             <div data-bind="ifnot: TemporaryBattleBattle.catching">
-                <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': TemporaryBattleBattle.enemyPokemon() } }">PokÃ©mon sprite</knockout>
+                <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': TemporaryBattleBattle.currentEnemyPokemon() } }">PokÃƒÂ©mon sprite</knockout>
             </div>
 
             <div data-bind="if: TemporaryBattleBattle.catching" class="catchChance">
@@ -58,15 +60,15 @@
 
             <div class="progress hitpoints trainerhitpoints">
                 <div class="progress-bar bg-danger" role="progressbar"
-                        data-bind="attr:{ style: 'width:' + TemporaryBattleBattle.enemyPokemon().healthPercentage() + '%' }"
+                        data-bind="attr:{ style: 'width:' + TemporaryBattleBattle.currentEnemyPokemon().healthPercentage() + '%' }"
                         aria-valuemin="0" aria-valuemax="100">
-                    <span data-bind="text: TemporaryBattleBattle.enemyPokemon().health().toLocaleString('en-US') + ' / ' + TemporaryBattleBattle.enemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
+                    <span data-bind="text: TemporaryBattleBattle.currentEnemyPokemon().health().toLocaleString('en-US') + ' / ' + TemporaryBattleBattle.currentEnemyPokemon().maxHealth().toLocaleString('en-US')" style="font-size: 12px;"></span>
                 </div>
             </div>
         <!-- /ko -->
 
         <!-- ko if: TemporaryBattleBattle.isDoubleBattle() -->
-            <div class="multi-battle-pokemon-list" data-bind="foreach: TemporaryBattleBattle.activeEnemyPokemonSlots">
+            <div class="multi-battle-pokemon-list" data-bind="foreach: TemporaryBattleBattle.enemyPokemonView">
                 <div class="multi-battle-pokemon-slot" data-bind="css: { clickable: $data && $data.isAlive() && !TemporaryBattleBattle.isCatchingPokemon($data) }, click: function() { if ($data && $data.isAlive() && !TemporaryBattleBattle.isCatchingPokemon($data)) { TemporaryBattleBattle.clickAttack($data); } }, clickBubble: false">
                     <knockout data-bind="if: $data">
                         <knockout data-bind="if: TemporaryBattleBattle.isCatchingPokemon($data)">
@@ -81,14 +83,14 @@
                         </knockout>
                         <knockout data-bind="ifnot: TemporaryBattleBattle.isCatchingPokemon($data)">
                             <div class="multi-battle-pokemon-sprite">
-                                <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': $data } }">PokÃ©mon sprite</knockout>
+                                <knockout data-bind="template: { name: 'pokemonSpriteTemplate', data: { 'pokemon': $data } }">PokÃƒÂ©mon sprite</knockout>
                             </div>
                         </knockout>
                     </knockout>
                 </div>
             </div>
 
-            <div class="multi-battle-hitpoints-list" data-bind="foreach: TemporaryBattleBattle.activeEnemyPokemonSlots">
+            <div class="multi-battle-hitpoints-list" data-bind="foreach: TemporaryBattleBattle.enemyPokemonView">
                 <div class="multi-battle-hitpoints-slot">
                     <knockout data-bind="if: $data">
                         <div class="progress multi-battle-hitpoints">
@@ -109,7 +111,7 @@
             <table width="100%">
                 <tr>
                     <td width="50%">
-                        <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.enemyPokemon() } }"></knockout>
+                        <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.firstEnemyPokemon() } }"></knockout>
                     </td>
                     <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
                         <span style="display: inline;">Click Attack:
