@@ -13,20 +13,13 @@ import Amount from '../wallet/Amount';
 import type BattlePokemon from './BattlePokemon';
 import type { Observable as KnockoutObservable, ObservableArray as KnockoutObservableArray, PureComputed } from 'knockout';
 
-type BattlePokemonGenerator = (pokemonIndex: number) => BattlePokemon;
-
-interface BattlePokemonSlot {
-    pokemon: BattlePokemon;
-    pokemonIndex: number;
-}
+type EnemyPokemonGenerator = (pokemonIndex: number) => BattlePokemon;
 
 /**
  * Handles all logic related to battling
  */
 export default class Battle {
-    static enemyPokemon: KnockoutObservable<BattlePokemon | null> = ko.observable(null);
-
-    private static enemyPokemonSlotsByBattle = new WeakMap<typeof Battle, KnockoutObservableArray<BattlePokemonSlot | null>>();
+    private static enemyPokemonByBattle = new WeakMap<typeof Battle, KnockoutObservableArray<BattlePokemon | null>>();
 
     static counter = 0;
     static catching: KnockoutObservable<boolean> = ko.observable(false);
@@ -54,7 +47,7 @@ export default class Battle {
     /**
      * Attacks with clicks and checks if the enemy is defeated.
      */
-    public static clickAttack(targetPokemon = this.enemyPokemon()) {
+    public static clickAttack(targetPokemon = this.firstEnemyPokemon()) {
         // click attacks disabled and we already beat the starter
         if (App.game.challenges.list.disableClickAttack.active() && player.regionStarters[GameConstants.Region.kanto]() != GameConstants.Starter.None) {
             return;
@@ -66,7 +59,7 @@ export default class Battle {
             return;
         }
         this.lastClickAttack = now;
-        if (!targetPokemon?.isAlive() || !this.getEnemyPokemons().includes(targetPokemon)) {
+        if (!targetPokemon?.isAlive() || !this.allEnemyPokemon().includes(targetPokemon)) {
             return;
         }
         GameHelper.incrementObservable(App.game.statistics.clickAttacks);
@@ -79,7 +72,7 @@ export default class Battle {
     /**
      * Award the player with money and exp, and throw a Pokéball if applicable
      */
-    public static defeatPokemon(enemyPokemon = this.enemyPokemon()) {
+    public static defeatPokemon(enemyPokemon = this.firstEnemyPokemon()) {
         if (!enemyPokemon) {
             return;
         }
@@ -122,7 +115,7 @@ export default class Battle {
     public static generateNewEnemy() {
         this.counter = 0;
         const enemyPokemon = PokemonFactory.generateWildPokemon(player.route, player.region, player.subregionObject());
-        this.setEnemyPokemon(enemyPokemon);
+        this.enemyPokemon([enemyPokemon]);
         PokemonHelper.incrementPokemonStatistics(enemyPokemon.id, GameConstants.PokemonStatisticsType.Encountered, enemyPokemon.shiny, enemyPokemon.gender, enemyPokemon.shadow);
         // Shiny
         if (enemyPokemon.shiny) {
@@ -149,101 +142,81 @@ export default class Battle {
         }
     }
 
-    protected static getEnemyPokemons(): BattlePokemon[] {
-        const slots = this.getEnemyPokemonSlots()();
-        if (!slots.length) {
-            const enemyPokemon = this.enemyPokemon();
-            return enemyPokemon ? [enemyPokemon] : [];
+    protected static get enemyPokemon(): KnockoutObservableArray<BattlePokemon | null> {
+        const battle = this as typeof Battle;
+        let enemyPokemon = Battle.enemyPokemonByBattle.get(battle);
+        if (!enemyPokemon) {
+            enemyPokemon = ko.observableArray([]);
+            Battle.enemyPokemonByBattle.set(battle, enemyPokemon);
         }
-        return slots
-            .filter((slot): slot is BattlePokemonSlot => !!slot)
-            .map((slot) => slot.pokemon);
+        return enemyPokemon;
     }
 
-    protected static getActiveEnemyPokemons(): BattlePokemon[] {
-        return this.getEnemyPokemons().filter((pokemon) => pokemon.isAlive());
+    protected static firstEnemyPokemon(): BattlePokemon | null {
+        return this.activeEnemyPokemon()[0] ?? null;
     }
 
-    protected static getActiveEnemyPokemonSlots(preserveSlots: boolean): Array<BattlePokemon | null> {
-        const slots = this.getEnemyPokemonSlots()();
-        if (!preserveSlots || !slots.length) {
-            return this.getActiveEnemyPokemons();
+    protected static allEnemyPokemon(): BattlePokemon[] {
+        return this.enemyPokemon().filter((pokemon): pokemon is BattlePokemon => !!pokemon);
+    }
+
+    protected static activeEnemyPokemon(): BattlePokemon[] {
+        return this.allEnemyPokemon().filter((pokemon) => pokemon.isAlive());
+    }
+
+    protected static visibleEnemyPokemon(
+        preservePositions: boolean,
+        shouldShow: (pokemon: BattlePokemon) => boolean = (pokemon) => pokemon.isAlive(),
+    ): Array<BattlePokemon | null> {
+        if (!preservePositions) {
+            return this.activeEnemyPokemon();
         }
-        return slots.map((slot) => slot?.pokemon.isAlive() ? slot.pokemon : null);
+        return this.enemyPokemon().map((pokemon) => pokemon && shouldShow(pokemon) ? pokemon : null);
     }
 
-    protected static getFirstActiveEnemyPokemon(): BattlePokemon | null {
-        return this.getActiveEnemyPokemons()[0] ?? null;
+    protected static hasEnemyPokemon(enemyPokemon: BattlePokemon): boolean {
+        return this.allEnemyPokemon().includes(enemyPokemon);
     }
 
     protected static setEnemyPokemon(enemyPokemon: BattlePokemon): void {
-        this.enemyPokemon(enemyPokemon);
-        this.resetEnemyPokemonSlots(1, 1, () => enemyPokemon);
+        this.enemyPokemon([enemyPokemon]);
     }
 
-    protected static updateEnemyPokemonSequence(totalPokemons: number, generatePokemon: BattlePokemonGenerator, maxActivePokemon = 1, defeatedPokemon?: BattlePokemon): void {
-        if (defeatedPokemon) {
-            this.replaceDefeatedEnemyPokemon(defeatedPokemon, totalPokemons, generatePokemon);
-            if (this.enemyPokemon() === defeatedPokemon || !this.enemyPokemon()?.isAlive()) {
-                this.enemyPokemon(this.getFirstActiveEnemyPokemon());
-            }
-        } else {
-            this.resetEnemyPokemonSlots(maxActivePokemon, totalPokemons, generatePokemon);
-            this.enemyPokemon(this.getFirstActiveEnemyPokemon());
-        }
+    protected static clearEnemyPokemon(): void {
+        this.enemyPokemon([]);
     }
 
-    private static resetEnemyPokemonSlots(maxActivePokemon: number, totalPokemons: number, generatePokemon: BattlePokemonGenerator): void {
-        const slots: BattlePokemonSlot[] = [];
-        for (let pokemonIndex = 0; pokemonIndex < maxActivePokemon && pokemonIndex < totalPokemons; pokemonIndex++) {
-            slots.push(this.createEnemyPokemonSlot(pokemonIndex, generatePokemon));
-        }
-        this.getEnemyPokemonSlots()(slots);
+    protected static startEnemyPokemon(totalPokemons: number, generatePokemon: EnemyPokemonGenerator, maxActivePokemon = 1): void {
+        const activeCount = Math.min(maxActivePokemon, totalPokemons);
+        this.enemyPokemon(
+            Array.from({ length: activeCount }, (_, pokemonIndex) => generatePokemon(pokemonIndex)),
+        );
     }
 
-    private static replaceDefeatedEnemyPokemon(enemyPokemon: BattlePokemon, totalPokemons: number, generatePokemon: BattlePokemonGenerator): void {
-        const slots = this.getEnemyPokemonSlots();
-        const enemyPokemonSlotIndex = slots().findIndex((slot) => slot?.pokemon === enemyPokemon);
-        if (enemyPokemonSlotIndex < 0) {
+    protected static continueEnemyPokemon(defeatedPokemon: BattlePokemon, defeatedCount: number, totalPokemons: number, generatePokemon: EnemyPokemonGenerator): void {
+        const defeatedPosition = this.enemyPokemon().findIndex((pokemon) => pokemon === defeatedPokemon);
+        if (defeatedPosition < 0) {
             return;
         }
-        const nextPokemonIndex = Math.max(...slots().map((slot) => slot?.pokemonIndex ?? -1)) + 1;
-        const replacementSlot = nextPokemonIndex < totalPokemons
-            ? this.createEnemyPokemonSlot(nextPokemonIndex, generatePokemon)
+        const nextPokemonIndex = defeatedCount + this.activeEnemyPokemon().length;
+        const replacement = nextPokemonIndex < totalPokemons
+            ? generatePokemon(nextPokemonIndex)
             : null;
-        slots.splice(enemyPokemonSlotIndex, 1, replacementSlot);
+        this.enemyPokemon.splice(defeatedPosition, 1, replacement);
     }
 
     protected static attackActivePokemon(calculateDamage: (pokemon: BattlePokemon) => number): void {
-        const enemyPokemons = this.getActiveEnemyPokemons();
-        if (!enemyPokemons.length) {
+        const enemyPokemon = this.activeEnemyPokemon();
+        if (!enemyPokemon.length) {
             return;
         }
-        const damageMultiplier = enemyPokemons.length > 1 ? 0.75 : 1;
-        enemyPokemons.forEach((pokemon) => {
+        const damageMultiplier = enemyPokemon.length > 1 ? 0.75 : 1;
+        enemyPokemon.forEach((pokemon) => {
             pokemon.damage(this.applyDamageMultiplier(calculateDamage(pokemon), damageMultiplier));
             if (!pokemon.isAlive()) {
                 this.defeatPokemon(pokemon);
             }
         });
-    }
-
-    protected static getEnemyPokemonSlots(): KnockoutObservableArray<BattlePokemonSlot | null> {
-        const battle = this as typeof Battle;
-        const slots = Battle.enemyPokemonSlotsByBattle.get(battle);
-        if (slots) {
-            return slots;
-        }
-        const newSlots: KnockoutObservableArray<BattlePokemonSlot | null> = ko.observableArray([]);
-        Battle.enemyPokemonSlotsByBattle.set(battle, newSlots);
-        return newSlots;
-    }
-
-    private static createEnemyPokemonSlot(pokemonIndex: number, generatePokemon: BattlePokemonGenerator): BattlePokemonSlot {
-        return {
-            pokemon: generatePokemon(pokemonIndex),
-            pokemonIndex,
-        };
     }
 
     private static applyDamageMultiplier(damage: number, damageMultiplier: number): number {
@@ -341,12 +314,12 @@ export default class Battle {
 
     // eslint-disable-next-line @typescript-eslint/member-ordering
     public static pokemonAttackTooltip: PureComputed<string> = ko.pureComputed(() => {
-        if (Battle.enemyPokemon()) {
-            const pokemonAttack = App.game.party.calculatePokemonAttack(Battle.enemyPokemon().type1, Battle.enemyPokemon().type2);
-            return `${pokemonAttack.toLocaleString('en-US')} against ${pokemonMap[Battle.enemyPokemon().name].type.map(t => PokemonType[t]).join('&nbsp;/&nbsp;')}`;
-        } else {
+        const enemyPokemon = Battle.firstEnemyPokemon();
+        if (!enemyPokemon) {
             return '';
         }
+        const pokemonAttack = App.game.party.calculatePokemonAttack(enemyPokemon.type1, enemyPokemon.type2);
+        return `${pokemonAttack.toLocaleString('en-US')} against ${pokemonMap[enemyPokemon.name].type.map(t => PokemonType[t]).join('&nbsp;/&nbsp;')}`;
     }).extend({ rateLimit: 1000 });
 
 }

@@ -9,17 +9,11 @@ class TemporaryBattleBattle extends Battle {
     static index: KnockoutObservable<number> = ko.observable(0);
     static totalPokemons: KnockoutObservable<number> = ko.observable(0);
     static catchingPokemons: KnockoutObservableArray<TemporaryBattleCatchState> = ko.observableArray([]);
-    static enemyPokemons: KnockoutComputed<BattlePokemon[]> = ko.pureComputed(() => {
-        return TemporaryBattleBattle.getEnemyPokemons();
-    });
-    static activeEnemyPokemons: KnockoutComputed<BattlePokemon[]> = ko.pureComputed(() => {
-        return TemporaryBattleBattle.activeEnemyPokemonSlots().filter((pokemon): pokemon is BattlePokemon => !!pokemon);
-    });
-    static activeEnemyPokemonSlots: KnockoutComputed<Array<BattlePokemon | null>> = ko.pureComputed(() => {
-        if (!TemporaryBattleBattle.battle?.optionalArgs.isDoubleBattle) {
-            return TemporaryBattleBattle.getActiveEnemyPokemonSlots(false);
-        }
-        return TemporaryBattleBattle.visibleEnemyPokemonSlots();
+    static enemyPokemonView: KnockoutComputed<Array<BattlePokemon | null>> = ko.pureComputed(() => {
+        return TemporaryBattleBattle.visibleEnemyPokemon(
+            TemporaryBattleBattle.isDoubleBattle(),
+            (enemyPokemon) => enemyPokemon.isAlive() || TemporaryBattleBattle.isCatchingPokemon(enemyPokemon)
+        );
     });
 
     public static isDoubleBattle: KnockoutComputed<boolean> = ko.pureComputed(() => {
@@ -34,7 +28,7 @@ class TemporaryBattleBattle extends Battle {
         return this.catchingPokemons().find((catchState) => catchState.pokemon === pokemon);
     }
 
-    public static clickAttack(targetPokemon = this.enemyPokemon()) {
+    public static clickAttack(targetPokemon = this.currentEnemyPokemon()) {
         if (!TemporaryBattleRunner.running()) {
             return;
         }
@@ -42,7 +36,7 @@ class TemporaryBattleBattle extends Battle {
     }
 
 
-    public static defeatPokemon(enemyPokemon = this.enemyPokemon()) {
+    public static defeatPokemon(enemyPokemon = this.currentEnemyPokemon()) {
         if (!enemyPokemon) {
             return;
         }
@@ -70,7 +64,7 @@ class TemporaryBattleBattle extends Battle {
         }
     }
 
-    private static endFight(enemyPokemon = this.enemyPokemon()) {
+    private static endFight(enemyPokemon = this.currentEnemyPokemon()) {
         if (!enemyPokemon) {
             return;
         }
@@ -84,11 +78,11 @@ class TemporaryBattleBattle extends Battle {
             }
             TemporaryBattleRunner.battleWon(TemporaryBattleBattle.battle);
         } else {
-            this.updateEnemyPokemonSequence(
+            this.continueEnemyPokemon(
+                enemyPokemon,
+                TemporaryBattleBattle.index(),
                 this.battle.getPokemonList().length,
-                (pokemonIndex) => PokemonFactory.generateTemporaryBattlePokemon(this.battle, pokemonIndex),
-                undefined,
-                enemyPokemon
+                (pokemonIndex) => PokemonFactory.generateTemporaryBattlePokemon(this.battle, pokemonIndex)
             );
         }
         player.lowerItemMultipliers(MultiplierDecreaser.Battle);
@@ -100,7 +94,7 @@ class TemporaryBattleBattle extends Battle {
     public static generateNewEnemy() {
         this.clearCatchState();
         TemporaryBattleBattle.counter = 0;
-        this.updateEnemyPokemonSequence(
+        this.startEnemyPokemon(
             this.battle.getPokemonList().length,
             (pokemonIndex) => PokemonFactory.generateTemporaryBattlePokemon(this.battle, pokemonIndex),
             this.battle.optionalArgs.isDoubleBattle ? 2 : 1
@@ -121,13 +115,6 @@ class TemporaryBattleBattle extends Battle {
 
     static set battle(battle: TemporaryBattle) {
         TemporaryBattleRunner.battleObservable(battle);
-    }
-
-    private static visibleEnemyPokemonSlots(): Array<BattlePokemon | null> {
-        return this.getEnemyPokemonSlots()().map((slot) => {
-            const pokemon = slot?.pokemon;
-            return pokemon && (pokemon.isAlive() || this.isCatchingPokemon(pokemon)) ? pokemon : null;
-        });
     }
 
     private static prepareTemporaryBattleCatch(enemyPokemon: BattlePokemon, pokeball: GameConstants.Pokeball): TemporaryBattleCatchState {

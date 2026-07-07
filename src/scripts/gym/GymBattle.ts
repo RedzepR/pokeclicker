@@ -3,14 +3,8 @@ class GymBattle extends Battle {
     static gym: Gym;
     static index: KnockoutObservable<number> = ko.observable(0);
     static totalPokemons: KnockoutObservable<number> = ko.observable(0);
-    static enemyPokemons: KnockoutComputed<BattlePokemon[]> = ko.pureComputed(() => {
-        return GymBattle.getEnemyPokemons();
-    });
-    static activeEnemyPokemons: KnockoutComputed<BattlePokemon[]> = ko.pureComputed(() => {
-        return GymBattle.getActiveEnemyPokemons();
-    });
-    static activeEnemyPokemonSlots: KnockoutComputed<Array<BattlePokemon | null>> = ko.pureComputed(() => {
-        return GymBattle.getActiveEnemyPokemonSlots(GymBattle.gym?.optionalArgs.isDoubleBattle);
+    static enemyPokemonView: KnockoutComputed<Array<BattlePokemon | null>> = ko.pureComputed(() => {
+        return GymBattle.visibleEnemyPokemon(GymBattle.gym?.optionalArgs.isDoubleBattle);
     });
 
     public static pokemonAttack() {
@@ -19,7 +13,7 @@ class GymBattle extends Battle {
         }
     }
 
-    public static clickAttack(targetPokemon = this.enemyPokemon()) {
+    public static clickAttack(targetPokemon = this.currentEnemyPokemon()) {
         if (!GymRunner.running()) {
             return;
         }
@@ -29,7 +23,7 @@ class GymBattle extends Battle {
     /**
      * Award the player with exp, and go to the next pokemon
      */
-    public static defeatPokemon(enemyPokemon = this.enemyPokemon()) {
+    public static defeatPokemon(enemyPokemon = this.currentEnemyPokemon()) {
         if (!enemyPokemon) {
             return;
         }
@@ -43,11 +37,11 @@ class GymBattle extends Battle {
         if (this.index() >= this.gym.getPokemonList().length) {
             GymRunner.gymWon(this.gym);
         } else {
-            this.updateEnemyPokemonSequence(
+            this.continueEnemyPokemon(
+                enemyPokemon,
+                this.index(),
                 this.gym.getPokemonList().length,
-                (pokemonIndex) => PokemonFactory.generateGymPokemon(this.gym, pokemonIndex),
-                undefined,
-                enemyPokemon
+                (pokemonIndex) => PokemonFactory.generateGymPokemon(this.gym, pokemonIndex)
             );
         }
     }
@@ -57,7 +51,7 @@ class GymBattle extends Battle {
      */
     public static generateNewEnemy() {
         this.counter = 0;
-        this.updateEnemyPokemonSequence(
+        this.startEnemyPokemon(
             this.gym.getPokemonList().length,
             (pokemonIndex) => PokemonFactory.generateGymPokemon(this.gym, pokemonIndex),
             this.gym.optionalArgs.isDoubleBattle ? 2 : 1
