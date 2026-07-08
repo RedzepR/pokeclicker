@@ -49,17 +49,8 @@
                                 WeatherType.Clear,
                             ).toLocaleString('en-US'),
                             tooltip: {
-                                title: Battle.firstEnemyPokemon()
-                                    ? `${App.game.party.calculatePokemonAttack(
-                                        Battle.firstEnemyPokemon().type1,
-                                        Battle.firstEnemyPokemon().type2,
-                                        true,
-                                        GameConstants.Region.none,
-                                        false,
-                                        false,
-                                        WeatherType.Clear,
-                                    ).toLocaleString('en-US')} against ${pokemonMap[Battle.firstEnemyPokemon().name].type.map(t => PokemonType[t]).join('&nbsp;/&nbsp;')}`
-                                    : '',
+                                html: true,
+                                title: Battle.pokemonAttackTooltip(BattleFrontierBattle),
                                 trigger: 'hover'}">
                             </span>
                         </span>

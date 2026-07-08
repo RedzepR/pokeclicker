@@ -10,8 +10,9 @@ import Routes from '../routes/Routes';
 import OakItemType from '../enums/OakItemType';
 import Rand from '../utilities/Rand';
 import Amount from '../wallet/Amount';
+import WeatherType from '../weather/WeatherType';
 import type BattlePokemon from './BattlePokemon';
-import type { Observable as KnockoutObservable, ObservableArray as KnockoutObservableArray, PureComputed } from 'knockout';
+import type { Observable as KnockoutObservable, ObservableArray as KnockoutObservableArray } from 'knockout';
 
 
 type EnemyPokemonGenerator = (pokemonIndex: number) => BattlePokemon;
@@ -312,36 +313,27 @@ export default class Battle {
             App.game.farming.gainRandomBerry();
         }
     }
-    private static currentBattle(): typeof Battle {
-        const battleGlobals = globalThis as typeof globalThis & Record<string, typeof Battle | undefined>;
-        switch (App.game.gameState) {
-            case GameConstants.GameState.gym:
-                return battleGlobals.GymBattle ?? Battle;
-            case GameConstants.GameState.dungeon:
-                return battleGlobals.DungeonBattle ?? Battle;
-            case GameConstants.GameState.battleFrontier:
-                return battleGlobals.BattleFrontierBattle ?? Battle;
-            case GameConstants.GameState.temporaryBattle:
-                return battleGlobals.TemporaryBattleBattle ?? Battle;
-            default:
-                return Battle;
-        }
-    }
-    // eslint-disable-next-line @typescript-eslint/member-ordering
-    public static pokemonAttackTooltip: PureComputed<string> = ko.pureComputed(() => {
-        const currentBattle = this.currentBattle();
-        const enemyPokemon = currentBattle.activeEnemyPokemon().length
-            ? currentBattle.activeEnemyPokemon()
-            : currentBattle.allEnemyPokemon();
+
+    public static pokemonAttackTooltip(battle: typeof Battle = Battle): string {
+        const enemyPokemon = battle.activeEnemyPokemon().length
+            ? battle.activeEnemyPokemon()
+            : battle.allEnemyPokemon();
         if (!enemyPokemon.length) {
             return '';
         }
         const damageMultiplier = enemyPokemon.length > 1 ? 0.75 : 1;
         return enemyPokemon.map((pokemon) => {
-            const pokemonAttack = App.game.party.calculatePokemonAttack(pokemon.type1, pokemon.type2);
+            const pokemonAttack = this.calculateTooltipPokemonAttack(battle, pokemon);
             const appliedDamage = Battle.applyDamageMultiplier(pokemonAttack, damageMultiplier);
             return `${appliedDamage.toLocaleString('en-US')} against ${pokemonMap[pokemon.name].type.map((t) => PokemonType[t]).join('&nbsp;/&nbsp;')}`;
         }).join('<br>');
-    }).extend({ rateLimit: 1000 });
+    }
+
+    private static calculateTooltipPokemonAttack(battle: typeof Battle, pokemon: BattlePokemon): number {
+        if (battle.name === 'BattleFrontierBattle') {
+            return App.game.party.calculatePokemonAttack(pokemon.type1, pokemon.type2, true, GameConstants.Region.none, false, false, WeatherType.Clear);
+        }
+        return App.game.party.calculatePokemonAttack(pokemon.type1, pokemon.type2);
+    }
 
 }

@@ -101,7 +101,7 @@
               </tr>
               <tr>
                 <td width="50%">
-                    <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.firstEnemyPokemon() } }"></knockout>
+                    <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': GymBattle.firstEnemyPokemon(), 'battle': GymBattle } }"></knockout>
                 </td>
                 <td width="50%" data-bind="css: { 'text-muted': App.game.challenges.list.disableClickAttack.active() }">
                     <span style="display: inline;">Click Attack:

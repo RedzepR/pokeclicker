@@ -5,7 +5,7 @@
          text: App.game.party.pokemonAttackObservable().toLocaleString('en-US'),
          tooltip: {
             html: true,
-            title: Battle.pokemonAttackTooltip,
+            title: Battle.pokemonAttackTooltip($data.battle ?? Battle),
             trigger: 'hover',
          }
          "></span>
@@ -13,4 +13,4 @@
 </script>
 
 <!-- Example usage -->
-<!-- <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.firstEnemyPokemon() } }">Pokémon sprite</knockout> -->
+<!-- <knockout data-bind="template: { name: 'pokemonAttackTemplate', data: { 'pokemon': Battle.firstEnemyPokemon(), 'battle': Battle } }">Pokémon sprite</knockout> -->
