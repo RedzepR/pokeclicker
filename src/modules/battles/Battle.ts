@@ -212,7 +212,7 @@ export default class Battle {
         if (!enemyPokemon.length) {
             return;
         }
-        const damageMultiplier = enemyPokemon.length > 1 ? 0.75 : 1;
+        const damageMultiplier = enemyPokemon.length > 1 ? GameConstants.DOUBLE_BATTLE_DAMAGE_MULTIPLIER : GameConstants.SINGLE_BATTLE_DAMAGE_MULTIPLIER;
         enemyPokemon.forEach((pokemon) => {
             pokemon.damage(this.applyDamageMultiplier(calculateDamage(pokemon), damageMultiplier));
             if (!pokemon.isAlive()) {
@@ -321,7 +321,7 @@ export default class Battle {
         if (!enemyPokemon.length) {
             return '';
         }
-        const damageMultiplier = enemyPokemon.length > 1 ? 0.75 : 1;
+        const damageMultiplier = enemyPokemon.length > 1 ? GameConstants.DOUBLE_BATTLE_DAMAGE_MULTIPLIER : GameConstants.SINGLE_BATTLE_DAMAGE_MULTIPLIER;
         return enemyPokemon.map((pokemon) => {
             const pokemonAttack = this.calculateTooltipPokemonAttack(battle, pokemon);
             const appliedDamage = Battle.applyDamageMultiplier(pokemonAttack, damageMultiplier);
