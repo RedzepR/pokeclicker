@@ -14,15 +14,20 @@ export default class QuestLineStepCompletedRequirement extends Requirement {
     }
 
     public getProgress(): number {
-        let questIndex = typeof this.questIndex === 'number' ? this.questIndex : (typeof this.questIndex === 'function' ? this.questIndex() : 0);
-        return (this.quest.state() === QuestLineState.ended || this.quest.curQuest() > questIndex) ? 1 : 0;
+        const quest = this.quest;
+        if (!quest) {
+            return 0;
+        }
+        const questIndex = typeof this.questIndex === 'number' ? this.questIndex : (typeof this.questIndex === 'function' ? this.questIndex() : 0);
+        return (quest.state() === QuestLineState.ended || quest.curQuest() > questIndex) ? 1 : 0;
     }
 
     public isCompleted() {
-        return this.quest.state() == QuestLineState.suspended ? false : super.isCompleted();
+        return this.quest?.state() == QuestLineState.suspended ? false : super.isCompleted();
     }
 
     public hint(): string {
-        return this.option !== AchievementOption.less ? `Progress further in questline ${this.quest.displayName}.` : `Questline ${this.quest.displayName} has progressed past this point.`;
+        const displayName = this.quest?.displayName ?? this.questLineName;
+        return this.option !== AchievementOption.less ? `Progress further in questline ${displayName}.` : `Questline ${displayName} has progressed past this point.`;
     }
 }

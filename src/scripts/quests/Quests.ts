@@ -18,7 +18,7 @@ class Quests implements Saveable {
     public freeRefresh = ko.observable(false);
     public questList: KnockoutObservableArray<Quest> = ko.observableArray();
     public questLines: KnockoutObservableArray<QuestLine> = ko.observableArray();
-    private questLineMap: Map<QuestLineNameType, QuestLine> = new Map();
+    private questLineMap: Map<string, QuestLine> = new Map();
     public level: KnockoutComputed<number> = ko.pureComputed((): number => {
         return this.xpToLevel(this.xp());
     });
@@ -45,7 +45,7 @@ class Quests implements Saveable {
     constructor() {
         this.questLines.subscribe(questLines => {
             this.questLineMap.clear();
-            questLines.forEach(questLine => this.questLineMap.set(questLine.name, questLine));
+            questLines.forEach(questLine => this.questLineMap.set(questLine.name.toLowerCase(), questLine));
         });
     }
 
@@ -80,7 +80,19 @@ class Quests implements Saveable {
      * @param name The quest line name
      */
     getQuestLine(name: QuestLineNameType) {
-        return this.questLineMap.get(name);
+        const normalizedName = name.toLowerCase();
+        const indexedQuestLine = this.questLineMap.get(normalizedName);
+        if (indexedQuestLine) {
+            return indexedQuestLine;
+        }
+
+        // Keep lookups reliable while quest lines are being constructed, even if
+        // the observable array has not notified the index yet.
+        const questLine = this.questLines().find(ql => ql.name.toLowerCase() === normalizedName);
+        if (questLine) {
+            this.questLineMap.set(normalizedName, questLine);
+        }
+        return questLine;
     }
 
     public beginQuest(index: number) {
