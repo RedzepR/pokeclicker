@@ -18,6 +18,7 @@ class Quests implements Saveable {
     public freeRefresh = ko.observable(false);
     public questList: KnockoutObservableArray<Quest> = ko.observableArray();
     public questLines: KnockoutObservableArray<QuestLine> = ko.observableArray();
+    private questLineMap: Map<QuestLineNameType, QuestLine> = new Map();
     public level: KnockoutComputed<number> = ko.pureComputed((): number => {
         return this.xpToLevel(this.xp());
     });
@@ -41,7 +42,12 @@ class Quests implements Saveable {
         return list.sort(Quests.questCompareBy);
     });
 
-    constructor() { }
+    constructor() {
+        this.questLines.subscribe(questLines => {
+            this.questLineMap.clear();
+            questLines.forEach(questLine => this.questLineMap.set(questLine.name, questLine));
+        });
+    }
 
     static questCompareBy(quest1, quest2): number {
         if (Quests.getQuestSortStatus(quest1) < Quests.getQuestSortStatus(quest2)) {
@@ -74,7 +80,7 @@ class Quests implements Saveable {
      * @param name The quest line name
      */
     getQuestLine(name: QuestLineNameType) {
-        return this.questLines().find(ql => ql.name.toLowerCase() == name.toLowerCase());
+        return this.questLineMap.get(name);
     }
 
     public beginQuest(index: number) {

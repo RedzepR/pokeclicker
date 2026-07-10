@@ -4264,25 +4264,18 @@ class QuestLineHelper {
     public static createTreasureMapQuestLine() {
         const treasureMapQuest = new QuestLine('Pirate Treasure Map', 'You obtained a Treasure Map.');
         this.addTreasureMapQuest(treasureMapQuest);
-        App.game.quests.questLines().push(treasureMapQuest);
-    }
-
-    public static rebuildTreasureMapQuestLine() {
-        const treasureMapQuest = App.game.quests.getQuestLine('Pirate Treasure Map');
-        if (!treasureMapQuest) {
-            this.createTreasureMapQuestLine();
+        const questLines = App.game.quests.questLines();
+        const existingQuestLineIndex = questLines.findIndex(questLine => questLine.name === treasureMapQuest.name);
+        if (existingQuestLineIndex === -1) {
+            questLines.push(treasureMapQuest);
             return;
         }
 
-        this.quitQuestLine('Pirate Treasure Map');
-        treasureMapQuest.quests().forEach(q => {
+        questLines[existingQuestLineIndex].quests().forEach(q => {
             q.deleteAutoCompleter();
             q.deleteFocusSub(true);
         });
-        treasureMapQuest.state(QuestLineState.inactive);
-        treasureMapQuest.totalQuests = 0;
-        treasureMapQuest.quests.removeAll();
-        this.addTreasureMapQuest(treasureMapQuest);
+        questLines.splice(existingQuestLineIndex, 1, treasureMapQuest);
     }
 
     public static isQuestLineCompleted(name: QuestLineNameType) {
