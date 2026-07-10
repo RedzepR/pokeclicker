@@ -387,6 +387,7 @@ class Quests implements Saveable {
         QuestLineHelper.loadQuestLines();
 
         if (!json) {
+            QuestLineHelper.createTreasureMapQuestLine();
             // Generate the questList
             this.generateQuestList();
             return;
@@ -411,9 +412,11 @@ class Quests implements Saveable {
             this.loadQuestList(json.questList);
         }
 
-        // Load our quest line progress
-        if (json.questLines) {
-            this.loadQuestLines(json.questLines);
-        }
+        // Restore static quest line progress before checking which dungeons are unlocked
+        // for the dynamic treasure map quest line.
+        const savedQuestLines = json.questLines ?? [];
+        this.loadQuestLines(savedQuestLines.filter(questLine => questLine.name !== 'Pirate Treasure Map'));
+        QuestLineHelper.createTreasureMapQuestLine();
+        this.loadQuestLines(savedQuestLines.filter(questLine => questLine.name === 'Pirate Treasure Map'));
     }
 }

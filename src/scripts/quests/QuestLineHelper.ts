@@ -4243,7 +4243,8 @@ class QuestLineHelper {
 
     private static addTreasureMapQuest(treasureMapQuest: QuestLine) {
         SeededRand.seedWithDate(new Date());
-        let treasureDungeon = SeededRand.fromArray(Object.values(dungeonList).filter(x => x.difficulty == player.highestRegion() && TownList[x.name].isUnlocked()));
+        const unlockedDungeons = Object.values(dungeonList).filter(x => x.difficulty == player.highestRegion() && TownList[x.name].isUnlocked());
+        let treasureDungeon = SeededRand.fromArray(unlockedDungeons);
         if (!treasureDungeon) {
             treasureDungeon = Object.values(dungeonList).find(() => true);
         }
@@ -4387,7 +4388,6 @@ class QuestLineHelper {
         this.createDrSplashQuestLine();
         this.createMeltanQuestLine();
         this.createRainbowRocketQuestLine();
-        this.createTreasureMapQuestLine();
         // Enforce unique questline names
         const numQuestLines = App.game.quests.questLines().length;
         if (numQuestLines != [...new Set(App.game.quests.questLines().map(ql => ql.name))].length) {
