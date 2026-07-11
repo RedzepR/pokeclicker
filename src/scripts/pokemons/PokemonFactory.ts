@@ -39,7 +39,7 @@ class PokemonFactory {
         const heldItem: BagItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.ROUTE_HELD_ITEM_MODIFIER, shiny);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
         const encounterType = roaming ? EncounterType.roamer : EncounterType.route;
-        const alpha = this.generateAlpha(GameConstants.ALPHA_CHANCE_BATTLE);
+        const alpha: boolean = this.generateAlpha(GameConstants.ALPHA_CHANCE_BATTLE);
 
         if (shiny) {
             Notifier.notify({
@@ -147,7 +147,7 @@ class PokemonFactory {
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_HELD_ITEM_MODIFIER, shiny);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
-        const alpha = this.generateAlpha(GameConstants.ALPHA_CHANCE_DUNGEON);
+        const alpha: boolean = this.generateAlpha(GameConstants.ALPHA_CHANCE_DUNGEON);
         if (shiny) {
             Notifier.notify({
                 message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)}! ✨`,
@@ -180,7 +180,7 @@ class PokemonFactory {
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_BOSS_HELD_ITEM_MODIFIER, shiny);
         const gender = this.generateGender(basePokemon.gender.femaleRatio, basePokemon.gender.type);
-        const alpha = this.generateAlpha(GameConstants.ALPHA_CHANCE_BATTLE);
+        const alpha: boolean = this.generateAlpha(GameConstants.ALPHA_CHANCE_BATTLE);
         if (shiny) {
             Notifier.notify({
                 message: `✨ You encountered a shiny ${PokemonHelper.displayName(name)}! ✨`,
