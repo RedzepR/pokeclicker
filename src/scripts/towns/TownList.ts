@@ -10167,7 +10167,7 @@ const Adaman = new NPC('Adaman & Sabi', [
 const Kamado8 = new NPC('Commander Kamado', [
     'Prelude Beach... Indeed a place of beginning. Now is not the time for words. Face me in battle!',
 ], {
-    image: 'assets/images/npcs/The Galaxy Team\'s Kamado',
+    image: 'assets/images/npcs/The Galaxy Team\'s Kamado.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Volo\'s Dream', 10), new QuestLineStepCompletedRequirement('Volo\'s Dream', 12, GameConstants.AchievementOption.less)]),
 });
 
@@ -10184,7 +10184,7 @@ const Volo8 = new NPC('Pokémon Wielder Volo', [
     'Now hand over the plates you gathered! I will be the one to bring them all together! My desire to meet Arceus cannot be contained any longer! I need to know what it is! I MUST know what it is!',
     'If I can meet Arceus myself, then I may also be able to subjugate its power... And using that, I will attempt to create a new, better world! ',
 ], {
-    image: 'assets/images/npcs/Pokémon Wielder Volo.png',
+    image: 'assets/images/npcs/Volo.png',
     requirement: new MultiRequirement([new QuestLineStepCompletedRequirement('Volo\'s Dream', 13), new QuestLineStepCompletedRequirement('Volo\'s Dream', 15, GameConstants.AchievementOption.less)]),
 });
 
