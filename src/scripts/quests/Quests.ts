@@ -18,7 +18,7 @@ class Quests implements Saveable {
     public freeRefresh = ko.observable(false);
     public questList: KnockoutObservableArray<Quest> = ko.observableArray();
     public questLines: KnockoutObservableArray<QuestLine> = ko.observableArray();
-    private questLineMap: Map<string, QuestLine> = new Map();
+    private questLineMap: Map<QuestLineNameType, QuestLine> = new Map();
     public level: KnockoutComputed<number> = ko.pureComputed((): number => {
         return this.xpToLevel(this.xp());
     });
@@ -42,12 +42,7 @@ class Quests implements Saveable {
         return list.sort(Quests.questCompareBy);
     });
 
-    constructor() {
-        this.questLines.subscribe(questLines => {
-            this.questLineMap.clear();
-            questLines.forEach(questLine => this.questLineMap.set(questLine.name.toLowerCase(), questLine));
-        });
-    }
+    constructor() { }
 
     static questCompareBy(quest1, quest2): number {
         if (Quests.getQuestSortStatus(quest1) < Quests.getQuestSortStatus(quest2)) {
@@ -80,19 +75,22 @@ class Quests implements Saveable {
      * @param name The quest line name
      */
     getQuestLine(name: QuestLineNameType) {
-        const normalizedName = name.toLowerCase();
-        const indexedQuestLine = this.questLineMap.get(normalizedName);
-        if (indexedQuestLine) {
-            return indexedQuestLine;
+        // Map did not work as a pureComputed due to deferUpdates = true, so build it here
+        if (this.questLineMap.size !== this.questLines().length) {
+            this.questLineMap.clear();
+            this.questLines().forEach(ql => this.questLineMap.set(ql.name, ql));
         }
+        return this.questLineMap.get(name);
+    }
 
-        // Keep lookups reliable while quest lines are being constructed, even if
-        // the observable array has not notified the index yet.
-        const questLine = this.questLines().find(ql => ql.name.toLowerCase() === normalizedName);
-        if (questLine) {
-            this.questLineMap.set(normalizedName, questLine);
+    replaceQuestLine(questLine: QuestLine) {
+        const oldQuestLine = this.getQuestLine(questLine.name);
+        if (!oldQuestLine) {
+            return;
         }
-        return questLine;
+        oldQuestLine.dispose();
+        this.questLines.replace(oldQuestLine, questLine);
+        this.questLineMap.set(questLine.name, questLine);
     }
 
     public beginQuest(index: number) {
@@ -387,7 +385,6 @@ class Quests implements Saveable {
         QuestLineHelper.loadQuestLines();
 
         if (!json) {
-            QuestLineHelper.createTreasureMapQuestLine();
             // Generate the questList
             this.generateQuestList();
             return;
@@ -412,11 +409,9 @@ class Quests implements Saveable {
             this.loadQuestList(json.questList);
         }
 
-        // Restore static quest line progress before checking which dungeons are unlocked
-        // for the dynamic treasure map quest line.
-        const savedQuestLines = json.questLines ?? [];
-        this.loadQuestLines(savedQuestLines.filter(questLine => questLine.name !== 'Pirate Treasure Map'));
-        QuestLineHelper.createTreasureMapQuestLine();
-        this.loadQuestLines(savedQuestLines.filter(questLine => questLine.name === 'Pirate Treasure Map'));
+        // Load our quest line progress
+        if (json.questLines) {
+            this.loadQuestLines(json.questLines);
+        }
     }
 }
