@@ -417,7 +417,7 @@ export const SpriteCredits: Credit[] = [
             'Sacred Stone Plate',
             'Sacred Toxic Plate',
             'Sacred Zap Plate',
-            'Scorebunny (Pirate)',
+            'Scorbunny (Pirate)',
             'Sea Mauville',
             'Shadow Absol',
             'Shadow Arbok',
@@ -1285,9 +1285,9 @@ export const SpriteCredits: Credit[] = [
         resources: [
             'Bounsweet (Pirate)',
             'Steenee (Pirate)',
-            'Tsareena (Captain)',         
-            'Captain Hoopa',         
-            'Cinderace (Captain)',         
+            'Tsareena (Captain)',
+            'Captain Hoopa',
+            'Cinderace (Captain)',
         ],
         // Notes: Made specifically for PokéClicker.
     },
