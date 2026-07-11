@@ -420,8 +420,7 @@ TemporaryBattleList['Gyarados Crew'] = new TemporaryBattle(
     undefined,
     {
         rewardFunction: () => {
-            QuestLineHelper.rebuildTreasureMapQuestLine();
-            App.game.quests.getQuestLine('Pirate Treasure Map').beginQuest();
+            QuestLineHelper.rebuildTreasureMapQuestLine().beginQuest();
         },
         resetDaily: true,
         returnTown: 'Gyarados Galleon',
