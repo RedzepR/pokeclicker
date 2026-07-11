@@ -4241,14 +4241,19 @@ class QuestLineHelper {
         App.game.quests.questLines().push(easterQuestLine);
     }
 
-    private static buildTreasureMapQuestLine(): QuestLine {
-        const treasureMapQuest = new QuestLine('Pirate Treasure Map', 'You obtained a Treasure Map.');
+    private static buildTreasureMapQuestLine(dungeonName?: string): QuestLine {
         SeededRand.seedWithDate(new Date());
         const unlockedDungeons = Object.values(dungeonList).filter(x => x.difficulty == player.highestRegion() && TownList[x.name].isUnlocked());
+        // Always generate seeded dungeon roll, even when a saved dungeon overrides the pick so the amount roll below stays the same within the day
         let treasureDungeon = SeededRand.fromArray(unlockedDungeons);
+        if (dungeonName && dungeonList[dungeonName]) {
+            // Restoring from a save, keep the dungeon picked when the quest line was built
+            treasureDungeon = dungeonList[dungeonName];
+        }
         if (!treasureDungeon) {
             treasureDungeon = Object.values(dungeonList).find(() => true);
         }
+        const treasureMapQuest = new TreasureMapQuestLine('You obtained a Treasure Map.', treasureDungeon.name);
         const rewardTotal = 90 + 6 * player.highestRegion();
         const rewardSilver = Math.floor(rewardTotal / 10);
         const rewardCopper = rewardTotal - rewardSilver * 10;
@@ -4264,8 +4269,8 @@ class QuestLineHelper {
         return treasureMapQuest;
     }
 
-    public static createTreasureMapQuestLine() {
-        App.game.quests.questLines().push(this.buildTreasureMapQuestLine());
+    public static createTreasureMapQuestLine(dungeonName?: string) {
+        App.game.quests.questLines().push(this.buildTreasureMapQuestLine(dungeonName));
     }
 
     public static rebuildTreasureMapQuestLine() {
@@ -4281,7 +4286,7 @@ class QuestLineHelper {
         return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
 
-    public static loadQuestLines() {
+    public static loadQuestLines(savedQuestLines?: any[]) {
         this.createTutorial();
         this.createRocketKantoQuestLine();
         this.createBillsGrandpaQuestLine();
@@ -4349,7 +4354,7 @@ class QuestLineHelper {
         this.createDrSplashQuestLine();
         this.createMeltanQuestLine();
         this.createRainbowRocketQuestLine();
-        this.createTreasureMapQuestLine();
+        this.createTreasureMapQuestLine(savedQuestLines?.find(ql => ql.name === 'Pirate Treasure Map')?.dungeon);
         // Enforce unique questline names
         const numQuestLines = App.game.quests.questLines().length;
         if (numQuestLines != [...new Set(App.game.quests.questLines().map(ql => ql.name))].length) {

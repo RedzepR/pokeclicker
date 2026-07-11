@@ -200,3 +200,16 @@ class QuestLine {
         return json;
     }
 }
+
+class TreasureMapQuestLine extends QuestLine {
+    constructor(description: string, public dungeon: string) {
+        super('Pirate Treasure Map', description);
+    }
+
+    toJSON() {
+        return {
+            ...super.toJSON(),
+            dungeon: this.dungeon,
+        };
+    }
+}

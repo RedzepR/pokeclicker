@@ -382,7 +382,7 @@ class Quests implements Saveable {
 
     fromJSON(json: any) {
         // Generate the questLines (statistics not yet loaded when constructing)
-        QuestLineHelper.loadQuestLines();
+        QuestLineHelper.loadQuestLines(json?.questLines);
 
         if (!json) {
             // Generate the questList

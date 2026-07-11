@@ -39,7 +39,7 @@ export class HeldItem extends Item {
         return this === comparedItem;
     }
 
-    /* eslint-disable @typescript-eslint/no-unused-vars */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public isInferior(comparedItem: HeldItem): boolean {
         return false;
     }
@@ -92,7 +92,7 @@ export class AttackBonusHeldItem extends HeldItem {
 }
 
 export class PokemonRestrictedAttackBonusHeldItem extends AttackBonusHeldItem {
-    
+
 }
 
 export class TypeRestrictedAttackBonusHeldItem extends AttackBonusHeldItem {
