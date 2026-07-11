@@ -14266,7 +14266,7 @@ dungeonList['Temple of Sinnoh'] = new Dungeon('Temple of Sinnoh',
     3782000, 54);
 
 dungeonList['Turnback Cave'] = new Dungeon('Turnback Cave',
-    ['Gabite', 'Hisuian Sliggoo', 'Dusclops', 'Gengar', 'Rotom', 'Drifblim', 'Hisuian Zorua'],
+    ['Gabite', 'Hisuian Sliggoo', 'Dusclops', 'Gengar', 'Rotom', 'Drifblim'],
     {
         common: [
             {loot: 'Cheri', weight: 2},
@@ -14285,6 +14285,7 @@ dungeonList['Turnback Cave'] = new Dungeon('Turnback Cave',
         rare: [
             {loot: 'Purple Shard'},
             {loot: 'Black Shard'},
+            {loot: 'Hisuian Zorua'}
         ],
         epic: [
             {loot: 'Spooky Plate'},
