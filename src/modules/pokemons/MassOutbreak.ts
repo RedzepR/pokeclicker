@@ -41,7 +41,10 @@ export default class MassOutbreak {
 
         MassOutbreak.increasedChanceRoute.forEach((subRegionGroups, region) => {
             subRegionGroups.forEach((route, group) => {
-                const routes = Routes.getRoutesByRegion(region).filter((r) => this.findGroup(region, r.subRegion ?? 0) === group).filter(r => r.pokemon.special?.some(({ req }) => req instanceof MassOutbreakRequirement || (req instanceof MultiRequirement && req.requirements.some(x => x instanceof MassOutbreakRequirement))));
+                const routes = Routes.getRoutesByRegion(region)
+                    .filter((r) => this.findGroup(region, r.subRegion ?? 0) === group)
+                    // eslint-disable-next-line max-len
+                    .filter(r => r.pokemon.special?.some(({ req }) => req instanceof MassOutbreakRequirement || (req instanceof MultiRequirement && req.requirements.some(x => x instanceof MassOutbreakRequirement))));
                 // Select a route
                 const selectedRoute = SeededRand.fromArray(routes);
                 route(selectedRoute);
