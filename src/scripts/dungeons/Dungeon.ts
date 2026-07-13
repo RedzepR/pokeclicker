@@ -3371,6 +3371,7 @@ dungeonList['New Mauville'] = new Dungeon('New Mauville',
         epic: [
             {loot: 'Razz'},
             {loot: 'Ultraball'},
+            {loot: 'Magneton (Incomplete)', ignoreDebuff: true},
         ],
         legendary: [{loot: 'Zap Plate'}],
     },
