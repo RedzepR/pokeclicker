@@ -1171,7 +1171,6 @@ export const SpriteCredits: Credit[] = [
         link: 'https://discordapp.com/users/1104416478964498432',
         image: 'assets/images/profile/trainer-162.png',
         resources: [
-            'Squirtle Squad',
             'Squad Leader Wartortle',
         ],
         // NOTES: Made specifically for Pokeclicker.
