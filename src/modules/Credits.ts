@@ -1157,6 +1157,15 @@ export const SpriteCredits: Credit[] = [
         // NOTES: free for non-profit use.
     },
     {
+        name: 'Smokeforst',
+        link: 'https://discordapp.com/users/1104416478964498432',
+        image: 'assets/images/profile/trainer-162.png',
+        resources: [
+            'Combee (Wall)',
+        ],
+        // NOTES: Made specifically for Pokeclicker.
+    },
+    {
         name: 'Someone Soul',
         link: 'https://discordapp.com/users/824384977633411082',
         resources: [
