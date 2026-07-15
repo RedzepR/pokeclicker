@@ -337,7 +337,7 @@ class FarmController {
         }
 
         const wanderer = BerryList.flatMap(berry => berry.wander).find(w => w.pokemon.includes(pokemon) && w.req);
-        return wanderer?.getHint() ?? '';
+        return wanderer && !wanderer.isAvailable() ? wanderer.getHint() : '';
     }
 
     public static shortcutVisible: KnockoutComputed<boolean> = ko.pureComputed(() => {

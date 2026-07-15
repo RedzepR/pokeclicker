@@ -713,6 +713,7 @@ export type PokemonNameType
     | 'Wormadam (Trash)'
     | 'Mothim'
     | 'Combee'
+    | 'Combee (Wall)'
     | 'Vespiquen'
     | 'Pachirisu'
     | 'Buizel'

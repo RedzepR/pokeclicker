@@ -3,6 +3,7 @@ import BerryFirmness from '../enums/BerryFirmness';
 import BerryType from '../enums/BerryType';
 import BerryFlavor from '../interfaces/BerryFlavor';
 import { PokemonNameType } from '../pokemons/PokemonNameType';
+import WandererOnFarmRequirement from '../requirements/WandererOnFarmRequirement';
 import Aura from './Aura';
 import { BerryWanderer } from './BerryWanderer';
 
@@ -25,7 +26,7 @@ export default class Berry {
         [BerryColor.Purple]: [new BerryWanderer(['Illumise', 'Oricorio (Sensu)'])],
         [BerryColor.Pink]: [new BerryWanderer(['Spewpa', 'Oricorio (Pa\'u)'])],
         [BerryColor.Green]: [new BerryWanderer(['Burmy (Plant)'])],
-        [BerryColor.Yellow]: [new BerryWanderer(['Combee', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)'])],
+        [BerryColor.Yellow]: [new BerryWanderer(['Combee', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)']), new BerryWanderer(['Combee (Wall)'], new WandererOnFarmRequirement(['Combee'], 3))],
         [BerryColor.Blue]: [new BerryWanderer(['Volbeat', 'Flabébé (Blue)'])],
         [BerryColor.Silver]: [new BerryWanderer(['Flabébé (White)'])],
         [BerryColor.Gold]: [new BerryWanderer(['Flabébé (Orange)'])],
