@@ -386,14 +386,16 @@ class PokemonLocations {
             return cache[pokemonName];
         }
         const cacheLine = this.initCacheLine(cache, Array<string>);
-        Berry.baseWander.forEach(pokemon => {
-            cacheLine[pokemon] = ['Always'];
+        Berry.baseWander.forEach(wanderer => {
+            wanderer.pokemon.forEach(pokemon => cacheLine[pokemon] = ['Always']);
         });
         BerryList.forEach((berry) => {
-            berry.wander.forEach(pokemon => {
-                if (cacheLine[pokemon][0] !== 'Always') {
-                    cacheLine[pokemon].push(BerryType[berry.type]);
-                }
+            berry.wander.forEach(wanderer => {
+                wanderer.pokemon.forEach((pokemon) => {
+                    if (cacheLine[pokemon][0] !== 'Always') {
+                        cacheLine[pokemon].push(BerryType[berry.type]);
+                    }
+                });
             });
         });
         return cacheLine[pokemonName];

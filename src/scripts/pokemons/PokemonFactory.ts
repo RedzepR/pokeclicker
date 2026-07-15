@@ -351,7 +351,7 @@ class PokemonFactory {
         const mulch = plot.mulch;
         const availablePokemon = [];
         const weights = [];
-        berry.wander.forEach((p, i) => {
+        berry.wander.filter(wanderer => wanderer.isAvailable()).flatMap(wanderer => wanderer.pokemon).forEach((p, i) => {
             if (pokemonMap[p].nativeRegion <= player.highestRegion()) {
                 availablePokemon.push(p);
                 weights.push(mulch === MulchType.Gooey_Mulch && i >= Berry.baseWander.length ? 3 : 1);

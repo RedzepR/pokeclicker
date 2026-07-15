@@ -331,6 +331,15 @@ class FarmController {
         }
     }
 
+    public static getWandererHint(pokemon: PokemonNameType): string {
+        if (pokemonMap[pokemon].nativeRegion > player.highestRegion()) {
+            return `Reach ${GameConstants.camelCaseToString(GameConstants.Region[pokemonMap[pokemon].nativeRegion])} to attract this Pokémon!`;
+        }
+
+        const wanderer = BerryList.flatMap(berry => berry.wander).find(w => w.pokemon.includes(pokemon) && w.req);
+        return wanderer?.getHint() ?? '';
+    }
+
     public static shortcutVisible: KnockoutComputed<boolean> = ko.pureComputed(() => {
         return App.game.farming.canAccess() && Settings.getSetting('showFarmModule').observableValue() === 'never';
     });

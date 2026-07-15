@@ -182,7 +182,7 @@
                             <tr>
                               <td>
                                 <ul class="list-inline">
-                                <!-- ko foreach: Berry.baseWander.filter(w => pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
+                                <!-- ko foreach: Berry.baseWander.flatMap(w => w.pokemon) -->
                                   <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
                                 <!-- /ko -->
                                 </ul>
@@ -194,20 +194,20 @@
                             <tr>
                               <td>
                                 <ul class="list-inline">
-                                <!-- ko foreach: Berry.colorWander[BerryList[$data].color].filter(w => pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
+                                <!-- ko foreach: Berry.colorWander[BerryList[$data].color].flatMap(w => w.pokemon) -->
                                 <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
                                 <!-- /ko -->
                                 </ul>
                               </td>
                             </tr>
-                            <!-- ko if: BerryList[$data].wander.some((w) => ![...Berry.baseWander, ...Berry.colorWander[BerryList[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
+                            <!-- ko if: BerryList[$data].wander.some((w) => ![...Berry.baseWander, ...Berry.colorWander[BerryList[$data].color]].includes(w)) -->
                             <tr>
                               <th colspan="2" data-bind="text: `Attracted to ${BerryType[$data]} Berry`">Specific Wanderers</th>
                             </tr>
                             <tr>
                               <td>
                                 <ul class="list-inline">
-                                <!-- ko foreach: BerryList[$data].wander.filter((w) => ![...Berry.baseWander, ...Berry.colorWander[BerryList[$data].color]].includes(w) && pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
+                                <!-- ko foreach: BerryList[$data].wander.filter((w) => ![...Berry.baseWander, ...Berry.colorWander[BerryList[$data].color]].includes(w)).flatMap(w => w.pokemon) -->
                                   <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
                                 <!-- /ko -->
                                 </ul>
