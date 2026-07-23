@@ -934,6 +934,7 @@ export const SpriteCredits: Credit[] = [
     {
         name: 'Mel',
         link: 'https://discordapp.com/users/49898798012436480/',
+        image: 'assets/images/profile/trainer-115.png',
         resources: [
             'Magikarp (Overweight)',
             'Magikarp (Jacked)',
