@@ -1,46 +1,63 @@
-name: 🔂 PR Preview Deploy
+name: 🔂 PR Preview
 
 on:
-  workflow_dispatch:
-    inputs:
-      pr_number:
-        description: "PR number to deploy"
-        required: true
-        type: string
-
-concurrency:
-  group: preview-${{ inputs.pr_number }}
-  cancel-in-progress: true
+  pull_request_target:
+    types:
+      - labeled
+      - closed
+    paths:
+      - 'src/**/*.ts'
+      - 'src/**/*.html'
+      - 'src/**/*.less'
+      - 'src/**/*.ejs'
 
 jobs:
   preview:
+    if: |
+      github.event.action == 'closed' ||
+      github.event.label.name == 'deploy-preview'
+
     environment: pokeclicker-development
     runs-on: ubuntu-latest
 
     permissions:
       contents: read
-      pull-requests: read
+      pull-requests: write
 
     steps:
-      - name: Get PR SHA
-        id: pr
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Get User Permission
+        id: checkAccess
+        if: github.event.action != 'closed'
+        uses: actions-cool/check-user-permission@v2
+        with:
+          require: write
+          username: ${{ github.actor }}
+
+      - name: Check User Permission
+        if: |
+          github.event.action != 'closed' &&
+          steps.checkAccess.outputs.require-result == 'false'
         run: |
-          echo "sha=$(gh pr view ${{ inputs.pr_number }} --json headRefOid -q .headRefOid)" >> "$GITHUB_OUTPUT"
+          echo "${{ github.actor }} does not have permissions on this repo."
+          echo "Current permission level is ${{ steps.checkAccess.outputs.user-permission }}"
+          exit 1
 
       - name: Checkout PR
+        if: github.event.action != 'closed'
         uses: actions/checkout@v6
         with:
-          ref: ${{ steps.pr.outputs.sha }}
+          ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
+          allow-unsafe-pr-checkout: true
 
       - name: Build PR
+        if: github.event.action != 'closed'
         uses: actions/setup-node@v6
         with:
           node-version-file: package.json
 
       - name: Build
+        if: github.event.action != 'closed'
         run: |
           npm ci
           echo "module.exports={DEVELOPMENT:true,DEV_BANNER:true};" >> config.js
@@ -50,8 +67,8 @@ jobs:
           perl -0pi -e 's|</title>|</title>\n<script>\nif("serviceWorker" in navigator){\nnavigator.serviceWorker.register("/sw.js",{scope:"/"}).then(reg=>{if(reg.waiting)reg.waiting.postMessage({type:"SKIP_WAITING"});});\nnavigator.serviceWorker.addEventListener("controllerchange",()=>{if(window._reloading)return;window._reloading=true;window.location.reload();});\n}\n</script>|s' build/index.html
 
       - name: Deploy to GH-Pages
-        uses: mvk/pr-preview-action@5ce80c4514b76075e126b7dbcd7674a7ff4183dd
         id: preview_step
+        uses: mvk/pr-preview-action@5ce80c4514b76075e126b7dbcd7674a7ff4183dd
         with:
           source-dir: 'build'
           preview-branch: 'master'
@@ -63,4 +80,26 @@ jobs:
           qr-code: false
 
       - name: Preview URL
+        if: github.event.action != 'closed'
         run: echo "url => ${{ steps.preview_step.outputs.deployment-url }}"
+
+      - name: Replace deploy label with deployed label
+        if: |
+          github.event.action == 'labeled' &&
+          success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.removeLabel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              name: 'deploy-preview'
+            });
+
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['preview-deployed']
+            });
