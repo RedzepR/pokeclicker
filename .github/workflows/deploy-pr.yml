@@ -1,57 +1,54 @@
-name: 🔂 PR Preview
+name: 🔂 PR Preview Deploy
 
 on:
-  pull_request_target:
-    # when using teardown: 'true', add default event types + closed event type
-    types: [opened, synchronize, reopened, closed]
-    paths:
-      - 'src/**/*.ts'
-      - 'src/**/*.html'
-      - 'src/**/*.less'
-      - 'src/**/*.ejs'
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: "PR number to deploy"
+        required: true
+        type: string
+
+concurrency:
+  group: preview-${{ inputs.pr_number }}
+  cancel-in-progress: true
 
 jobs:
   preview:
-    environment: pokeclicker-development # link to the environment
+    environment: pokeclicker-development
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write # allow to create/update PR comments
-    steps:
-      - name: Get User Permission
-        id: checkAccess
-        uses: actions-cool/check-user-permission@v2
-        with:
-          require: write
-          username: ${{ github.triggering_actor }}
 
-      # if the user does not have the required permission, we should return exit code 1 to stop the workflow
-      # or add a condition to skip the next steps instead (if we don't want this to deploy to preview PR for everyone)
-      - name: Check User Permission
-        if: steps.checkAccess.outputs.require-result == 'false'
+    permissions:
+      contents: read
+      pull-requests: read
+
+    steps:
+      - name: Get PR SHA
+        id: pr
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          echo "${{ github.triggering_actor }} does not have permissions on this repo."
-          echo "Current permission level is ${{ steps.checkAccess.outputs.user-permission }}"
-          echo "Job originally triggered by ${{ github.actor }}"
-          exit 0
+          echo "sha=$(gh pr view ${{ inputs.pr_number }} --json headRefOid -q .headRefOid)" >> "$GITHUB_OUTPUT"
 
       - name: Checkout PR
         uses: actions/checkout@v6
         with:
-          ref: ${{  github.event.pull_request.head.sha }}
+          ref: ${{ steps.pr.outputs.sha }}
           persist-credentials: false
 
       - name: Build PR
         uses: actions/setup-node@v6
         with:
           node-version-file: package.json
-      - run: |
+
+      - name: Build
+        run: |
           npm ci
           echo "module.exports={DEVELOPMENT:true,DEV_BANNER:true};" >> config.js
           npm run build
           rm -rf build/assets
           rm -rf build/libs
           perl -0pi -e 's|</title>|</title>\n<script>\nif("serviceWorker" in navigator){\nnavigator.serviceWorker.register("/sw.js",{scope:"/"}).then(reg=>{if(reg.waiting)reg.waiting.postMessage({type:"SKIP_WAITING"});});\nnavigator.serviceWorker.addEventListener("controllerchange",()=>{if(window._reloading)return;window._reloading=true;window.location.reload();});\n}\n</script>|s' build/index.html
-      
+
       - name: Deploy to GH-Pages
         uses: mvk/pr-preview-action@5ce80c4514b76075e126b7dbcd7674a7ff4183dd
         id: preview_step
