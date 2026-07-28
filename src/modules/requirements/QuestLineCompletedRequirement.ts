@@ -1,4 +1,4 @@
-import { AchievementOption } from '../GameConstants';
+import { AchievementOption, AchievementType } from '../GameConstants';
 import QuestLineState from '../quests/QuestLineState';
 import { QuestLineNameType } from '../quests/QuestLineNameType';
 import AchievementRequirement from './AchievementRequirement';
@@ -9,14 +9,15 @@ export default class QuestLineCompletedRequirement extends AchievementRequiremen
     }
 
     constructor(private questLineName: QuestLineNameType, option = AchievementOption.equal) {
-        super(1, option);
+        super(1, option, AchievementType.Quest);
     }
 
     public getProgress(): number {
-        return this.quest.state() === QuestLineState.ended ? 1 : 0;
+        // Quest lines may not be loaded yet when achievements are first evaluated
+        return this.quest?.state() === QuestLineState.ended ? 1 : 0;
     }
 
     public hint(): string {
-        return `Questline ${this.quest.displayName} needs to be ${this.option !== AchievementOption.less ? 'completed' : 'incomplete'}.`;
+        return `Questline ${this.quest?.displayName ?? this.questLineName} needs to be ${this.option !== AchievementOption.less ? 'completed' : 'incomplete'}.`;
     }
 }
