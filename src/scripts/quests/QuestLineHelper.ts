@@ -4241,45 +4241,14 @@ class QuestLineHelper {
         App.game.quests.questLines().push(easterQuestLine);
     }
 
-    private static buildTreasureMapQuestLine(dungeonName?: string): QuestLine {
-        SeededRand.seedWithDate(new Date());
-        const unlockedDungeons = Object.values(dungeonList).filter(x => x.difficulty == player.highestRegion() && TownList[x.name].isUnlocked());
-        // Always generate seeded dungeon roll, even when a saved dungeon overrides the pick so the amount roll below stays the same within the day
-        let treasureDungeon = SeededRand.fromArray(unlockedDungeons);
-        if (dungeonName && dungeonList[dungeonName]) {
-            // Restoring from a save, keep the dungeon picked when the quest line was built
-            treasureDungeon = dungeonList[dungeonName];
-        }
-        if (!treasureDungeon) {
-            treasureDungeon = Object.values(dungeonList).find(() => true);
-        }
-        const treasureMapQuest = new TreasureMapQuestLine('You obtained a Treasure Map.', treasureDungeon.name);
-        const rewardTotal = 90 + 6 * player.highestRegion();
-        const rewardSilver = Math.floor(rewardTotal / 10);
-        const rewardCopper = rewardTotal - rewardSilver * 10;
-        treasureMapQuest.addQuest(new DefeatDungeonQuest(SeededRand.intBetween(1, treasureDungeon.difficulty), undefined, treasureDungeon.name).withDescription(`The map you obtained says there is a treasure waiting in ${treasureDungeon.name}. Go clear it out.`).withCustomReward(() => {
-            BagHandler.gainItem({ type: ItemType.item, id: 'Relic_silver' }, rewardSilver);
-            BagHandler.gainItem({ type: ItemType.item, id: 'Relic_copper' }, rewardCopper);
-            Notifier.notify({
-                message: `You found the pirate treasure containing ${rewardSilver} Silver Coins and ${rewardCopper} Copper Coins!`,
-                type: NotificationConstants.NotificationOption.success,
-                setting: NotificationConstants.NotificationSetting.Items.dropped_item,
-            });
-        }));
-        return treasureMapQuest;
+    public static createTreasureMapQuestLine(saved?: { dungeon?: string, amount?: number }) {
+        App.game.quests.questLines().push(new TreasureMapQuestLine(saved));
     }
 
-    public static createTreasureMapQuestLine(dungeonName?: string) {
-        App.game.quests.questLines().push(this.buildTreasureMapQuestLine(dungeonName));
-    }
-
-    public static rebuildTreasureMapQuestLine() {
-        if (!App.game.quests.getQuestLine('Pirate Treasure Map')) {
-            this.createTreasureMapQuestLine();
-            return;
-        }
-
-        App.game.quests.replaceQuestLine(this.buildTreasureMapQuestLine());
+    public static rebuildTreasureMapQuestLine(): QuestLine {
+        const questLine = new TreasureMapQuestLine();
+        App.game.quests.replaceQuestLine(questLine);
+        return questLine;
     }
 
     public static isQuestLineCompleted(name: QuestLineNameType) {
@@ -4354,7 +4323,7 @@ class QuestLineHelper {
         this.createDrSplashQuestLine();
         this.createMeltanQuestLine();
         this.createRainbowRocketQuestLine();
-        this.createTreasureMapQuestLine(savedQuestLines?.find(ql => ql.name === 'Pirate Treasure Map')?.dungeon);
+        this.createTreasureMapQuestLine(savedQuestLines?.find(ql => ql.name === 'Pirate Treasure Map'));
         // Enforce unique questline names
         const numQuestLines = App.game.quests.questLines().length;
         if (numQuestLines != [...new Set(App.game.quests.questLines().map(ql => ql.name))].length) {
