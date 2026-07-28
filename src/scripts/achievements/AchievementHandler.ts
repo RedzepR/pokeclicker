@@ -670,9 +670,9 @@ class AchievementHandler {
         addEventPokemonAchievements('Egghunt', 'Easter', (p: PokemonListData) => ['Pikachu (Easter)', 'Togepi (Flowering Crown)', 'Torchic (Egg)'].includes(p.name));
         addEventPokemonAchievements('Blossom', '\'Golden Week\'', (p: PokemonListData) => p.name.endsWith('(Rose)'));
         addEventPokemonAchievements('Party', '\'Flying Pikachu\'', (p: PokemonListData) => p.name == 'Flying Pikachu' || p.name == 'Red Spearow');
-        addEventPokemonAchievements('Pirate', '\'A Pirate\'s Life\'', (p: PokemonListData) => p.name.includes("Pirate") || p.name.includes("Captain"));
+        addEventPokemonAchievements('Pirate', '\'A Pirate\'s Life\'', (p: PokemonListData) => p.name.includes('Pirate') || p.name.includes('Captain'));
         AchievementHandler.addAchievement('The Pirate King', 'Collect one Pirate Receipt', new ItemOwnedRequirement('Pirate_receipt', 1), 2, GameConstants.ExtraAchievementCategories.events);
-        
+
         // Secret achievements
         AchievementHandler.addSecretAchievement(
             'The Kids Yearn for the Mines',
