@@ -11170,7 +11170,7 @@ dungeonList['Pirate Island'] = new Dungeon('Pirate Island',
         new DungeonBossPokemon('Cinderace (Captain)', 120168558, 50, { hide: true, requirement: new ObtainedPokemonRequirement('Cinderace (Captain)') }),
         new DungeonBossPokemon('Captain Zacian', 144141988, 50, { hide: true, requirement: new MultiRequirement([new MaxRegionRequirement(GameConstants.Region.galar), new ClearDungeonRequirement(100, GameConstants.getDungeonIndex('Pirate Island'))])}),
     ],
-    555000, 21);
+    555000, 21, undefined, { achievement: false});
 
 //Unknown Dungeon? Contains Mewtwo.
 
