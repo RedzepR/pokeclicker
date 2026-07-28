@@ -1,10 +1,9 @@
 import { AchievementOption } from '../GameConstants';
 import QuestLineState from '../quests/QuestLineState';
 import { QuestLineNameType } from '../quests/QuestLineNameType';
+import AchievementRequirement from './AchievementRequirement';
 
-import Requirement from './Requirement';
-
-export default class QuestLineCompletedRequirement extends Requirement {
+export default class QuestLineCompletedRequirement extends AchievementRequirement {
     get quest() {
         return App.game.quests.getQuestLine(this.questLineName);
     }
