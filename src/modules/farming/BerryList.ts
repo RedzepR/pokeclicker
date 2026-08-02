@@ -4,7 +4,7 @@ import BerryFirmness from '../enums/BerryFirmness';
 import BerryType from '../enums/BerryType';
 import Aura from './Aura';
 import Berry from './Berry';
-import { BerryWanderer } from './BerryWanderer';
+import BerryWandererGroup from './BerryWandererGroup';
 
 export const BerryList: Berry[] = [
 
@@ -564,7 +564,7 @@ export const BerryList: Berry[] = [
             'It has a vibrant pink pigment, and it is found in such abundance on Pinkan Island that all Pokémon found there are colored Pink!',
         ],
         undefined,
-        [new BerryWanderer(['Pinkan Scyther'])],
+        [new BerryWandererGroup(['Pinkan Scyther'])],
     ),
     //#endregion
 
@@ -586,7 +586,7 @@ export const BerryList: Berry[] = [
             'It has a tendency to overtake nearby plants.',
         ],
         undefined,
-        [new BerryWanderer(['Charmander', 'Cyndaquil', 'Torchic', 'Chimchar', 'Tepig', 'Fennekin', 'Litten', 'Scorbunny', 'Fuecoco'])],
+        [new BerryWandererGroup(['Charmander', 'Cyndaquil', 'Torchic', 'Chimchar', 'Tepig', 'Fennekin', 'Litten', 'Scorbunny', 'Fuecoco'])],
     ),
 
     new Berry(
@@ -606,7 +606,7 @@ export const BerryList: Berry[] = [
             'This Berry promotes the fruiting of nearby Berry plants.',
         ],
         new Aura(AuraType.Harvest, [1.1, 1.2, 1.3]),
-        [new BerryWanderer(['Squirtle', 'Totodile', 'Mudkip', 'Piplup', 'Oshawott', 'Froakie', 'Popplio', 'Sobble', 'Quaxly'])],
+        [new BerryWandererGroup(['Squirtle', 'Totodile', 'Mudkip', 'Piplup', 'Oshawott', 'Froakie', 'Popplio', 'Sobble', 'Quaxly'])],
     ),
 
     new Berry(
@@ -626,7 +626,7 @@ export const BerryList: Berry[] = [
             'The same energy promotes the growth of nearby Berries.',
         ],
         new Aura(AuraType.Growth, [1.1, 1.2, 1.3]),
-        [new BerryWanderer(['Pikachu', 'Plusle', 'Minun', 'Pachirisu', 'Emolga', 'Dedenne', 'Togedemaru', 'Morpeko (Hangry)', 'Pawmi'])],
+        [new BerryWandererGroup(['Pikachu', 'Plusle', 'Minun', 'Pachirisu', 'Emolga', 'Dedenne', 'Togedemaru', 'Morpeko (Hangry)', 'Pawmi'])],
     ),
 
     new Berry(
@@ -646,7 +646,7 @@ export const BerryList: Berry[] = [
             'It has a tendency to expand into nearby plots, but attracts Pokémon that are holding items.',
         ],
         new Aura(AuraType.Pickup, [1.005, 1.01, 1.015]),
-        [new BerryWanderer(['Bulbasaur', 'Chikorita', 'Treecko', 'Turtwig', 'Snivy', 'Chespin', 'Rowlet', 'Grookey', 'Sprigatito'])],
+        [new BerryWandererGroup(['Bulbasaur', 'Chikorita', 'Treecko', 'Turtwig', 'Snivy', 'Chespin', 'Rowlet', 'Grookey', 'Sprigatito'])],
     ),
 
     new Berry(
@@ -666,7 +666,7 @@ export const BerryList: Berry[] = [
             'This Berry slows the decay of nearby Berries.',
         ],
         new Aura(AuraType.Decay, [0.9, 0.8, 0.7]),
-        [new BerryWanderer(['Jynx', 'Swinub', 'Spheal', 'Snover', 'Snom'])],
+        [new BerryWandererGroup(['Jynx', 'Swinub', 'Spheal', 'Snover', 'Snom'])],
     ),
 
     new Berry(
@@ -686,7 +686,7 @@ export const BerryList: Berry[] = [
             'Growing these Berries will promote Egg growth.',
         ],
         new Aura(AuraType.Egg, [1.01, 1.02, 1.03]),
-        [new BerryWanderer(['Mankey', 'Makuhita', 'Riolu', 'Scraggy', 'Crabrawler'])],
+        [new BerryWandererGroup(['Mankey', 'Makuhita', 'Riolu', 'Scraggy', 'Crabrawler'])],
     ),
 
     new Berry(
@@ -707,7 +707,7 @@ export const BerryList: Berry[] = [
             'Due to its poisonous nature, it increases the chances of mutations near it.',
         ],
         new Aura(AuraType.Mutation, [1.2, 1.4, 1.6]),
-        [new BerryWanderer(['Grimer', 'Spinarak', 'Gulpin', 'Skorupi', 'Salandit', 'Toxel'])],
+        [new BerryWandererGroup(['Grimer', 'Spinarak', 'Gulpin', 'Skorupi', 'Salandit', 'Toxel'])],
     ),
 
     new Berry(
@@ -727,7 +727,7 @@ export const BerryList: Berry[] = [
             'Growing these Berries will soften the ground around it, increasing the chances of replanting.',
         ],
         new Aura(AuraType.Replant, [1.01, 1.02, 1.03]),
-        [new BerryWanderer(['Sandshrew', 'Larvitar', 'Numel', 'Hippopotas'])],
+        [new BerryWandererGroup(['Sandshrew', 'Larvitar', 'Numel', 'Hippopotas'])],
     ),
 
     new Berry(
@@ -744,7 +744,7 @@ export const BerryList: Berry[] = [
         BerryFirmness.Very_Hard,
         ['This Berry is said to be a new kind that is a cross of two Berries brought together by winds from far away.'],
         undefined,
-        [new BerryWanderer(['Farfetch\'d', 'Murkrow', 'Tropius', 'Chatot'])],
+        [new BerryWandererGroup(['Farfetch\'d', 'Murkrow', 'Tropius', 'Chatot'])],
     ),
 
     new Berry(
@@ -764,7 +764,7 @@ export const BerryList: Berry[] = [
             'The same behavior affects nearby plants, causing additional mutations.',
         ],
         new Aura(AuraType.Mutation, [1.1, 1.2, 1.3]),
-        [new BerryWanderer(['Mr. Mime', 'Natu', 'Ralts', 'Chingling'])],
+        [new BerryWandererGroup(['Mr. Mime', 'Natu', 'Ralts', 'Chingling'])],
     ),
 
     new Berry(
@@ -784,7 +784,7 @@ export const BerryList: Berry[] = [
             'The attracted Bug Pokémon decrease the amount of harvestable Berries in nearby plants.',
         ],
         new Aura(AuraType.Harvest, [0.9, 0.8, 0.7]),
-        [new BerryWanderer(['Pinsir', 'Shuckle', 'Shuckle (Corked)', 'Nincada', 'Mothim', 'Sizzlipede'])],
+        [new BerryWandererGroup(['Pinsir', 'Shuckle', 'Shuckle (Corked)', 'Nincada', 'Mothim', 'Sizzlipede'])],
     ),
 
     new Berry(
@@ -804,7 +804,7 @@ export const BerryList: Berry[] = [
             'This Berry plant hardens the surrounding soil, decreasing the chances of replanting.',
         ],
         new Aura(AuraType.Replant, [0.99, 0.98, 0.97]),
-        [new BerryWanderer(['Rhyhorn', 'Sudowoodo', 'Aron', 'Bonsly', 'Rockruff'])],
+        [new BerryWandererGroup(['Rhyhorn', 'Sudowoodo', 'Aron', 'Bonsly', 'Rockruff'])],
     ),
 
     new Berry(
@@ -824,7 +824,7 @@ export const BerryList: Berry[] = [
             'This Berry causes other nearby Berries to wither away faster.',
         ],
         new Aura(AuraType.Death, [1.25, 1.5, 2.0]),
-        [new BerryWanderer(['Gastly', 'Misdreavus', 'Shedinja', 'Drifloon'])],
+        [new BerryWandererGroup(['Gastly', 'Misdreavus', 'Shedinja', 'Drifloon'])],
     ),
 
     new Berry(
@@ -844,7 +844,7 @@ export const BerryList: Berry[] = [
             'This Berry requires a lot of energy to grow, but isn\'t fussy about what it consumes, it helps other plants by removing toxins from the soil.',
         ],
         new Aura(AuraType.Decay, [0.8, 0.6, 0.5]),
-        [new BerryWanderer(['Dratini', 'Bagon', 'Gible', 'Druddigon', 'Drampa', 'Applin', 'Exposed Applin'])],
+        [new BerryWandererGroup(['Dratini', 'Bagon', 'Gible', 'Druddigon', 'Drampa', 'Applin', 'Exposed Applin'])],
     ),
 
     new Berry(
@@ -865,7 +865,7 @@ export const BerryList: Berry[] = [
             'It also prevents Kasib from mutating.',
         ],
         undefined,
-        [new BerryWanderer(['Houndour', 'Absol', 'Stunky', 'Zorua', 'Impidimp'])],
+        [new BerryWandererGroup(['Houndour', 'Absol', 'Stunky', 'Zorua', 'Impidimp'])],
     ),
 
     new Berry(
@@ -885,7 +885,7 @@ export const BerryList: Berry[] = [
             'This Berry plant is very hardy and resistant, making it resistant to mutations, and also decreasing the chance of mutations around it.',
         ],
         new Aura(AuraType.Mutation, [0.5, 0.25, 0.0]),
-        [new BerryWanderer(['Magnemite', 'Skarmory', 'Beldum', 'Bronzor', 'Cufant'])],
+        [new BerryWandererGroup(['Magnemite', 'Skarmory', 'Beldum', 'Bronzor', 'Cufant'])],
     ),
 
     new Berry(
@@ -902,7 +902,7 @@ export const BerryList: Berry[] = [
         BerryFirmness.Very_Soft,
         ['This Berry can be cored out and dried to make a whistle. Blowing through its hole makes an indescribable sound.'],
         new Aura(AuraType.Egg, [0.99, 0.98, 0.97]),
-        [new BerryWanderer(['Snorlax', 'Girafarig', 'Swablu', 'Munchlax', 'Audino', 'Skwovet'])],
+        [new BerryWandererGroup(['Snorlax', 'Girafarig', 'Swablu', 'Munchlax', 'Audino', 'Skwovet'])],
     ),
 
     new Berry(
@@ -922,7 +922,7 @@ export const BerryList: Berry[] = [
             'The scent of this Berry plant attracts wild Pokémon.',
         ],
         new Aura(AuraType.Attract, [1.02, 1.04, 1.07]),
-        [new BerryWanderer(['Clefairy', 'Togepi', 'Ralts'])],
+        [new BerryWandererGroup(['Clefairy', 'Togepi', 'Ralts'])],
     ),
 
     new Berry(
@@ -939,7 +939,7 @@ export const BerryList: Berry[] = [
         BerryFirmness.Soft,
         ['This berry grows around the waist of certain Snover.'],
         undefined,
-        [new BerryWanderer(['Snover (Berry)'])],
+        [new BerryWandererGroup(['Snover (Berry)'])],
     ),
     //#endregion
 
@@ -961,7 +961,7 @@ export const BerryList: Berry[] = [
             'The scent of this Berry plant repels wild Pokémon.',
         ],
         new Aura(AuraType.Attract, [0.99, 0.97, 0.95]),
-        [new BerryWanderer(['Hoopa'])],
+        [new BerryWandererGroup(['Hoopa'])],
     ),
 
     new Berry(
@@ -981,7 +981,7 @@ export const BerryList: Berry[] = [
             'This inspires Pokémon to train harder.',
         ],
         new Aura(AuraType.Xp, [1.005, 1.01, 1.015]),
-        [new BerryWanderer(['Burmy (No Coat)'])],
+        [new BerryWandererGroup(['Burmy (No Coat)'])],
     ),
 
     new Berry(
@@ -1066,7 +1066,7 @@ export const BerryList: Berry[] = [
         BerryFirmness.Very_Hard,
         ['This Berry is surrounded by mystery. It is rumored to be imbued with the power of the sea.'],
         undefined,
-        [new BerryWanderer(['Manaphy'])],
+        [new BerryWandererGroup(['Manaphy'])],
     ),
 
     new Berry(
@@ -1116,7 +1116,7 @@ export const BerryList: Berry[] = [
             'This power revitalizes and prevents other berries from withering.',
         ],
         undefined,
-        [new BerryWanderer(['Mew'])],
+        [new BerryWandererGroup(['Mew'])],
     ),
 
     new Berry(
@@ -1163,7 +1163,7 @@ export const BerryList: Berry[] = [
         BerryFirmness.Super_Hard,
         ['This Berry is considered a mirage. It was said to be so strong that it had to be abandoned at the world\'s edge.'],
         new Aura(AuraType.Shiny, [1.005, 1.01, 1.015]),
-        [new BerryWanderer(['Jirachi'])],
+        [new BerryWandererGroup(['Jirachi'])],
     ),
 
     new Berry(
@@ -1180,7 +1180,7 @@ export const BerryList: Berry[] = [
         BerryFirmness.Hard,
         ['A completely enigmatic Berry. It apparently has the power of the stars that fill the night sky.'],
         undefined,
-        [new BerryWanderer(['Detective Pikachu'])],
+        [new BerryWandererGroup(['Detective Pikachu'])],
     ),
 
     new Berry(

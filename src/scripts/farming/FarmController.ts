@@ -331,13 +331,30 @@ class FarmController {
         }
     }
 
-    public static getWandererHint(pokemon: PokemonNameType): string {
+    public static getWandererPokemon(groups: BerryWandererGroup[]): PokemonNameType[] {
+        return [...new Set(groups.flatMap(wanderer => wanderer.pokemon))].filter(p => pokemonMap[p].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION);
+    }
+
+    public static getBerrySpecificWanderers(berry: BerryType, includeColorWanderersWithReqs = false): BerryWandererGroup[] {
+        const berryData = BerryList[berry];
+        return berryData.wander.filter(w => !Berry.baseWander.includes(w)
+            && (!Berry.colorWander[berryData.color].includes(w) || (includeColorWanderersWithReqs && !!w.req)));
+    }
+
+    public static isWandererAvailable(pokemon: PokemonNameType, berry: BerryType): boolean {
+        if (pokemonMap[pokemon].nativeRegion > player.highestRegion()) {
+            return false;
+        }
+        return BerryList[berry].getWandererRequirement(pokemon)?.isCompleted() ?? true;
+    }
+
+    public static getWandererHint(pokemon: PokemonNameType, berry: BerryType): string {
         if (pokemonMap[pokemon].nativeRegion > player.highestRegion()) {
             return `Reach ${GameConstants.camelCaseToString(GameConstants.Region[pokemonMap[pokemon].nativeRegion])} to attract this Pokémon!`;
         }
 
-        const wanderer = BerryList.flatMap(berry => berry.wander).find(w => w.pokemon.includes(pokemon) && w.req);
-        return wanderer && !wanderer.isAvailable() ? wanderer.getHint() : '';
+        const req = BerryList[berry].getWandererRequirement(pokemon);
+        return req && !req.isCompleted() ? req.hint() : '';
     }
 
     public static shortcutVisible: KnockoutComputed<boolean> = ko.pureComputed(() => {

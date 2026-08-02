@@ -7,20 +7,20 @@ export default class WandererOnFarmRequirement extends Requirement {
 
     constructor(
         pokemonName: PokemonNameType[],
-        capturesNeeded = 1,
+        wanderersNeeded = 1,
         option: GameConstants.AchievementOption = GameConstants.AchievementOption.more,
     ) {
-        super(capturesNeeded, option);
+        super(wanderersNeeded, option);
         this.pokemon = pokemonName;
     }
 
     public getProgress() {
-        const numWanderer = App.game.farming.plotList.map(x => x.wanderer?.name).filter(name => this.pokemon.includes(name)).length;
+        const numWanderer = App.game.farming.plotList.filter(plot => this.pokemon.includes(plot.wanderer?.name)).length;
 
         return Math.min(numWanderer, this.requiredValue);
     }
 
     public hint(): string {
-        return `Have atleast ${this.requiredValue} ${this.pokemon.join(' and ')} wandering on the Farm at the same time.`;
+        return `Have at least ${this.requiredValue} ${this.pokemon.join(' and ')} wandering on the Farm at the same time.`;
     }
 }

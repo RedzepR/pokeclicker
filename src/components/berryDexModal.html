@@ -179,41 +179,41 @@
                             </tr>
                           </thead>
                           <tbody class="wanderPokemonList">
-                              <tr>
-                                  <td>
-                                      <ul class="list-inline">
-                                          <!-- ko foreach: Berry.baseWander.flatMap(w => w.pokemon).filter(w => pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
-                                          <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
-                                          <!-- /ko -->
-                                      </ul>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <th colspan="2" data-bind="text: `Attracted to ${BerryColor[BerryList[$data].color]}-Colored Berries`">Color Wanderers</th>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <ul class="list-inline">
-                                          <!-- ko foreach: Berry.colorWander[BerryList[$data].color].flatMap(w => w.pokemon).filter(w => pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
-                                          <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
-                                          <!-- /ko -->
-                                      </ul>
-                                  </td>
-                              </tr>
-                              <!-- ko if: BerryList[$data].wander.some((w) => !Berry.baseWander.includes(w) && !Berry.colorWander[BerryList[$data].color].includes(w) && w.pokemon.some(p => pokemonMap[p].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION)) -->
-                              <tr>
-                                  <th colspan="2" data-bind="text: `Attracted to ${BerryType[$data]} Berry`">Specific Wanderers</th>
-                              </tr>
-                              <tr>
-                                  <td>
-                                      <ul class="list-inline">
-                                          <!-- ko foreach: BerryList[$data].wander.filter((w) => ![...Berry.baseWander, ...Berry.colorWander[BerryList[$data].color]].includes(w)).flatMap(w => w.pokemon).filter(w => pokemonMap[w].nativeRegion <= GameConstants.MAX_AVAILABLE_REGION) -->
-                                          <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: $data}"></li>
-                                          <!-- /ko -->
-                                      </ul>
-                                  </td>
-                              </tr>
-                              <!-- /ko -->
+                            <tr>
+                              <td>
+                                <ul class="list-inline">
+                                <!-- ko foreach: FarmController.getWandererPokemon(Berry.baseWander) -->
+                                  <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: { pokemon: $data, berry: +$parent }}"></li>
+                                <!-- /ko -->
+                                </ul>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th colspan="2" data-bind="text: `Attracted to ${BerryColor[BerryList[$data].color]}-Colored Berries`">Color Wanderers</th>
+                            </tr>
+                            <tr>
+                              <td>
+                                <ul class="list-inline">
+                                <!-- ko foreach: FarmController.getWandererPokemon(Berry.colorWander[BerryList[$data].color]) -->
+                                <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: { pokemon: $data, berry: +$parent }}"></li>
+                                <!-- /ko -->
+                                </ul>
+                              </td>
+                            </tr>
+                            <!-- ko if: FarmController.getWandererPokemon(FarmController.getBerrySpecificWanderers($data)).length -->
+                            <tr>
+                              <th colspan="2" data-bind="text: `Attracted to ${BerryType[$data]} Berry`">Specific Wanderers</th>
+                            </tr>
+                            <tr>
+                              <td>
+                                <ul class="list-inline">
+                                <!-- ko foreach: FarmController.getWandererPokemon(FarmController.getBerrySpecificWanderers($data)) -->
+                                  <li class="list-inline-item" data-bind="template: { name: 'wanderingPokémonDisplay', data: { pokemon: $data, berry: +$parent }}"></li>
+                                <!-- /ko -->
+                                </ul>
+                              </td>
+                            </tr>
+                            <!-- /ko -->
                           </tbody>
                         </table>
                       </td>

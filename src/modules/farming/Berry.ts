@@ -3,33 +3,41 @@ import BerryFirmness from '../enums/BerryFirmness';
 import BerryType from '../enums/BerryType';
 import BerryFlavor from '../interfaces/BerryFlavor';
 import { PokemonNameType } from '../pokemons/PokemonNameType';
+import OneFromManyRequirement from '../requirements/OneFromManyRequirement';
+import Requirement from '../requirements/Requirement';
 import WandererOnFarmRequirement from '../requirements/WandererOnFarmRequirement';
 import Aura from './Aura';
-import { BerryWanderer } from './BerryWanderer';
+import BerryWandererGroup from './BerryWandererGroup';
 
 export default class Berry {
     public flavors: BerryFlavor[];
-    public wander: BerryWanderer[];
+    public wander: BerryWandererGroup[];
 
-    public static baseWander: BerryWanderer[] = [
-        new BerryWanderer(['Tangela', 'Scyther',
+    // Base wanderers should never have requirements
+    public static baseWander: BerryWandererGroup[] = [
+        new BerryWandererGroup([
+            'Tangela', 'Scyther',
             'Pineco', 'Heracross',
             'Cherubi',
             'Sewaddle', 'Karrablast',
             'Scatterbug',
             'Cutiefly', 'Bounsweet',
-            'Blipbug', 'Gossifleur']),
+            'Blipbug', 'Gossifleur',
+        ]),
     ];
 
-    public static colorWander: Record<BerryColor, BerryWanderer[]> = {
-        [BerryColor.Red]: [new BerryWanderer(['Ledyba', 'Flabébé (Red)', 'Oricorio (Baile)'])],
-        [BerryColor.Purple]: [new BerryWanderer(['Illumise', 'Oricorio (Sensu)'])],
-        [BerryColor.Pink]: [new BerryWanderer(['Spewpa', 'Oricorio (Pa\'u)'])],
-        [BerryColor.Green]: [new BerryWanderer(['Burmy (Plant)'])],
-        [BerryColor.Yellow]: [new BerryWanderer(['Combee', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)']), new BerryWanderer(['Combee (Wall)'], new WandererOnFarmRequirement(['Combee'], 3))],
-        [BerryColor.Blue]: [new BerryWanderer(['Volbeat', 'Flabébé (Blue)'])],
-        [BerryColor.Silver]: [new BerryWanderer(['Flabébé (White)'])],
-        [BerryColor.Gold]: [new BerryWanderer(['Flabébé (Orange)'])],
+    public static colorWander: Record<BerryColor, BerryWandererGroup[]> = {
+        [BerryColor.Red]: [new BerryWandererGroup(['Ledyba', 'Flabébé (Red)', 'Oricorio (Baile)'])],
+        [BerryColor.Purple]: [new BerryWandererGroup(['Illumise', 'Oricorio (Sensu)'])],
+        [BerryColor.Pink]: [new BerryWandererGroup(['Spewpa', 'Oricorio (Pa\'u)'])],
+        [BerryColor.Green]: [new BerryWandererGroup(['Burmy (Plant)'])],
+        [BerryColor.Yellow]: [
+            new BerryWandererGroup(['Combee', 'Flabébé (Yellow)', 'Oricorio (Pom-Pom)']),
+            new BerryWandererGroup(['Combee (Wall)'], new WandererOnFarmRequirement(['Combee'], 3)),
+        ],
+        [BerryColor.Blue]: [new BerryWandererGroup(['Volbeat', 'Flabébé (Blue)'])],
+        [BerryColor.Silver]: [new BerryWandererGroup(['Flabébé (White)'])],
+        [BerryColor.Gold]: [new BerryWandererGroup(['Flabébé (Orange)'])],
     };
 
     /**
@@ -62,7 +70,7 @@ export default class Berry {
         public firmness: BerryFirmness,
         public description: string[],
         public aura?: Aura,
-        wander?: BerryWanderer[],
+        wander?: BerryWandererGroup[],
     ) {
         this.flavors = [];
         for (let i = 0; i < 5; i++) {
@@ -73,6 +81,14 @@ export default class Berry {
 
     public static isBaseWanderer(pokemon: PokemonNameType): boolean {
         return this.baseWander.some(wanderer => wanderer.pokemon.includes(pokemon));
+    }
+
+    public getWandererRequirement(pokemon: PokemonNameType): Requirement {
+        const groups = this.wander.filter(group => group.pokemon.includes(pokemon));
+        if (!groups.length || groups.some(group => !group.req)) {
+            return undefined;
+        }
+        return groups.length === 1 ? groups[0].req : new OneFromManyRequirement(groups.map(group => group.req));
     }
 
     get descriptionHTML(): string {
