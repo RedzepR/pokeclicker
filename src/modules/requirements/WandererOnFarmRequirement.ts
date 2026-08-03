@@ -3,20 +3,16 @@ import { PokemonNameType } from '../pokemons/PokemonNameType';
 import Requirement from './Requirement';
 
 export default class WandererOnFarmRequirement extends Requirement {
-    private pokemon: PokemonNameType[];
-
     constructor(
-        pokemonName: PokemonNameType[],
+        private pokemon: PokemonNameType[],
         wanderersNeeded = 1,
         option: GameConstants.AchievementOption = GameConstants.AchievementOption.more,
     ) {
         super(wanderersNeeded, option);
-        this.pokemon = pokemonName;
     }
 
     public getProgress() {
         const numWanderer = App.game.farming.plotList.filter(plot => this.pokemon.includes(plot.wanderer?.name)).length;
-
         return Math.min(numWanderer, this.requiredValue);
     }
 
