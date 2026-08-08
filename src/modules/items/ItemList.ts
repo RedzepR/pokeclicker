@@ -24,6 +24,7 @@ import {
     Pokeball,
     PokeBlockColor,
     Region,
+    VeteranUnlock,
     VitaminType,
 } from '../GameConstants';
 import { MulchShovelItem, ShovelItem } from './ShovelItem';
@@ -44,6 +45,9 @@ import UndergroundItemValueType from '../enums/UndergroundItemValueType';
 import TreasureItem from './TreasureItem';
 import { pokemonMap } from '../pokemons/PokemonList';
 import AttackGainConsumable from './AttackGainConsumable';
+import CollectibleItem from './CollectibleItem';
+import NullRequirement from '../requirements/NullRequirement';
+import VeteranUnlockRequirement from '../requirements/VeteranUnlockRequirement';
 export const ItemList: { [name: string]: Item } = {};
 
 ItemList.xAttack         = new BattleItem(BattleItemType.xAttack, '+50% Bonus to Pokémon attack for 30 seconds', 600, undefined, 'X Attack', 'pokemonAttack', 1.5);
@@ -242,6 +246,11 @@ ItemList.Max_Mushroom_IoA = new QuestItem('Max_Mushroom_IoA', 'Max Mushroom', 'A
 ItemList.Shaderoot_Carrot_Calyrex = new QuestItem('Shaderoot_Carrot_Calyrex', 'Shaderoot Carrot', 'Carrot that the King of Bountiful Harvest\'s beloved steed likes to eat. It grew in a gloomy field.', 'The Crown of Galar');
 ItemList.Iceroot_Carrot_Calyrex = new QuestItem('Iceroot_Carrot_Calyrex', 'Iceroot Carrot', 'Carrot that the King of Bountiful Harvest\'s beloved steed likes to eat. It grew in a field covered in snow.', 'The Crown of Galar');
 ItemList.Wishing_Piece = new QuestItem('Wishing_Piece', 'Wishing Piece', 'Attracts Gigantamax Pokémon to the Max Lair', 'The Lair of Giants');
+ItemList.CeruleanBerryShopPermit = new CollectibleItem('CeruleanBerryShopPermit', 'Berry Shop Permit',
+    'A permit granting access to the exclusive Berry Shop in Cerulean City.', new NullRequirement(), 10000, Currency.farmPoint, {
+        maxAmount: 1,
+        visible: new VeteranUnlockRequirement(VeteranUnlock.CeruleanBerryShopPermit),
+    });
 
 // Vitamins
 ItemList.Protein   = new Vitamin(VitaminType.Protein, 1e4, Currency.money, {
