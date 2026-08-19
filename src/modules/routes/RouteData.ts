@@ -1398,6 +1398,10 @@ Routes.add(new RegionRoute(
     'Desert Resort', Region.unova, 25,
     new RoutePokemon({
         land: ['Sandshrew', 'Trapinch', 'Maractus', 'Darumaka', 'Dwebble', 'Scraggy', 'Sigilyph', 'Sandile'],
+        special: [
+            new SpecialRoutePokemon(['Braviary'], new DayOfWeekRequirement(DayOfWeek.Monday)),
+            new SpecialRoutePokemon(['Mandibuzz'], new DayOfWeekRequirement(DayOfWeek.Thursday)),
+        ],
     }),
     [
         new RouteKillRequirement(10, Region.unova, 4),
