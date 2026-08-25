@@ -8053,16 +8053,6 @@ TownList['Roadside Motel'] = new Town(
         npcs: [RoadsideMotelLooker1, RoadsideMotelAnabel1, RoadsideMotelLooker2, RoadsideMotelAnabel2, RoadsideMotelAnabel3, RoadsideMotelMina, RoadsideMotelNanu1, RoadsideMotelNanu2, RoadsideMotelAnabel4, RoadsideMotelAnabel5],
     }
 );
-TownList['Tsareena Sloop'] = new Town(
-    'Tsareena Sloop',
-    GameConstants.Region.alola,
-    GameConstants.AlolaSubRegions.MelemeleIsland,
-    [TemporaryBattleList['Tsareena Crew'], new GenericTraderShop('PirateFence', 'Shady Fence')],
-    {
-        requirements: [new SpecialEventRequirement('A Pirate\'s Life')],
-        npcs: [],
-    }
-);
 TownList['Heahea City'] = new Town(
     'Heahea City',
     GameConstants.Region.alola,
