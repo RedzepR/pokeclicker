@@ -14,7 +14,6 @@ import { PokemonRestrictedAttackBonusHeldItem, TypeRestrictedAttackBonusHeldItem
 import CustomRequirement from '../requirements/CustomRequirement';
 
 export type GenericTraderShopIdentifier =
-    'CoinChanger' |
     'PirateFence' |
     'Palaeontologist' |
     'EverstoneDealer' |
@@ -257,33 +256,6 @@ export default class GenericDeal {
 
         SeededRand.seedWithDate(date);
 
-        GenericDeal.list.CoinChanger = ko.observableArray([
-            new GenericDeal({
-                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_copper, amount: 10 }],
-                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_silver, amount: 1 }],
-            }),
-            new GenericDeal({
-                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_copper, amount: 100 }],
-                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 1 }],
-            }),
-            new GenericDeal({
-                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_silver, amount: 10 }],
-                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 1 }],
-            }),
-            new GenericDeal({
-                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_silver, amount: 1 }],
-                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_copper, amount: 10 }],
-            }),
-            new GenericDeal({
-                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 1 }],
-                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_silver, amount: 10 }],
-            }),
-            new GenericDeal({
-                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 1 }],
-                profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_copper, amount: 100 }],
-            }),
-        ]);
-
         GenericDeal.list.PirateFence = ko.observableArray(this.generatePirateDeals(date));        
 
         GenericDeal.list.Palaeontologist = ko.observableArray([
@@ -492,18 +464,18 @@ export default class GenericDeal {
         const list = [];
         list.push(
             new GenericDeal({
-                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_copper, amount: 1 }],
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 1 }],
                 profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Ultraball, amount: 5, hidePlayerInventory: true }],
             }));
 
         for (let i = 0; i < 2; i++) {
             list.push(new GenericDeal({
-                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_silver, amount: 13 + SeededRand.intBetween(-2, 2) }],
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 130 + SeededRand.intBetween(-20, 20) }],
                 profits: [{ type: DealCostOrProfitType.Item, item: DealHelper.randomEvoItem(), amount: 1 }],
             }));
         }
         list.push(new GenericDeal({
-            costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 2 }],
+            costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 200 }],
             profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Rare_Candy, amount: 1 }],
         }));
 
@@ -512,7 +484,7 @@ export default class GenericDeal {
         ).slice(0, 3);
         typeBoostItems.forEach((item) => {
             list.push(new GenericDeal({
-                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_silver, amount: 18 + SeededRand.intBetween(-3, 3) }],
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 180 + SeededRand.intBetween(-30, 30) }],
                 profits: [{ type: DealCostOrProfitType.Item, item, amount: 1 }],
                 visibleRequirement: new MaxRegionRequirement(Region.johto),
             }));
@@ -523,19 +495,19 @@ export default class GenericDeal {
         ).slice(0, 2);
         pokeballItems.forEach((item) => {
             list.push(new GenericDeal({
-                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 10 }],
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 1000 }],
                 profits: [{ type: DealCostOrProfitType.Item, item, amount: 5, hidePlayerInventory: true }],
                 visibleRequirement: new MaxRegionRequirement(Region.sinnoh),
             }));
         });
 
         list.push(new GenericDeal({
-            costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 1 }],
+            costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 100 }],
             profits: [{ type: DealCostOrProfitType.Item, item: ItemList['Zorua (Pirate)'], amount: 1, hidePlayerInventory: true }],
             visibleRequirement: new MaxRegionRequirement(Region.unova),
         }));
         list.push(new GenericDeal({
-            costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 8 }],
+            costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 800 }],
             profits: [{ type: DealCostOrProfitType.Item, item: ItemList.Power_Bracer, amount: 1 }],
             visibleRequirement: new MaxRegionRequirement(Region.alola),
         }));
@@ -545,7 +517,7 @@ export default class GenericDeal {
         );
         if (pokemonBoostItem) {
             list.push(new GenericDeal({
-                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 300 + SeededRand.intBetween(-30, 30) }],
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 30000 + SeededRand.intBetween(-3000, 3000) }],
                 profits: [
                     { type: DealCostOrProfitType.Item, item: pokemonBoostItem, amount: 1 },
                     { type: DealCostOrProfitType.Item, item: ItemList.Pirate_receipt, amount: 1, hidePlayerInventory: true }],
