@@ -622,7 +622,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.125,
         },
-        'heldItem': { type: ItemType.item, id: 'Relic_Gold', amount: 10 },
+        'heldItem': { type: ItemType.item, id: 'Relic_gold', amount: 10 },
     },
     {
         'id': 7,
@@ -14644,7 +14644,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.125,
         },
-        'heldItem': { type: ItemType.item, id: 'Relic_Gold', amount: 10 },
+        'heldItem': { type: ItemType.item, id: 'Relic_gold', amount: 10 },
     },
     {
         'id': 449,
@@ -23324,7 +23324,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
-        'heldItem': { type: ItemType.item, id: 'Relic_Gold', amount: 10 },
+        'heldItem': { type: ItemType.item, id: 'Relic_gold', amount: 10 },
     },
     {
         'id': 762,
@@ -23367,7 +23367,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
-        'heldItem': { type: ItemType.item, id: 'Relic_Gold', amount: 10 },
+        'heldItem': { type: ItemType.item, id: 'Relic_gold', amount: 10 },
     },
     {
         'id': 763,
@@ -23408,7 +23408,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 1,
         },
-        'heldItem': { type: ItemType.item, id: 'Relic_Gold', amount: 10 },
+        'heldItem': { type: ItemType.item, id: 'Relic_gold', amount: 10 },
     },
     {
         'id': 764,
@@ -25104,7 +25104,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.125,
         },
-        'heldItem': { type: ItemType.item, id: 'Relic_Gold', amount: 25 },
+        'heldItem': { type: ItemType.item, id: 'Relic_gold', amount: 25 },
     },
     {
         'id': 814,
@@ -25152,7 +25152,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.125,
         },
-        'heldItem': { type: ItemType.item, id: 'Relic_Gold', amount: 25 },
+        'heldItem': { type: ItemType.item, id: 'Relic_gold', amount: 25 },
     },
     {
         'id': 815,
@@ -25193,7 +25193,7 @@ export const pokemonList = createPokemonArray(
         'gender': {
             'femaleRatio': 0.125,
         },
-        'heldItem': { type: ItemType.item, id: 'Relic_Gold', amount: 25 },
+        'heldItem': { type: ItemType.item, id: 'Relic_gold', amount: 25 },
     },
     {
         'id': 815.01,
@@ -28496,7 +28496,7 @@ export const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 335,
         'catchRate': 10,
-        'heldItem': { type: ItemType.item, id: 'Relic_Gold', amount: 25 },
+        'heldItem': { type: ItemType.item, id: 'Relic_gold', amount: 25 },
         'gender': {
             'type': Genders.Genderless,
         },
