@@ -1205,7 +1205,7 @@ TownList['Gyarados Galleon'] = new Town(
     'Gyarados Galleon',
     GameConstants.Region.kanto,
     GameConstants.KantoSubRegions.Kanto,
-    [TemporaryBattleList['Gyarados Crew'], new GenericTraderShop('CoinChanger', 'Pirate Coin Changer'), new GenericTraderShop('PirateFence', 'Shady Fence')],
+    [TemporaryBattleList['Gyarados Crew'], new GenericTraderShop('PirateFence', 'Shady Fence')],
     {
         requirements: [new SpecialEventRequirement('A Pirate\'s Life')],
         npcs: [CaptainGyarados],
@@ -6973,7 +6973,7 @@ TownList['Pirate Island'] = new DungeonTown(
     GameConstants.Region.kalos,
     GameConstants.KalosSubRegions.Kalos,
     [new SpecialEventRequirement('A Pirate\'s Life')],
-    [new GenericTraderShop('CoinChanger', 'Pirate Coin Changer'), new GenericTraderShop('PirateFence', 'Shady Fence')],
+    [new GenericTraderShop('PirateFence', 'Shady Fence')],
     {
         npcs: [WorkingPirate],
 
@@ -8057,7 +8057,7 @@ TownList['Tsareena Sloop'] = new Town(
     'Tsareena Sloop',
     GameConstants.Region.alola,
     GameConstants.AlolaSubRegions.MelemeleIsland,
-    [TemporaryBattleList['Tsareena Crew'], new GenericTraderShop('CoinChanger', 'Pirate Coin Changer'), new GenericTraderShop('PirateFence', 'Shady Fence')],
+    [TemporaryBattleList['Tsareena Crew'], new GenericTraderShop('PirateFence', 'Shady Fence')],
     {
         requirements: [new SpecialEventRequirement('A Pirate\'s Life')],
         npcs: [],
