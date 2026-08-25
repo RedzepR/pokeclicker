@@ -879,7 +879,6 @@ const NewIslandAsh2 = new NPC('Ash Ketchum',
 
 const CaptainGyarados = new NPC('Captain Gyarados', [
     'Pirate crew battles are part of our everyday life out here. According to the old pirate code, I must hand over a reward if you manage to defeat us…',
-    'But be warned: if you triumph over my crew, even stronger pirates may start roaming in this area.',
 ], {
     image: 'assets/images/pokemon/130.02.png',
 }
