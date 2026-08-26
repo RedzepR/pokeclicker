@@ -11149,19 +11149,15 @@ dungeonList['Pirate Island'] = new Dungeon('Pirate Island',
             {loot: 'Black_shard'},
         ],
         epic: [
-            {loot: 'Relic_gold', ignoreDebuff: true, amount: 10},
-            {loot: 'Diveball'},
-            {loot: 'Duskball'},
-        ],
-        legendary: [
-            {loot: 'Pirate_Compass', ignoreDebuff: true},
-            {loot: 'Mystic_Water'},
+            { loot: 'Relic_gold', ignoreDebuff: true, amount: 10},
+            { loot: 'Mystic_Water'},
             {loot: 'Black_Glasses'},
         ],
-        mythic: [
-            {loot: 'Captain Hoopa', ignoreDebuff: true},
-            {loot: 'Relic_gold', weight: 2, ignoreDebuff: true, amount: 100},
+        legendary: [
+            { loot: 'Pirate_Compass', ignoreDebuff: true },
+            { loot: 'Captain Hoopa', ignoreDebuff: true },
         ],
+        mythic: [{loot: 'Relic_gold', ignoreDebuff: true, amount: 100}],
     },
     9003000,
     [
