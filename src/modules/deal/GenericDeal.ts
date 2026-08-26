@@ -4,7 +4,7 @@ import BerryType from '../enums/BerryType';
 import Item from '../items/Item';
 import { ItemList } from '../items/ItemList';
 import GameHelper from '../GameHelper';
-import { Currency, Region } from '../GameConstants';
+import { Currency, Region, MAX_AVAILABLE_REGION } from '../GameConstants';
 import Requirement from '../requirements/Requirement';
 import ObtainedPokemonRequirement from '../requirements/ObtainedPokemonRequirement';
 import MaxRegionRequirement from '../requirements/MaxRegionRequirement';
@@ -513,7 +513,7 @@ export default class GenericDeal {
         }));
 
         const pokemonBoostItem = SeededRand.fromArray(
-            Object.values(ItemList).filter((i) => i instanceof PokemonRestrictedAttackBonusHeldItem && (i as PokemonRestrictedAttackBonusHeldItem).regionUnlocked <= player.highestRegion()),
+            Object.values(ItemList).filter((i) => i instanceof PokemonRestrictedAttackBonusHeldItem && (i as PokemonRestrictedAttackBonusHeldItem).regionUnlocked <= MAX_AVAILABLE_REGION),
         );
         if (pokemonBoostItem) {
             list.push(new GenericDeal({
