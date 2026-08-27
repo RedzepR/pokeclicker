@@ -517,7 +517,7 @@ export default class GenericDeal {
         );
         if (pokemonBoostItem) {
             list.push(new GenericDeal({
-                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 30000 + SeededRand.intBetween(-3000, 3000) }],
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 10000 + SeededRand.intBetween(-1000, 1000) }],
                 profits: [
                     { type: DealCostOrProfitType.Item, item: pokemonBoostItem, amount: 1 },
                     { type: DealCostOrProfitType.Item, item: ItemList.Pirate_receipt, amount: 1, hidePlayerInventory: true }],
