@@ -469,10 +469,18 @@ export default class GenericDeal {
                 visibleRequirement: new SpecialEventRequirement('A Pirate\'s Life'),
             }));
 
+        const selectedEvoItems = new Set<Item>();
         for (let i = 0; i < 2; i++) {
+            const cost = 130 + SeededRand.intBetween(-20, 20);
+            let evoItem: Item;
+            do {
+                evoItem = DealHelper.randomEvoItem();
+            } while (selectedEvoItems.has(evoItem));
+            selectedEvoItems.add(evoItem);
+
             list.push(new GenericDeal({
-                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: 130 + SeededRand.intBetween(-20, 20) }],
-                profits: [{ type: DealCostOrProfitType.Item, item: DealHelper.randomEvoItem(), amount: 1 }],
+                costs: [{ type: DealCostOrProfitType.Item, item: ItemList.Relic_gold, amount: cost }],
+                profits: [{ type: DealCostOrProfitType.Item, item: evoItem, amount: 1 }],
             }));
         }
         list.push(new GenericDeal({
