@@ -207,10 +207,8 @@ class Party implements Feature, TmpPartyType {
             }
         }
 
-        const isInBreedingQueue = App.game.breeding.queueList().some(([eggType, id]) => eggType === EggType.Pokemon && id === pokemon.id);
-
-        // Pokemon in an active hatchery slot do not attack, but queued Pokemon do.
-        if (includeBreeding || !pokemon.breeding || isInBreedingQueue) {
+        // Check if the Pokemon is currently breeding (no attack)
+        if (includeBreeding || !pokemon.breeding) {
             if (type1 == PokemonType.None) {
                 attack = pAttack * multiplier;
             } else {
